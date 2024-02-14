@@ -54,3 +54,4 @@ Devamında Migrator uygulaması çalıştırılarak veritabanı initilize yapıl
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/507070cf-87b1-4833-869b-09887bf997bf)
 
 
+Cache-Redis için free bir instance oluşturuldu ve app settings güncellendi. 
