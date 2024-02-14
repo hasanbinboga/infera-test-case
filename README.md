@@ -50,4 +50,7 @@ Ardından Infera adında bir db ve infera_app isminde bir db user ı oluşturdum
 Daha sonra CLI komutlarını (https://docs.abp.io/en/abp/latest/CLI) kullanarak yeni projeyi oluşturdum.
 `abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder --with-public-website -dbms SqlServer --connection-string "Server=localhost;Database=Infera;User Id=infera_app;Password=123;Trusted_Connection=True;"`
 
+Devamında Migrator uygulaması çalıştırılarak veritabanı initilize yapıldı.
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/507070cf-87b1-4833-869b-09887bf997bf)
+
 
