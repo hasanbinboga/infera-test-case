@@ -68,4 +68,9 @@ Solution çalıştırıldığında her iki projenin de sorunsuz şekilde ayağa 
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/df4db05b-174e-469b-8bae-cca8cae17134)
 
+Auth server default admin bilgileri ile swagger üzerinden authorize olduk.
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/619bebbe-d3cf-442d-850f-a05725d8540c)
 
+Authorize işlemi için kullanıcı bilgileri;
+user:admin
+pass:1q2w3E*
