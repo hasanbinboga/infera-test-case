@@ -33,3 +33,8 @@ NuGet paket imzası doğrulaması atlanıyor.
 Şu komutu kullanarak aracı çağırabilirsiniz: abp
 'volo.abp.cli' aracı (sürüm '8.1.0-rc.1') başarıyla yüklendi.
 `
+
+Veritabanı olarak SqlServer kullanmayı planlıyorum. Bu nedenle Sql Server developer edition (https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x41f&culture=tr-tr&country=tr) ve SSMS indiridip kurdum.
+
+Daha sonra CLI komutlarını (https://docs.abp.io/en/abp/latest/CLI) kullanarak yeni projeyi oluşturdum.
+`abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder -dbms --connection-string`
