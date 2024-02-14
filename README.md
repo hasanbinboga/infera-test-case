@@ -22,3 +22,14 @@ Sorunun .net 8 versiyonunun eski olmasından kaynaklandığını konu ile ilgili
 https://github.com/dotnet/sdk/issues/35566
 
 İlk olarak Windows update ve VS updatelerini tamamladım. Projeyi .Net 8 ile geliştirmeyi planlıyorum.
+Sorunun Nuget package soruce'unun offline olarak ayarlanmasından kaynaklandığını belirledim.
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/c99780df-1e4f-4695-afb8-826e180f0f33)
+
+nuget source url: https://api.nuget.org/v3/index.json olarak güncellendi. 
+
+`
+C:\Repos\infera-test-case\Infera>dotnet tool install --global Volo.Abp.Cli --version 8.1.0-rc.1
+NuGet paket imzası doğrulaması atlanıyor.
+Şu komutu kullanarak aracı çağırabilirsiniz: abp
+'volo.abp.cli' aracı (sürüm '8.1.0-rc.1') başarıyla yüklendi.
+`
