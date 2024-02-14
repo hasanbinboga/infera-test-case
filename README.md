@@ -64,3 +64,8 @@ Auth Server'ın da HostApp ile birlikte ayağa kalkması için Solution özellik
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/b7e1bd95-4fa3-4cdc-8d29-6a291dbfb81c)
 
+Solution çalıştırıldığında her iki projenin de sorunsuz şekilde ayağa kalktığı görüldü.
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/df4db05b-174e-469b-8bae-cca8cae17134)
+
+
