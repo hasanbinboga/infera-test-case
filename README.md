@@ -55,3 +55,8 @@ Devamında Migrator uygulaması çalıştırılarak veritabanı initilize yapıl
 
 
 Cache-Redis için free bir instance oluşturuldu ve app settings güncellendi. 
+
+Infera.TestCase.HttpApi.Host projesi IIS Express üzerinden çalıştırıldığında default swagger ui erişim sağlandı.
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/db2fc585-4975-4266-9cf6-4404bddc3105)
+
