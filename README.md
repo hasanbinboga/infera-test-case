@@ -72,10 +72,12 @@ Auth server default admin bilgileri ile swagger üzerinden authorize olduk.
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/619bebbe-d3cf-442d-850f-a05725d8540c)
 
 Authorize işlemi için kullanıcı bilgileri;
-`
-user:admin
-pass:1q2w3E*
-`
+
+>User:admin
+>
+>Password:1q2w3E*
+
+
 Ardından test amaçlı olarak swagger üzerinden rolleri sorguladım;
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/e7637e9c-0538-4144-a7b0-87e875160db7)
