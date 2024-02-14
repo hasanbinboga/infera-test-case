@@ -83,3 +83,16 @@ Ardından test amaçlı olarak swagger üzerinden rolleri sorguladım;
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/e7637e9c-0538-4144-a7b0-87e875160db7)
 
 Böylece Backend scaffold hazırlanmış oldu.
+
+Frontend projesini ayağa kaldırmak için solution klasöründeki daki angular klasörü içerisinde komut satırı açarak npm paketlerini yüklüyoruz.
+
+`
+npm install -g @angular/cli
+npm i --legacy-peer-deps
+ng update @angular/cli @angular/core --force
+`
+
+Ardından uygulamayı çalıştırıyoruz
+
+`npm start`
+
