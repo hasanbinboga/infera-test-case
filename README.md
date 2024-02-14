@@ -41,6 +41,6 @@ Veritabanı olarak SqlServer kullanmayı planlıyorum. Bu nedenle Sql Server dev
 Ardından Infera adında bir db ve infera_app isminde bir db user ı oluşturdum. Uygulamanın veritabanına bu user ile bağlanmasını planlıyorum.
 
 Daha sonra CLI komutlarını (https://docs.abp.io/en/abp/latest/CLI) kullanarak yeni projeyi oluşturdum.
-`abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder -dbms --connection-string`
+`abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder -dbms SqlServer --connection-string Server=localhost;Database=Infera;User Id=infera_app;Password=123;Trusted_Connection=True`
 
 
