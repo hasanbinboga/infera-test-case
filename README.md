@@ -96,3 +96,5 @@ Ardından uygulamayı çalıştırıyoruz
 
 `npm start`
 
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/b2fdaabd-3dd7-4cc0-8c82-4b8114ca305a)
+
