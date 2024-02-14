@@ -60,3 +60,7 @@ Infera.TestCase.HttpApi.Host projesi IIS Express üzerinden çalıştırıldığ
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/db2fc585-4975-4266-9cf6-4404bddc3105)
 
+Auth Server'ın da HostApp ile birlikte ayağa kalkması için Solution özelliklerinde gerekli güncellemeler yapıldı.
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/b7e1bd95-4fa3-4cdc-8d29-6a291dbfb81c)
+
