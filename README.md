@@ -34,6 +34,13 @@ NuGet paket imzası doğrulaması atlanıyor.
 'volo.abp.cli' aracı (sürüm '8.1.0-rc.1') başarıyla yüklendi.
 `
 
+Ayrıca Visual Studio 2022 güncellemeleri de yapıldı.
+
+`
+C:\Users\PC>dotnet --version
+8.0.200
+`
+
 Veritabanı olarak SqlServer kullanmayı planlıyorum. Bu nedenle Sql Server developer edition (https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x41f&culture=tr-tr&country=tr) ve SSMS indiridip kurdum.
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/02ea0c76-9f34-4a2e-9bd0-bf4c7b099a0b)
@@ -41,6 +48,6 @@ Veritabanı olarak SqlServer kullanmayı planlıyorum. Bu nedenle Sql Server dev
 Ardından Infera adında bir db ve infera_app isminde bir db user ı oluşturdum. Uygulamanın veritabanına bu user ile bağlanmasını planlıyorum.
 
 Daha sonra CLI komutlarını (https://docs.abp.io/en/abp/latest/CLI) kullanarak yeni projeyi oluşturdum.
-`abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder -dbms SqlServer --connection-string Server=localhost;Database=Infera;User Id=infera_app;Password=123;Trusted_Connection=True`
+`abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder --with-public-website -dbms SqlServer --connection-string "Server=localhost;Database=Infera;User Id=infera_app;Password=123;Trusted_Connection=True;"`
 
 
