@@ -23,6 +23,8 @@ https://github.com/dotnet/sdk/issues/35566
 
 İlk olarak Windows update ve VS updatelerini tamamladım. Projeyi .Net 8 ile geliştirmeyi planlıyorum.
 Sorunun Nuget package soruce'unun offline olarak ayarlanmasından kaynaklandığını belirledim.
+
+
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/c99780df-1e4f-4695-afb8-826e180f0f33)
 
 nuget source url: https://api.nuget.org/v3/index.json olarak güncellendi. 
