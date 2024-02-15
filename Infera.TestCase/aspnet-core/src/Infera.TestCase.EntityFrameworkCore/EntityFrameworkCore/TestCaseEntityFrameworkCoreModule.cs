@@ -12,6 +12,7 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Infera.TestCase.Buildings;
 
 namespace Infera.TestCase.EntityFrameworkCore;
 
@@ -41,6 +42,8 @@ public class TestCaseEntityFrameworkCoreModule : AbpModule
                 /* Remove "includeAllEntities: true" to create
                  * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
+
+            //options.AddRepository<IBuildingRepository, EfCoreBuildingRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>

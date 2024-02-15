@@ -165,3 +165,16 @@ Done. To undo this action, use 'ef migrations remove'
 
 Devamında migration'ı db'ye yansıtmak amacıyal DbMigrator projesini çalıştırdım.
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/cb3975c0-2c11-432c-9bd1-44aec6282862)
+
+
+```console
+[20:48:31 INF] Started database migrations...
+[20:48:31 INF] Migrating schema for host database...
+[20:48:32 INF] Executing host database seed...
+[20:48:35 INF] Successfully completed host database migrations.
+[20:48:36 INF] Successfully completed all database migrations.
+[20:48:36 INF] You can safely end this process...
+
+C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.DbMigrator\bin\Debug\net8.0\Infera.TestCase.DbMigrator.exe (process 10296) exited with code 0.
+Press any key to close this window . . .
+```

@@ -557,7 +557,7 @@ namespace Infera.TestCase.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BuildingId")
+                    b.Property<Guid?>("BuildingId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Capacity")
@@ -2532,9 +2532,7 @@ namespace Infera.TestCase.Migrations
                 {
                     b.HasOne("Infera.TestCase.Building", null)
                         .WithMany("Warehouses")
-                        .HasForeignKey("BuildingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BuildingId");
                 });
 
             modelBuilder.Entity("Infera.TestCase.WarehouseInventory", b =>

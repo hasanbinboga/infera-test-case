@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Infera.TestCase.Migrations
 {
     [DbContext(typeof(TestCaseDbContext))]
-    [Migration("20240215132448_InferaDbInit")]
-    partial class InferaDbInit
+    [Migration("20240215174807_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -560,7 +560,7 @@ namespace Infera.TestCase.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BuildingId")
+                    b.Property<Guid?>("BuildingId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Capacity")
@@ -2535,9 +2535,7 @@ namespace Infera.TestCase.Migrations
                 {
                     b.HasOne("Infera.TestCase.Building", null)
                         .WithMany("Warehouses")
-                        .HasForeignKey("BuildingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BuildingId");
                 });
 
             modelBuilder.Entity("Infera.TestCase.WarehouseInventory", b =>

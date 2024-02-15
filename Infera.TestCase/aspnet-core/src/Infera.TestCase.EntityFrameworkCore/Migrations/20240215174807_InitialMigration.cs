@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infera.TestCase.Migrations
 {
     /// <inheritdoc />
-    public partial class InferaDbInit : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -97,7 +97,7 @@ namespace Infera.TestCase.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BuildingId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BuildingId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     No = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Floor = table.Column<int>(type: "int", nullable: false),
@@ -121,8 +121,7 @@ namespace Infera.TestCase.Migrations
                         name: "FK_AppWarehouses_AppBuildings_BuildingId",
                         column: x => x.BuildingId,
                         principalTable: "AppBuildings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
