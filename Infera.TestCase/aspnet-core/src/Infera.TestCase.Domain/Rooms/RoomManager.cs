@@ -10,9 +10,9 @@ public class RoomManager : DomainService
 {
     public IRoomRepository RoomRepository { get; }
 
-    public RoomManager(IRoomRepository RoomRepository)
+    public RoomManager(IRoomRepository roomRepository)
     {
-        RoomRepository = RoomRepository; 
+        RoomRepository = roomRepository; 
     }
 
     public async Task<Room> CreateAsync(Guid buildingId,

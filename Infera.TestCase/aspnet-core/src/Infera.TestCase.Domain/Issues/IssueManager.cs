@@ -8,9 +8,9 @@ public class IssueManager : DomainService
 {
     public IIssueRepository IssueRepository { get; }
 
-    public IssueManager(IIssueRepository IssueRepository)
+    public IssueManager(IIssueRepository issueRepository)
     {
-        IssueRepository = IssueRepository; 
+        IssueRepository = issueRepository; 
     }
 
     public async Task<Issue> CreateAsync(Guid buildingId,
