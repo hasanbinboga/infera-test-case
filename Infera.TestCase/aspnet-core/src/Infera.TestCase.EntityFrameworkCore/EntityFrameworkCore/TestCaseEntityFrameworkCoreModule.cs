@@ -1,6 +1,7 @@
 ﻿using Infera.TestCase.Buildings;
 using Infera.TestCase.BuildingWarehouses;
 using Infera.TestCase.Issues;
+using Infera.TestCase.Rooms;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -46,6 +47,7 @@ public class TestCaseEntityFrameworkCoreModule : AbpModule
             options.AddRepository<Building, EfCoreBuildingRepository>();
             options.AddRepository<BuildingWarehouse, EfCoreBuildingWarehouseRepository>();
             options.AddRepository<Issue, EfCoreIssueRepository>();
+            options.AddRepository<Room, EfCoreRoomRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>
