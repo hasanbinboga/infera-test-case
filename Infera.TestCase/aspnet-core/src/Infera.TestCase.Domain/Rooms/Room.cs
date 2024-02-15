@@ -15,6 +15,7 @@ namespace Infera.TestCase
         public virtual bool HasMiniBar { get; set; }
         public virtual string? Notes { get; set; }
         public virtual Collection<SaleOrder> SaleOrders { get; protected set; } //Sub collection
+        public virtual Collection<Issue> Issues { get; protected set; } //Sub collection
 
         protected Room()
         {
@@ -41,6 +42,7 @@ namespace Infera.TestCase
             //initialize the collections
 
             SaleOrders = new Collection<SaleOrder>();
+            Issues = new Collection<Issue>();
         }
 
         internal void SetBuildingId(Guid buildingId)
