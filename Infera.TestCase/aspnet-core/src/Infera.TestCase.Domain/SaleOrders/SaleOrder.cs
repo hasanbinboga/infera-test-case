@@ -20,7 +20,7 @@ namespace Infera.TestCase
 
         }
 
-        public SaleOrder(Guid id,
+        internal SaleOrder(Guid id,
                         [NotNull] Guid roomId,
                         [NotNull] Guid warehouseInventoryId,
                         [NotNull] int count,

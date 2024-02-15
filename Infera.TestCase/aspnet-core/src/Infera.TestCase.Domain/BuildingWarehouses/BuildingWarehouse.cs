@@ -22,7 +22,7 @@ namespace Infera.TestCase
         }
 
         //Primary constructor
-        public BuildingWarehouse(Guid id, 
+        internal BuildingWarehouse(Guid id, 
                         [NotNull] Guid buildingId,
                         [NotNull] Guid warehouseId): base(id) 
         {

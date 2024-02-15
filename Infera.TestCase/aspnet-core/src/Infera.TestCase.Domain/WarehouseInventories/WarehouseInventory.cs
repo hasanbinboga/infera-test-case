@@ -22,7 +22,7 @@ namespace Infera.TestCase
             
         }
 
-        public WarehouseInventory(Guid id,
+        internal WarehouseInventory(Guid id,
                                  [NotNull] Guid warehouseId,
                                  [NotNull] Guid productInventoryId,
                                   int count,

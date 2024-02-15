@@ -23,7 +23,7 @@ namespace Infera.TestCase
 
         }
 
-        public ProductInventory(
+        internal ProductInventory(
                             Guid id,
                             [NotNull] string name,
                             string manifacturer,

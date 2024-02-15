@@ -22,7 +22,7 @@ namespace Infera.TestCase
             
         }
 
-        public Room(Guid id,
+        internal Room(Guid id,
                     [NotNull] Guid buildingId, 
                     [NotNull] int floor,
                     [NotNull] string no,

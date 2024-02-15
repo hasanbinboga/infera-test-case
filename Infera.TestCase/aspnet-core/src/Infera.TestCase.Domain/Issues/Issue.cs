@@ -23,7 +23,7 @@ namespace Infera.TestCase
 
         }
 
-        public Issue(Guid id,
+        internal Issue(Guid id,
             Guid buildingId,
             Guid roomId,
             Guid warehouseInventoryId,

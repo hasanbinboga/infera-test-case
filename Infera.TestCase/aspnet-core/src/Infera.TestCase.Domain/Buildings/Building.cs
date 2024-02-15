@@ -28,7 +28,7 @@ namespace Infera.TestCase
         }
 
         //Primary constructor
-        public Building(Guid id, 
+        internal Building(Guid id, 
                         [NotNull] string name,
                         [NotNull] string no, 
                         string addres): base(id) 

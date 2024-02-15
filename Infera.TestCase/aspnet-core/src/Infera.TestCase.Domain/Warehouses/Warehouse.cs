@@ -8,7 +8,7 @@ namespace Infera.TestCase
 {
     public class Warehouse : FullAuditedAggregateRoot<Guid>
     {
-        public virtual Guid BuildingId { get; set; }
+        public virtual Guid? BuildingId { get; set; }
         public virtual string Name { get; set; } 
         public virtual string No { get; set; } 
         public virtual int Floor { get; set; }
@@ -24,9 +24,9 @@ namespace Infera.TestCase
         }
 
 
-        public Warehouse(
+        internal Warehouse(
                         Guid id,
-                        [NotNull] Guid buildingId,
+                        Guid? buildingId,
                         string name,
                         string no,
                         int floor,
@@ -34,7 +34,7 @@ namespace Infera.TestCase
                         string content,
                         string notes): base(id)
         {
-            SetBuildingId(buildingId);
+            BuildingId = buildingId;
             SetName(name);
             SetNo(no);
             Floor = floor;
@@ -48,13 +48,7 @@ namespace Infera.TestCase
             WarehouseInventories = new Collection<WarehouseInventory>();
         }
 
-
-        internal void SetBuildingId( Guid buildingId )
-        {
-            Check.NotNull(buildingId, nameof(buildingId));
-            BuildingId = buildingId;
-        }
-
+ 
         internal void SetName(string name)
         {
             Check.NotNullOrWhiteSpace(name, nameof(name), WarehouseConsts.MaxNameLength, WarehouseConsts.MinNameLength);

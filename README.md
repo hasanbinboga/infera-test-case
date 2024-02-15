@@ -214,4 +214,5 @@ Press any key to close this window . . .
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/628b001e-68f1-4410-95fb-a416a4e7d229)
 
 
+Artık her bir entity için domain service ve custom repository sınıflarını oluşturabiliriz.
 
