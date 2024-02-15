@@ -22,6 +22,7 @@ namespace Infera.TestCase
 
         public Warehouse(
                         Guid id,
+                        Guid buildingId,
                         string name,
                         string no,
                         int floor,
@@ -30,12 +31,20 @@ namespace Infera.TestCase
                         string notes
                         ): base( id )
         {
+            SetBuildingId(buildingId);
             SetName(name);
             SetNo(no);
             Floor = floor;
             Capacity = capacity;
             SetContent(content);
             SetNotes(notes);
+        }
+
+
+        internal void SetBuildingId( Guid buildingId )
+        {
+            Check.NotNull(buildingId, nameof(buildingId));
+            BuildingId = buildingId;
         }
 
         internal void SetName(string name)
