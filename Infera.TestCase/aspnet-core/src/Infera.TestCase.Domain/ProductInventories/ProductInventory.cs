@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
@@ -22,16 +23,15 @@ namespace Infera.TestCase
 
         public ProductInventory(
                             Guid id,
-                            string name,
+                            [NotNull] string name,
                             string manifacturer,
                             ProductInventoryType type,
                             int size,
                             double salePrice,
-                            string notes
-            ): base(id)
+                            string notes): base(id)
         {
             SetName(name);
-            SetManifaturer(manifacturer);
+            SetManifacturer(manifacturer);
             Type = type;
             Size = size;
             SalePrice = salePrice;
@@ -44,19 +44,19 @@ namespace Infera.TestCase
         internal void SetName(string name)
         {
             Check.NotNullOrWhiteSpace(name, nameof(name));
-            Check.Length(name, nameof(name), 255, 3);
+            Check.Length(name, nameof(name), ProductInventoryConsts.MaxNameLength, ProductInventoryConsts.MinNameLength);
             Name = name;
         }
 
-        internal void SetManifaturer(string manifacturer)
+        internal void SetManifacturer(string manifacturer)
         {
-            Check.Length(manifacturer, nameof(manifacturer), 255);
+            Check.Length(manifacturer, nameof(manifacturer), ProductInventoryConsts.MaxManifacturerLength);
             Manifacturer = manifacturer;
         }
 
         internal void SetNotes(string notes)
         {
-            Check.Length(notes, nameof(notes), 500, 0);
+            Check.Length(notes, nameof(notes), ProductInventoryConsts.MaxNotesLength);
             Notes = notes;
         }
 
