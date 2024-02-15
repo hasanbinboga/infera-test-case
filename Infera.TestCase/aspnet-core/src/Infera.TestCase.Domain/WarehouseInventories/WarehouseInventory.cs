@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
@@ -11,6 +12,7 @@ namespace Infera.TestCase
         public virtual int Count { get; set; } 
         public virtual int Capacity { get; set; } 
         public virtual string? Notes { get; set; }
+        public virtual Collection<WarehouseInventory> WarehouseInventories { get; protected set; } //Sub collection
 
         protected WarehouseInventory()
         {
@@ -30,6 +32,8 @@ namespace Infera.TestCase
             Count = count;
             SetNotes(notes);
 
+            //initialize the collections
+            WarehouseInventories = new Collection<WarehouseInventory>();
         }
 
         internal void SetNotes(string notes)
