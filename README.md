@@ -96,3 +96,16 @@ Ardından uygulamayı çalıştırıyoruz
 
 `npm start`
 
+Scaffold'un düzgün şekilde çalıştığından emin olduktan sonra test case için verilen bilgilere göre ER Diyagramı oluşturdum.
+
+![image](https://github.com/hasanbinboga/infera-test-case/er-diagram.jpg)
+
+Gereksinimler şu şekildedir;
+>· Bina, Oda, Depo olacak. Binaya bağlı birden fazla oda ve depo olabilir. Bir odanın birden fazla bina ile bağlantısı olamaz.
+
+>· Envanter/Ürün olacak. Envanter/Ürün depoda saklanacak. Bir envanter/ürün birden fazla depoda olabilir.
+
+>· (Opsiyonel +) Depo Giriş ve Depo Çıkış olacak. Kullanıcı bir ürün eklediğinde o hangi depoya eklediyse orada görünecek. Çıkış yaptığında hangi binaya ve odaya ürünün gittiğini görebilecek.
+
+>· (Opsiyonel +) İş Emri tanımı olacak. Bu tanımı bina/oda/depo için veya envanter/ürün için bakım talepleri gibi düşünebilirsiniz. İş Emri tanımları xxx binadaki xxx odada bulunan xxx kodlu ürünün bakımı/temizliği/kontrolü şeklinde bir yapıda olacak. 
+
