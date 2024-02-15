@@ -97,9 +97,10 @@ public class TestCaseDbContext :
             b.Property(s => s.Name).IsRequired().HasMaxLength(BuildingConsts.MaxNameLength);
             b.Property(s => s.No).IsRequired().HasMaxLength(BuildingConsts.MaxNoLength);
             b.Property(s => s.Addres).HasMaxLength(BuildingConsts.MaxAddresLength);
-
-
         });
+
+        builder.Entity<Building>().HasIndex(s => new { s.Name, s.No, s.IsDeleted });
+
         builder.Entity<Room>(b =>
         {
             b.ToTable(TestCaseConsts.DbTablePrefix + "Rooms", TestCaseConsts.DbSchema);
@@ -108,7 +109,9 @@ public class TestCaseDbContext :
             b.Property(s => s.Floor).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(RoomConsts.MaxNotesLength);
 
-        });
+        }); 
+
+        builder.Entity<Room>().HasIndex(s => new { s.BuildingId, s.No, s.Floor, s.HasMiniBar, s.Capacity, s.IsDeleted });
 
         builder.Entity<BuildingWarehouse>(b =>
         {
@@ -118,6 +121,8 @@ public class TestCaseDbContext :
             b.Property(s => s.WarehouseId).IsRequired();
 
         });
+        
+        builder.Entity<BuildingWarehouse>().HasIndex(s => new { s.BuildingId, s.WarehouseId, s.IsDeleted });
 
         builder.Entity<Warehouse>(b =>
         {
@@ -130,6 +135,8 @@ public class TestCaseDbContext :
 
         });
 
+        builder.Entity<Warehouse>().HasIndex(s => new { s.BuildingId, s.Name, s.No, s.Floor, s.Capacity, s.IsDeleted });
+
         builder.Entity<WarehouseInventory>(b =>
         {
             b.ToTable(TestCaseConsts.DbTablePrefix + "WarehouseInventories", TestCaseConsts.DbSchema);
@@ -138,6 +145,8 @@ public class TestCaseDbContext :
             b.Property(s => s.Notes).HasMaxLength(WarehouseInventoryConsts.MaxNotesLength);
 
         });
+
+        builder.Entity<WarehouseInventory>().HasIndex(s => new { s.WarehouseId, s.ProductInventoryId, s.Count, s.Capacity, s.IsDeleted });
 
         builder.Entity<ProductInventory>(b =>
         {
@@ -148,6 +157,9 @@ public class TestCaseDbContext :
             b.Property(s => s.Size).IsRequired();
             b.Property(s => s.SalePrice).IsRequired();
         });
+
+        builder.Entity<ProductInventory>().HasIndex(s => new { s.Name, s.Manifacturer, s.Type, s.Size, s.SalePrice, s.IsDeleted });
+
 
         builder.Entity<Accounting>(b =>
         {
@@ -160,14 +172,7 @@ public class TestCaseDbContext :
             b.Property(s => s.Type).IsRequired();
         });
 
-        builder.Entity<Room>(b =>
-        {
-            b.ToTable(TestCaseConsts.DbTablePrefix + "Rooms", TestCaseConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props            
-            b.Property(s => s.No).HasMaxLength(RoomConsts.MaxNoLength).IsRequired();
-            b.Property(s => s.Floor).IsRequired();
-            b.Property(s => s.Notes).HasMaxLength(RoomConsts.MaxNotesLength);
-        });
+        builder.Entity<Accounting>().HasIndex(s => new { s.ProductInventoryId, s.SaleOrderId, s.Type, s.InvoiceDate, s.InvoiceNumber, s.SalePrice, s.PurchasePrice, s.IsDeleted });
 
         builder.Entity<SaleOrder>(b =>
         {
@@ -176,6 +181,8 @@ public class TestCaseDbContext :
             b.Property(s => s.Count).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(SaleOrderConsts.MaxNotesLength);
         });
+
+        builder.Entity<SaleOrder>().HasIndex(s => new { s.RoomId, s.WarehouseInventoryId, s.Count, s.IsCompleted, s.IsDeleted });
 
         builder.Entity<Issue>(b =>
         {
@@ -187,5 +194,6 @@ public class TestCaseDbContext :
             b.HasOne<IdentityUser>().WithMany().HasForeignKey(x => x.Assignee);
         });
 
+        builder.Entity<Issue>().HasIndex(s => new { s.BuildingId, s.RoomId, s.WarehouseInventoryId, s.ProductInventoryId, s.Type, s.Assignee, s.IsCompleted, s.CompletedTime, s.IsDeleted });
     }
 }

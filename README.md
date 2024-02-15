@@ -178,3 +178,32 @@ Devamında migration'ı db'ye yansıtmak amacıyal DbMigrator projesini çalış
 C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.DbMigrator\bin\Debug\net8.0\Infera.TestCase.DbMigrator.exe (process 10296) exited with code 0.
 Press any key to close this window . . .
 ```
+
+Ardından gerekli index tanımlarını oluşturarak yeniden db migration yaptım.
+
+```console
+dotnet ef migrations add CreateIndexes 
+```
+
+Migration başarılı şekilde oluştu.
+```console
+PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore> dotnet ef migrations add CreateIndexes
+Build started...
+Build succeeded.
+An operation was scaffolded that may result in the loss of data. Please review the migration for accuracy.
+Done. To undo this action, use 'ef migrations remove'
+```
+Ardından DbMigrator uygulaması ile veri tabanını güncelledim.
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/cb3975c0-2c11-432c-9bd1-44aec6282862)
+
+```console
+[21:20:19 INF] Started database migrations...
+[21:20:19 INF] Migrating schema for host database...
+[21:20:20 INF] Executing host database seed...
+[21:20:23 INF] Successfully completed host database migrations.
+[21:20:23 INF] Successfully completed all database migrations.
+[21:20:23 INF] You can safely end this process...
+
+C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.DbMigrator\bin\Debug\net8.0\Infera.TestCase.DbMigrator.exe (process 25956) exited with code 0.
+Press any key to close this window . . .
+```
