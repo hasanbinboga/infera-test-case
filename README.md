@@ -186,6 +186,7 @@ dotnet ef migrations add CreateIndexes
 ```
 
 Migration başarılı şekilde oluştu.
+
 ```console
 PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore> dotnet ef migrations add CreateIndexes
 Build started...
@@ -193,7 +194,9 @@ Build succeeded.
 An operation was scaffolded that may result in the loss of data. Please review the migration for accuracy.
 Done. To undo this action, use 'ef migrations remove'
 ```
+
 Ardından DbMigrator uygulaması ile veri tabanını güncelledim.
+
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/cb3975c0-2c11-432c-9bd1-44aec6282862)
 
 ```console
@@ -207,3 +210,8 @@ Ardından DbMigrator uygulaması ile veri tabanını güncelledim.
 C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.DbMigrator\bin\Debug\net8.0\Infera.TestCase.DbMigrator.exe (process 25956) exited with code 0.
 Press any key to close this window . . .
 ```
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/628b001e-68f1-4410-95fb-a416a4e7d229)
+
+
+
