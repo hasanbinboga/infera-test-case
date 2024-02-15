@@ -29,8 +29,7 @@ namespace Infera.TestCase
                         int floor,
                         int capacity,
                         string content,
-                        string notes
-                        ): base( id )
+                        string notes): base(id)
         {
             SetBuildingId(buildingId);
             SetName(name);

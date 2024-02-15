@@ -14,6 +14,7 @@ namespace Infera.TestCase
         public virtual int Capacity { get; set; } 
         public virtual string? Notes { get; set; }
         public virtual Collection<WarehouseInventory> WarehouseInventories { get; protected set; } //Sub collection
+        public virtual Collection<SaleOrder> SaleOrders { get; protected set; } //Sub collection
 
         protected WarehouseInventory()
         {
@@ -35,6 +36,7 @@ namespace Infera.TestCase
 
             //initialize the collections
             WarehouseInventories = new Collection<WarehouseInventory>();
+            SaleOrders = new Collection<SaleOrder>();
         }
 
         internal void SetNotes(string notes)
