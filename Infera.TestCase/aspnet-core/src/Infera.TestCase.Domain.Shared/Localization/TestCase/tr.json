@@ -6,7 +6,8 @@
         "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
         "Infera.TestCase:00001": "{Name} isimli bina zaten var.",
         "Infera.TestCase:00002": "Bu bina zaten bu depo ile ilişkilidir.",
-        "Infera.TestCase:00003": "Bu binada {No} numaralı oda zaten var.",        
-        "Infera.TestCase:00004": "{Manifacturer} tarafından üretilen {Size} boyutlarındaki {Name} markalı ürün zaten var."
+        "Infera.TestCase:00003": "Bu binada {No} numaralı oda zaten var.",
+        "Infera.TestCase:00004": "{Manifacturer} tarafından üretilen {Size} boyutlarındaki {Name} markalı ürün zaten var.",
+        "Infera.TestCase:00005": "Belirtilen ürün bu depoda zaten var."
     }
 }
