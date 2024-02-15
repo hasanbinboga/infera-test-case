@@ -1,5 +1,6 @@
 ﻿using Infera.TestCase.Buildings;
 using Infera.TestCase.BuildingWarehouses;
+using Infera.TestCase.Issues;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -38,18 +39,19 @@ public class TestCaseEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<TestCaseDbContext>(options =>
         {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
+            /* Remove "includeAllEntities: true" to create
+             * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
-            
+
             options.AddRepository<Building, EfCoreBuildingRepository>();
             options.AddRepository<BuildingWarehouse, EfCoreBuildingWarehouseRepository>();
+            options.AddRepository<Issue, EfCoreIssueRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>
         {
-                /* The main point to change your DBMS.
-                 * See also TestCaseMigrationsDbContextFactory for EF Core tooling. */
+            /* The main point to change your DBMS.
+             * See also TestCaseMigrationsDbContextFactory for EF Core tooling. */
             options.UseSqlServer();
         });
 

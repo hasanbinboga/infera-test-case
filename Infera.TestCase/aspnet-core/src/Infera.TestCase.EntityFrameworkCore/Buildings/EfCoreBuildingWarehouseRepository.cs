@@ -1,5 +1,4 @@
-﻿using Infera.TestCase.BuildingWarehouses;
-using Infera.TestCase.EntityFrameworkCore;
+﻿using Infera.TestCase.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
-namespace Infera.TestCase.Buildings;
+namespace Infera.TestCase.BuildingWarehouses;
 
 internal class EfCoreBuildingWarehouseRepository : EfCoreRepository<TestCaseDbContext, BuildingWarehouse, Guid>, IBuildingWarehouseRepository
 {
