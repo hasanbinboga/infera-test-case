@@ -14,6 +14,7 @@ namespace Infera.TestCase
 
         public virtual Collection<Room> Rooms { get; protected set; } //Sub collection
         public virtual Collection<BuildingWarehouse> BuildingWarehouses { get; protected set; } //Sub collection
+        public virtual Collection<Warehouse> Warehouses { get; protected set; } //Sub collection
         public virtual Collection<Issue> Issues { get; protected set; } //Sub collection
 
         protected Building()
@@ -39,6 +40,7 @@ namespace Infera.TestCase
             //initialize the collections
 
             Rooms = new Collection<Room>(); 
+            Warehouses = new Collection<Warehouse>();
             BuildingWarehouses = new Collection<BuildingWarehouse>();
             Issues = new Collection<Issue>();
 

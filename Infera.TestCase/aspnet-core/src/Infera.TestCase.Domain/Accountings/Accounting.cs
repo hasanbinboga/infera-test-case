@@ -8,7 +8,7 @@ namespace Infera.TestCase
     public class Accounting : FullAuditedAggregateRoot<Guid>
     {
         public Guid ProductInventoryId { get; set; }
-        public Guid OrderId { get; set; }
+        public Guid? SaleOrderId { get; set; }
         public int Count { get; set; }
         public double PurchasePrice { get; set; }
         public double SalePrice { get; set; }
@@ -25,7 +25,7 @@ namespace Infera.TestCase
 
         public Accounting(Guid id,
                         [NotNull] Guid productInventoryId,
-                        [NotNull] Guid orderId,
+                        Guid? saleOrderId,
                         [NotNull] int count,
                         [NotNull] AccountingType type,
                         double purchasePrice,
@@ -37,7 +37,6 @@ namespace Infera.TestCase
             ) : base(id)
         {
             SetProductInventoryId(productInventoryId);
-            SetOrderId(orderId);
             SetCount(count);
             SetType(type);
             PurchasePrice = purchasePrice;
@@ -46,6 +45,7 @@ namespace Infera.TestCase
             Tax = tax;
             InvoiceDate = invoiceDate;
             SetInvoiceNumber(invoiceNumber);
+            SaleOrderId = saleOrderId;
 
         }
 
@@ -55,13 +55,7 @@ namespace Infera.TestCase
         {
             Check.NotNull(productInventoryId, nameof(productInventoryId));
             ProductInventoryId = productInventoryId;
-        }
-
-        internal void SetOrderId(Guid orderId)
-        {
-            Check.NotNull(orderId, nameof(orderId));
-            OrderId = orderId;
-        }
+        } 
 
         internal void SetCount(int count)
         {

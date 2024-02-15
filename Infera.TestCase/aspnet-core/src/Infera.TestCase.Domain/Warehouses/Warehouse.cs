@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
@@ -14,6 +15,8 @@ namespace Infera.TestCase
         public virtual int Capacity { get; set; }
         public virtual string? Content { get; set; }
         public virtual string? Notes { get; set; }
+        public virtual Collection<BuildingWarehouse> BuildingWarehouses { get; protected set; } //Sub collection
+        public virtual Collection<WarehouseInventory> WarehouseInventories { get; protected set; } //Sub collection
 
         protected Warehouse()
         {
@@ -38,6 +41,11 @@ namespace Infera.TestCase
             Capacity = capacity;
             SetContent(content);
             SetNotes(notes);
+
+            //initialize the collections
+
+            BuildingWarehouses = new Collection<BuildingWarehouse>();
+            WarehouseInventories = new Collection<WarehouseInventory>();
         }
 
 

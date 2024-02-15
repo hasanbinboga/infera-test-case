@@ -11,8 +11,8 @@ namespace Infera.TestCase
         public virtual Guid BuildingId { get; set; }
         public virtual int Floor { get; set; }
         public virtual string No { get; set; }
-        public virtual int Capacity { get; set; }
-        public virtual bool HasMiniBar { get; set; }
+        public virtual int? Capacity { get; set; }
+        public virtual bool? HasMiniBar { get; set; }
         public virtual string? Notes { get; set; }
         public virtual Collection<SaleOrder> SaleOrders { get; protected set; } //Sub collection
         public virtual Collection<Issue> Issues { get; protected set; } //Sub collection
@@ -24,10 +24,10 @@ namespace Infera.TestCase
 
         public Room(Guid id,
                     [NotNull] Guid buildingId, 
-                    int floor,
-                    string no,
-                    int capacity,
-                    bool hasMiniBar,
+                    [NotNull] int floor,
+                    [NotNull] string no,
+                    int? capacity,
+                    bool? hasMiniBar,
                     string notes
             ): base(id)
         {
