@@ -1,6 +1,6 @@
 ﻿
 namespace Infera.TestCase;
-public enum PorductInventoryType
+public enum ProductInventoryType
 {
     None=0,
     Drink =1,

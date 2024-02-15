@@ -1,4 +1,5 @@
 ﻿using System;
+using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Infera.TestCase
@@ -7,14 +8,52 @@ namespace Infera.TestCase
     {
         public virtual string Name { get; set; }
         public virtual string  Manifacturer { get; set; }
-        public virtual PorductInventoryType Type { get; set; }
+        public virtual ProductInventoryType Type { get; set; }
         public virtual int Size { get; set; }
-        public virtual bool SalePrice { get; set; }
+        public virtual double SalePrice { get; set; }
         public virtual string? Notes { get; set; }
 
-        public ProductInventory()
+        protected ProductInventory()
         {
             
         }
+
+        public ProductInventory(
+                            Guid id,
+                            string name,
+                            string manifacturer,
+                            ProductInventoryType type,
+                            int size,
+                            double salePrice,
+                            string notes
+            ): base(id)
+        {
+            SetName(name);
+            SetManifaturer(manifacturer);
+            Type = type;
+            Size = size;
+            SalePrice = salePrice;
+            SetNotes(notes);
+        }
+
+        internal void SetName(string name)
+        {
+            Check.NotNullOrWhiteSpace(name, nameof(name));
+            Check.Length(name, nameof(name), 255, 3);
+            Name = name;
+        }
+
+        internal void SetManifaturer(string manifacturer)
+        {
+            Check.Length(manifacturer, nameof(manifacturer), 255);
+            Manifacturer = manifacturer;
+        }
+
+        internal void SetNotes(string notes)
+        {
+            Check.Length(notes, nameof(notes), 500, 0);
+            Notes = notes;
+        }
+
     }
 }
