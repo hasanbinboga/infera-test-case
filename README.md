@@ -101,7 +101,7 @@ Ardından uygulamayı çalıştırıyoruz
 
 Scaffold'un düzgün şekilde çalıştığından emin olduktan sonra test case için verilen bilgilere göre ER Diyagramı oluşturdum.
 
-![image](https://github.com/hasanbinboga/infera-test-case/er-diagram.jpg)
+![image](https://github.com/hasanbinboga/infera-test-case/blob/main/er-diagram.jpg)
 
 Gereksinimler şu şekildedir;
 >· Bina, Oda, Depo olacak. Binaya bağlı birden fazla oda ve depo olabilir. Bir odanın birden fazla bina ile bağlantısı olamaz.
