@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
@@ -12,10 +13,11 @@ namespace Infera.TestCase
         public virtual int Count { get; set; }
         public virtual bool IsCompleted { get; set; }
         public virtual string? Notes { get; set; }
+        public virtual Collection<Accounting> Accountings { get; protected set; } //Sub collection
 
         protected SaleOrder()
         {
-            
+
         }
 
         public SaleOrder(Guid id,
@@ -24,13 +26,17 @@ namespace Infera.TestCase
                         [NotNull] int count,
                         bool isCompleted,
                         string notes
-                        ): base(id) 
+                        ) : base(id)
         {
             SetRoomId(roomId);
             SetWarehouseInventoryId(warehouseInventoryId);
             SetCount(count);
             IsCompleted = isCompleted;
             SetNotes(notes);
+
+            //initialize the collections
+
+            Accountings = new Collection<Accounting>();
         }
 
         internal void SetRoomId(Guid roomId)
@@ -58,7 +64,7 @@ namespace Infera.TestCase
             Notes = notes;
         }
 
-        
+
 
     }
 }

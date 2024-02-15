@@ -9,16 +9,17 @@ namespace Infera.TestCase
     public class ProductInventory : FullAuditedAggregateRoot<Guid>
     {
         public virtual string Name { get; set; }
-        public virtual string  Manifacturer { get; set; }
+        public virtual string Manifacturer { get; set; }
         public virtual ProductInventoryType Type { get; set; }
         public virtual int Size { get; set; }
         public virtual double SalePrice { get; set; }
         public virtual string? Notes { get; set; }
         public virtual Collection<WarehouseInventory> WarehouseInventories { get; protected set; } //Sub collection
+        public virtual Collection<Accounting> Accountings { get; protected set; } //Sub collection
 
         protected ProductInventory()
         {
-            
+
         }
 
         public ProductInventory(
@@ -28,7 +29,7 @@ namespace Infera.TestCase
                             ProductInventoryType type,
                             int size,
                             double salePrice,
-                            string notes): base(id)
+                            string notes) : base(id)
         {
             SetName(name);
             SetManifacturer(manifacturer);
@@ -39,6 +40,7 @@ namespace Infera.TestCase
 
             //initialize the collections
             WarehouseInventories = new Collection<WarehouseInventory>();
+            Accountings = new Collection<Accounting>();
         }
 
         internal void SetName(string name)
