@@ -5,6 +5,7 @@ using Infera.TestCase.ProductInventories;
 using Infera.TestCase.Rooms;
 using Infera.TestCase.SaleOrders;
 using Infera.TestCase.WarehouseInventories;
+using Infera.TestCase.Warehouses;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -54,6 +55,7 @@ public class TestCaseEntityFrameworkCoreModule : AbpModule
             options.AddRepository<Room, EfCoreRoomRepository>();
             options.AddRepository<SaleOrder, EfCoreSaleOrderRepository>();
             options.AddRepository<WarehouseInventory, EfCoreWarehouseInventoryRepository>();
+            options.AddRepository<Warehouse, EfCoreWarehouseRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>

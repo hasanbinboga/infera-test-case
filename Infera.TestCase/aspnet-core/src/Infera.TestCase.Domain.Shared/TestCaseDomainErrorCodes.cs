@@ -8,4 +8,5 @@ public static class TestCaseDomainErrorCodes
     public const string RoomAlreadyExists = "Infera.TestCase:00003";
     public const string ProductInventoryAlreadyExists = "Infera.TestCase:00004";
     public const string WarehouseInventoryAlreadyExists = "Infera.TestCase:00005";
+    public const string WarehouseAlreadyExists = "Infera.TestCase:00006";
 }
