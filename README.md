@@ -6,7 +6,7 @@ Volosoft Abp Framework Açık kaynaklı(open source) bir web uygulama framework'
 
 abp cli kurmak istediğimde aşağıdaki hatayı aldım.
 
-`
+```console
 C:\Users\PC>dotnet tool install -g Volo.Abp.Cli
 Unhandled exception: Microsoft.DotNet.Cli.NuGetPackageDownloader.NuGetPackageNotFoundException: volo.abp.cli::[*, ), C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\ NuGet akışlarında bulunamadı.
    at Microsoft.DotNet.Cli.NuGetPackageDownloader.NuGetPackageDownloader.GetMatchingVersionInternalAsync(String packageIdentifier, IEnumerable`1 packageSources, VersionRange versionRange, CancellationToken cancellationToken)
@@ -16,7 +16,7 @@ Unhandled exception: Microsoft.DotNet.Cli.NuGetPackageDownloader.NuGetPackageNot
    at Microsoft.DotNet.Tools.Tool.Install.ToolInstallGlobalOrToolPathCommand.Execute()
    at System.CommandLine.Invocation.InvocationPipeline.Invoke(ParseResult parseResult)
    at Microsoft.DotNet.Cli.Program.ProcessArgs(String[] args, TimeSpan startupTime, ITelemetry telemetryClient)
-`
+```
 
 Sorunun .net 8 versiyonunun eski olmasından kaynaklandığını konu ile ilgili olarak issue oluşturulduğunu gördüm. 
 https://github.com/dotnet/sdk/issues/35566
@@ -29,19 +29,19 @@ Sorunun Nuget package soruce'unun offline olarak ayarlanmasından kaynaklandığ
 
 nuget source url: https://api.nuget.org/v3/index.json olarak güncellendi. 
 
-`
+```console
 C:\Repos\infera-test-case\Infera>dotnet tool install --global Volo.Abp.Cli --version 8.1.0-rc.1
 NuGet paket imzası doğrulaması atlanıyor.
 Şu komutu kullanarak aracı çağırabilirsiniz: abp
 'volo.abp.cli' aracı (sürüm '8.1.0-rc.1') başarıyla yüklendi.
-`
+```
 
 Ayrıca Visual Studio 2022 güncellemeleri de yapıldı.
 
-`
+```console
 C:\Users\PC>dotnet --version
 8.0.200
-`
+```
 
 Veritabanı olarak SqlServer kullanmayı planlıyorum. Bu nedenle Sql Server developer edition (https://go.microsoft.com/fwlink/p/?linkid=2215158&clcid=0x41f&culture=tr-tr&country=tr) ve SSMS indiridip kurdum.
 
@@ -50,7 +50,9 @@ Veritabanı olarak SqlServer kullanmayı planlıyorum. Bu nedenle Sql Server dev
 Ardından Infera adında bir db ve infera_app isminde bir db user ı oluşturdum. Uygulamanın veritabanına bu user ile bağlanmasını planlıyorum.
 
 Daha sonra CLI komutlarını (https://docs.abp.io/en/abp/latest/CLI) kullanarak yeni projeyi oluşturdum.
-`abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder --with-public-website -dbms SqlServer --connection-string "Server=localhost;Database=Infera;User Id=infera_app;Password=123;Trusted_Connection=True;"`
+```console
+abp new Infera.TestCase --template app --ui angular --separate-auth-server --database-provider ef --theme leptonx-lite --create-solution-folder --with-public-website -dbms SqlServer --connection-string "Server=localhost;Database=Infera;User Id=infera_app;Password=123;Trusted_Connection=True;"
+```
 
 Devamında Migrator uygulaması çalıştırılarak veritabanı initilize yapıldı.
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/507070cf-87b1-4833-869b-09887bf997bf)
@@ -74,11 +76,10 @@ Auth server default admin bilgileri ile swagger üzerinden authorize olduk.
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/619bebbe-d3cf-442d-850f-a05725d8540c)
 
 Authorize işlemi için kullanıcı bilgileri;
-
->User:admin
->
->Password:1q2w3E*
-
+```console
+User:admin
+Password:1q2w3E*
+```
 
 Ardından test amaçlı olarak swagger üzerinden rolleri sorguladım;
 
@@ -88,15 +89,17 @@ Böylece Backend scaffold hazırlanmış oldu.
 
 Frontend projesini ayağa kaldırmak için solution klasöründeki daki angular klasörü içerisinde komut satırı açarak npm paketlerini yüklüyoruz.
 
-`
+```console
 npm install -g @angular/cli
 npm i --legacy-peer-deps
 ng update @angular/cli @angular/core --force
-`
+```
 
 Ardından uygulamayı çalıştırıyoruz
 
-`npm start`
+```console
+npm start
+```
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/b2fdaabd-3dd7-4cc0-8c82-4b8114ca305a)
 
 Scaffold'un düzgün şekilde çalıştığından emin olduktan sonra test case için verilen bilgilere göre ER Diyagramı oluşturdum.
@@ -116,13 +119,13 @@ Gereksinimler şu şekildedir;
 
 ER diagramında belirtilen entity ler ile ilgili geliştirimeler tamamlanarak migration oluşturuldu;
 
-`
+```console
 dotnet ef migrations add InitialMigration 
-`
+```
 
 Uygulama başarılı olarak derlendiği halde aşağıdaki uyarıları verdi;
 
-`
+```console
 PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore> dotnet ef Migrations Add InferaDbInit
 Build started...
 Build succeeded.
@@ -142,19 +145,23 @@ The foreign key property 'WarehouseInventory.ProductInventoryId1' was created in
 The foreign key property 'WarehouseInventory.WarehouseId1' was created in shadow state because a conflicting property with the simple name 'WarehouseId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
 Done. To undo this action, use 'ef migrations remove'
 PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore>
-`
+```
 
 Yapılan incelemede veri tipi uyumsuzlukları nedeniyle ekstra property oluşturduğu tespit edildi. Oluşturulan migration kaldırıldı.
 
-`
+```console
 dotnet ef migrations remove
-`
+```
 
 Db Context registrationdaki relation tanımları kaldırıldığında uyarıların düzeldiği görüldü. Sadece Issue.Assignee property si için IdentityUser ilişkisi tanımlandı.
 
-`
+```console
 PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore> dotnet ef Migrations Add InferaDbInit
 Build started...
 Build succeeded.
 Done. To undo this action, use 'ef migrations remove'
-`
+```
+
+
+Devamında migration'ı db'ye yansıtmak amacıyal DbMigrator projesini çalıştırdım.
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/cb3975c0-2c11-432c-9bd1-44aec6282862)
