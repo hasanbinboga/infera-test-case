@@ -13,6 +13,7 @@ namespace Infera.TestCase
         public virtual string? Addres { get; protected set; }
 
         public virtual Collection<Room> Rooms { get; protected set; } //Sub collection
+        public virtual Collection<BuildingWarehouse> BuildingWarehouses { get; protected set; } //Sub collection
 
         protected Building()
         {
@@ -37,6 +38,7 @@ namespace Infera.TestCase
             //initialize the collections
 
             Rooms = new Collection<Room>(); 
+            BuildingWarehouses = new Collection<BuildingWarehouse>();
 
         }
 

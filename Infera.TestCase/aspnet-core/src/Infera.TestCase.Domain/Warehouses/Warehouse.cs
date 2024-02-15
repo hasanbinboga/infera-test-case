@@ -1,4 +1,5 @@
 ﻿using System;
+using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Infera.TestCase
@@ -7,16 +8,59 @@ namespace Infera.TestCase
     {
         public virtual Guid BuildingId { get; set; }
         public virtual string Name { get; set; } 
-        public virtual  int Number { get; set; } 
+        public virtual string No { get; set; } 
         public virtual int Floor { get; set; }
         public virtual int Capacity { get; set; }
         public virtual string? Content { get; set; }
         public virtual string? Notes { get; set; }
 
-        public Warehouse()
+        protected Warehouse()
         {
             
         }
 
+
+        public Warehouse(
+                        Guid id,
+                        string name,
+                        string no,
+                        int floor,
+                        int capacity,
+                        string content,
+                        string notes
+                        ): base( id )
+        {
+            SetName(name);
+            SetNo(no);
+            Floor = floor;
+            Capacity = capacity;
+            SetContent(content);
+            SetNotes(notes);
+        }
+
+        internal void SetName(string name)
+        {
+            Check.NotNullOrWhiteSpace(name, nameof(name), WarehouseConsts.MaxNameLength, WarehouseConsts.MinNameLength);
+            Name = name;
+        }
+
+
+        internal void SetNo(string no)
+        {
+            Check.NotNullOrWhiteSpace(no, nameof(no), WarehouseConsts.MaxNoLength);
+            No = no;
+        }
+
+        internal void SetContent(string content)
+        {
+            Check.NotNullOrWhiteSpace(content, nameof(content), WarehouseConsts.MaxContentLength);
+            Content = content;
+        }
+
+        internal void SetNotes(string notes)
+        {
+            Check.NotNullOrWhiteSpace(notes, nameof(notes), WarehouseConsts.MaxNotesLength);
+            Notes = notes;
+        }
     }
 }
