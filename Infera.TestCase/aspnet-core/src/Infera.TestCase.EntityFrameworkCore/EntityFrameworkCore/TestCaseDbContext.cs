@@ -95,12 +95,12 @@ public class TestCaseDbContext :
             b.ToTable(TestCaseConsts.DbTablePrefix + "Buildings", TestCaseConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(s => s.Name).IsRequired().HasMaxLength(BuildingConsts.MaxNameLength);
-            b.Property(s=>s.No).IsRequired().HasMaxLength(BuildingConsts.MaxNoLength);
-            b.Property(s=>s.Addres).HasMaxLength(BuildingConsts.MaxAddresLength);
+            b.Property(s => s.No).IsRequired().HasMaxLength(BuildingConsts.MaxNoLength);
+            b.Property(s => s.Addres).HasMaxLength(BuildingConsts.MaxAddresLength);
 
-            
+
         });
-        builder.Entity<Room>(b => 
+        builder.Entity<Room>(b =>
         {
             b.ToTable(TestCaseConsts.DbTablePrefix + "Rooms", TestCaseConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props            
@@ -108,8 +108,6 @@ public class TestCaseDbContext :
             b.Property(s => s.Floor).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(RoomConsts.MaxNotesLength);
 
-            // ADD THE MAPPING FOR THE RELATION
-            b.HasOne<Building>().WithMany().HasForeignKey(x => x.BuildingId).IsRequired();
         });
 
         builder.Entity<BuildingWarehouse>(b =>
@@ -119,9 +117,6 @@ public class TestCaseDbContext :
             b.Property(s => s.BuildingId).IsRequired();
             b.Property(s => s.WarehouseId).IsRequired();
 
-            // ADD THE MAPPING FOR THE RELATION
-            b.HasOne<Building>().WithMany().HasForeignKey(x => x.BuildingId).IsRequired();
-            b.HasOne<Warehouse>().WithMany().HasForeignKey(x => x.WarehouseId).IsRequired();
         });
 
         builder.Entity<Warehouse>(b =>
@@ -129,11 +124,10 @@ public class TestCaseDbContext :
             b.ToTable(TestCaseConsts.DbTablePrefix + "Warehouses", TestCaseConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props            
             b.Property(s => s.Name).IsRequired().HasMaxLength(WarehouseConsts.MinNameLength);
-            b.Property(s=>s.No).IsRequired();
-            b.Property(s=>s.Floor).IsRequired();
-            b.Property(s=>s.Notes).HasMaxLength(WarehouseConsts.MaxNotesLength);
+            b.Property(s => s.No).IsRequired();
+            b.Property(s => s.Floor).IsRequired();
+            b.Property(s => s.Notes).HasMaxLength(WarehouseConsts.MaxNotesLength);
 
-            b.HasOne<Building>().WithMany().HasForeignKey(x => x.BuildingId).IsRequired();
         });
 
         builder.Entity<WarehouseInventory>(b =>
@@ -143,8 +137,6 @@ public class TestCaseDbContext :
             b.Property(s => s.Count).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(WarehouseInventoryConsts.MaxNotesLength);
 
-            b.HasOne<Warehouse>().WithMany().HasForeignKey(x => x.WarehouseId).IsRequired();
-            b.HasOne<ProductInventory>().WithMany().HasForeignKey(x => x.ProductInventoryId).IsRequired();
         });
 
         builder.Entity<ProductInventory>(b =>
@@ -166,10 +158,6 @@ public class TestCaseDbContext :
             b.Property(s => s.Amount).IsRequired();
             b.Property(s => s.Tax).IsRequired();
             b.Property(s => s.Type).IsRequired();
-            
-
-            b.HasOne<ProductInventory>().WithMany().HasForeignKey(x => x.ProductInventoryId).IsRequired();
-            b.HasOne<SaleOrder>().WithMany().HasForeignKey(x => x.SaleOrderId).IsRequired();
         });
 
         builder.Entity<Room>(b =>
@@ -179,8 +167,6 @@ public class TestCaseDbContext :
             b.Property(s => s.No).HasMaxLength(RoomConsts.MaxNoLength).IsRequired();
             b.Property(s => s.Floor).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(RoomConsts.MaxNotesLength);
-
-            b.HasOne<Building>().WithMany().HasForeignKey(x => x.BuildingId).IsRequired();
         });
 
         builder.Entity<SaleOrder>(b =>
@@ -189,9 +175,6 @@ public class TestCaseDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props            
             b.Property(s => s.Count).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(SaleOrderConsts.MaxNotesLength);
-
-            b.HasOne<Room>().WithMany().HasForeignKey(x => x.RoomId).IsRequired();
-            b.HasOne<WarehouseInventory>().WithMany().HasForeignKey(x => x.WarehouseInventoryId).IsRequired();
         });
 
         builder.Entity<Issue>(b =>
@@ -201,12 +184,7 @@ public class TestCaseDbContext :
             b.Property(s => s.Type).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(IssueConsts.MaxNotesLength);
 
-            b.HasOne<Building>().WithMany().HasForeignKey(x => x.BuildingId);
             b.HasOne<IdentityUser>().WithMany().HasForeignKey(x => x.Assignee);
-            b.HasOne<Room>().WithMany().HasForeignKey(x => x.RoomId);
-            b.HasOne<WarehouseInventory>().WithMany().HasForeignKey(x => x.WarehouseInventoryId);
-            b.HasOne<ProductInventory>().WithMany().HasForeignKey(x => x.ProductInventoryId);
-
         });
 
     }

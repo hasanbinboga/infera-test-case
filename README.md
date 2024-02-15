@@ -112,3 +112,49 @@ Gereksinimler şu şekildedir;
 
 >· (Opsiyonel +) İş Emri tanımı olacak. Bu tanımı bina/oda/depo için veya envanter/ürün için bakım talepleri gibi düşünebilirsiniz. İş Emri tanımları xxx binadaki xxx odada bulunan xxx kodlu ürünün bakımı/temizliği/kontrolü şeklinde bir yapıda olacak. 
 
+
+
+ER diagramında belirtilen entity ler ile ilgili geliştirimeler tamamlanarak migration oluşturuldu;
+
+`
+dotnet ef migrations add InitialMigration 
+`
+
+Uygulama başarılı olarak derlendiği halde aşağıdaki uyarıları verdi;
+
+`
+PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore> dotnet ef Migrations Add InferaDbInit
+Build started...
+Build succeeded.
+The foreign key property 'Accounting.ProductInventoryId1' was created in shadow state because a conflicting property with the simple name 'ProductInventoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'Accounting.SaleOrderId1' was created in shadow state because a conflicting property with the simple name 'SaleOrderId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'BuildingWarehouse.BuildingId1' was created in shadow state because a conflicting property with the simple name 'BuildingId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'BuildingWarehouse.WarehouseId1' was created in shadow state because a conflicting property with the simple name 'WarehouseId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'Issue.BuildingId1' was created in shadow state because a conflicting property with the simple name 'BuildingId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'Issue.ProductInventoryId1' was created in shadow state because a conflicting property with the simple name 'ProductInventoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'Issue.RoomId1' was created in shadow state because a conflicting property with the simple name 'RoomId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'Issue.WarehouseInventoryId1' was created in shadow state because a conflicting property with the simple name 'WarehouseInventoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'Room.BuildingId1' was created in shadow state because a conflicting property with the simple name 'BuildingId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'SaleOrder.RoomId1' was created in shadow state because a conflicting property with the simple name 'RoomId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'SaleOrder.WarehouseInventoryId1' was created in shadow state because a conflicting property with the simple name 'WarehouseInventoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'Warehouse.BuildingId1' was created in shadow state because a conflicting property with the simple name 'BuildingId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'WarehouseInventory.ProductInventoryId1' was created in shadow state because a conflicting property with the simple name 'ProductInventoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+The foreign key property 'WarehouseInventory.WarehouseId1' was created in shadow state because a conflicting property with the simple name 'WarehouseId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+Done. To undo this action, use 'ef migrations remove'
+PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore>
+`
+
+Yapılan incelemede veri tipi uyumsuzlukları nedeniyle ekstra property oluşturduğu tespit edildi. Oluşturulan migration kaldırıldı.
+
+`
+dotnet ef migrations remove
+`
+
+Db Context registrationdaki relation tanımları kaldırıldığında uyarıların düzeldiği görüldü. Sadece Issue.Assignee property si için IdentityUser ilişkisi tanımlandı.
+
+`
+PS C:\Repos\infera-test-case\Infera.TestCase\aspnet-core\src\Infera.TestCase.EntityFrameworkCore> dotnet ef Migrations Add InferaDbInit
+Build started...
+Build succeeded.
+Done. To undo this action, use 'ef migrations remove'
+`
