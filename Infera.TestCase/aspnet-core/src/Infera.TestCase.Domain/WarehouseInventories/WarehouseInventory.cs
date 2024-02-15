@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
@@ -20,14 +21,14 @@ namespace Infera.TestCase
         }
 
         public WarehouseInventory(Guid id,
-                                  Guid warehouseId,
-                                  Guid productInventoryId,
+                                 [NotNull] Guid warehouseId,
+                                 [NotNull] Guid productInventoryId,
                                   int count,
                                   int capacity,
                                   string notes):base(id) 
         {
-            WarehouseId = warehouseId;
-            ProductInventoryId = productInventoryId;
+            SetWarehouseId(warehouseId);
+            SetProductInventoryId(productInventoryId);
             Capacity = capacity;
             Count = count;
             SetNotes(notes);
@@ -42,6 +43,18 @@ namespace Infera.TestCase
             Notes = notes;
         }
 
+        internal void SetWarehouseId(Guid warehouseId)
+        {
+            Check.NotNull(warehouseId, nameof(warehouseId));
+            WarehouseId = warehouseId;
+        }
+
+
+        internal void SetProductInventoryId(Guid productInventoryId)
+        {
+            Check.NotNull(productInventoryId, nameof(productInventoryId));
+            ProductInventoryId = productInventoryId;
+        }
 
     }
 }

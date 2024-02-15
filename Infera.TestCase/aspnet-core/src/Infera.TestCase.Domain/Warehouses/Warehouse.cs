@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
@@ -22,7 +23,7 @@ namespace Infera.TestCase
 
         public Warehouse(
                         Guid id,
-                        Guid buildingId,
+                        [NotNull] Guid buildingId,
                         string name,
                         string no,
                         int floor,
