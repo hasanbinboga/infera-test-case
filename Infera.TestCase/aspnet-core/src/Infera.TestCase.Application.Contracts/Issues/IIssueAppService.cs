@@ -12,5 +12,6 @@ public interface IIssueAppService: ICrudAppService<
                                                     IssueCreateUpdateDto
                                                     >
 {
-    Task<ListResultDto<IssueLookupDto>> GetIssueLookupAsync(); 
+    Task<ListResultDto<IssueLookupDto>> GetIssueLookupAsync();
+    Task<ListResultDto<UserLookupDto>> GetUserLookupAsync();
 }

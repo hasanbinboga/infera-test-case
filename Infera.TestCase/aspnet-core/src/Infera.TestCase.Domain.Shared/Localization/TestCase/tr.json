@@ -14,7 +14,10 @@
         "Infera.TestCase:00005": "Belirtilen ürün bu depoda zaten var.",
         "Infera.TestCase:00006": "Bu binada zaten {No} numaralı ve {Name} isimli depo vardır.",
         "Infera.TestCase:00007": "{Date} tarih ve {InvoiceNo} numaralı fatura zaten var.",
-        "Permission:Buildings": "Bina Modülü"
-
+        "Permission:Buildings": "Bina Modülü",
+        "Enum:IssueType.0": "Bilinmiyor",
+        "Enum:IssueType.1": "Temizlik",
+        "Enum:IssueType.2": "Onarım",
+        "Enum:IssueType.3": "Eksikleri tamamla"
     }
 }

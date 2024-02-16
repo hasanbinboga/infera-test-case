@@ -1,4 +1,4 @@
-import type { IssueCreateUpdateDto, IssueDto, IssueLookupDto } from './models';
+import type { IssueCreateUpdateDto, IssueDto, IssueLookupDto, UserLookupDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { ListResultDto, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -48,6 +48,14 @@ export class IssueService {
       method: 'GET',
       url: '/api/app/issue',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getUserLookup = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ListResultDto<UserLookupDto>>({
+      method: 'GET',
+      url: '/api/app/issue/user-lookup',
     },
     { apiName: this.apiName,...config });
   

@@ -1230,6 +1230,43 @@
             }
           ],
           "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/building",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Infera.TestCase.Buildings.BuildingCreateUpdateDto, Infera.TestCase.Application.Contracts",
+                  "type": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
+                  "typeSimple": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
+                  "typeSimple": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Infera.TestCase.Buildings.BuildingDto",
+                "typeSimple": "Infera.TestCase.Buildings.BuildingDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<Infera.TestCase.Buildings.BuildingDto,Infera.TestCase.Buildings.BuildingCreateUpdateDto>"
+            },
             "GetAsyncById": {
               "uniqueName": "GetAsyncById",
               "name": "GetAsync",
@@ -1342,43 +1379,6 @@
               },
               "allowAnonymous": null,
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<Infera.TestCase.Buildings.BuildingDto,Infera.TestCase.Buildings.BuildingDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
-            },
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/building",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Infera.TestCase.Buildings.BuildingCreateUpdateDto, Infera.TestCase.Application.Contracts",
-                  "type": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
-                  "typeSimple": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
-                  "typeSimple": "Infera.TestCase.Buildings.BuildingCreateUpdateDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Infera.TestCase.Buildings.BuildingDto",
-                "typeSimple": "Infera.TestCase.Buildings.BuildingDto"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<Infera.TestCase.Buildings.BuildingDto,Infera.TestCase.Buildings.BuildingCreateUpdateDto>"
             },
             "UpdateAsyncByIdAndInput": {
               "uniqueName": "UpdateAsyncByIdAndInput",
@@ -1494,6 +1494,14 @@
                   "returnValue": {
                     "type": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.IssueLookupDto>",
                     "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.IssueLookupDto>"
+                  }
+                },
+                {
+                  "name": "GetUserLookupAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.UserLookupDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.UserLookupDto>"
                   }
                 },
                 {
@@ -1641,6 +1649,21 @@
               "returnValue": {
                 "type": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.IssueLookupDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.IssueLookupDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Infera.TestCase.Issues.IIssueAppService"
+            },
+            "GetUserLookupAsync": {
+              "uniqueName": "GetUserLookupAsync",
+              "name": "GetUserLookupAsync",
+              "httpMethod": "GET",
+              "url": "api/app/issue/user-lookup",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.UserLookupDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Infera.TestCase.Issues.UserLookupDto>"
               },
               "allowAnonymous": null,
               "implementFrom": "Infera.TestCase.Issues.IIssueAppService"
@@ -6517,6 +6540,27 @@
       ]
     },
     "Infera.TestCase.Issues.IssueLookupDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Infera.TestCase.Issues.UserLookupDto": {
       "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
       "enumNames": null,

@@ -40,3 +40,7 @@ export interface IssueDto extends AuditedEntityDto<string> {
 export interface IssueLookupDto extends EntityDto<string> {
   name?: string;
 }
+
+export interface UserLookupDto extends EntityDto<string> {
+  name?: string;
+}

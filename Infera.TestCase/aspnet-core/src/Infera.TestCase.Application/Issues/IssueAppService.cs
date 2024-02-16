@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.Identity;
+using Volo.Abp.Identity.Integration;
+using Volo.Abp.Users;
 
 namespace Infera.TestCase.Issues
 {
@@ -30,7 +33,8 @@ namespace Infera.TestCase.Issues
         private readonly IWarehouseInventoryRepository _warehouseInventoryRepository;
         private readonly IBuildingRepository _buildingRepository;
         private readonly IBuildingWarehouseRepository _buildingWarehouseRepository;
-        private readonly IProductInventoryRepository _productRepository;
+        private readonly IProductInventoryRepository _productRepository; 
+        private readonly IIdentityUserIntegrationService _identityUserIntegrationService;
 
         public IssueAppService(IIssueRepository repository,
             IRoomRepository roomRepository,
@@ -38,6 +42,7 @@ namespace Infera.TestCase.Issues
             IBuildingWarehouseRepository buildingWarehouseRepository,
             IBuildingRepository buildingRepository,
             IProductInventoryRepository productRepository,
+            IIdentityUserIntegrationService identityUserIntegrationService,
             IWarehouseInventoryRepository warehouseInventoryRepository
             ) : base(repository)
         {
@@ -47,6 +52,7 @@ namespace Infera.TestCase.Issues
             _buildingRepository = buildingRepository;
             _productRepository = productRepository;
             _warehouseInventoryRepository = warehouseInventoryRepository;
+            _identityUserIntegrationService = identityUserIntegrationService;
 
             GetPolicyName = TestCasePermissions.Issues.Default;
             GetListPolicyName = TestCasePermissions.Issues.Default;
@@ -58,6 +64,7 @@ namespace Infera.TestCase.Issues
 
         public override async Task<IssueDto> GetAsync(Guid id)
         {
+            
             //Get the IQueryable<Issue> from the repository
             var queryable = await Repository.GetQueryableAsync();
             var prodQueryable = await _productRepository.GetQueryableAsync();
@@ -129,6 +136,16 @@ namespace Infera.TestCase.Issues
             );
         }
 
+        public async Task<ListResultDto<UserLookupDto>> GetUserLookupAsync()
+        {
+            var users = await _identityUserIntegrationService.SearchAsync(new UserLookupSearchInputDto { MaxResultCount = 50});
+
+            return new ListResultDto<UserLookupDto>(
+                users.Items.Select(x => new UserLookupDto { Id = x.Id, Name = x.Name }).ToList()
+            ) ;
+        }
+
+       
         public override async Task<PagedResultDto<IssueDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
             //Get the IQueryable<Issue> from the repository

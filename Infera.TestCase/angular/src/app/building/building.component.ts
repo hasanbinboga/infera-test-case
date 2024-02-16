@@ -2,8 +2,10 @@ import { ListService, PagedResultDto } from '@abp/ng.core';
 import { ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { issueTypeOptions } from '@proxy';
 import { BuildingService, BuildingDto } from '@proxy/buildings';
-import { IssueDto } from '@proxy/issues';
+import { IssueDto, IssueService, UserLookupDto } from '@proxy/issues';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-building',
@@ -11,23 +13,28 @@ import { IssueDto } from '@proxy/issues';
   styleUrl: './building.component.scss'
 })
 export class BuildingComponent implements OnInit {
-  
+
   building = { items: [], totalCount: 0 } as PagedResultDto<BuildingDto>;
   isModalOpen = false;
   isIssueModalOpen = false;
 
   form: FormGroup;
   issueForm: FormGroup;
-  
+
   selectedBuilding = {} as BuildingDto;
-  
- 
+
+  users: UserLookupDto[];
+
+  issueTypes = issueTypeOptions;
 
 
   constructor(public readonly list: ListService,
     private fb: FormBuilder,
     private confirmation: ConfirmationService,
-    private buildingService: BuildingService) {
+    private buildingService: BuildingService,
+    private issueService: IssueService,
+  ) {
+
   }
 
   ngOnInit(): void {
@@ -36,14 +43,19 @@ export class BuildingComponent implements OnInit {
     this.list.hookToQuery(buildingStreamCreator).subscribe((response) => {
       this.building = response;
     });
+
+    this.issueService.getUserLookup().subscribe(s=>{
+      this.users = s.items;
+    });
+    
   }
 
-  create(){
+  create() {
     this.selectedBuilding = {} as BuildingDto;
     this.buildForm();
     this.isModalOpen = true;
   }
-  
+
   buildForm() {
     this.form = this.fb.group({
       name: [this.selectedBuilding.name || '', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
@@ -52,7 +64,7 @@ export class BuildingComponent implements OnInit {
     });
   }
 
-  edit(id:string){
+  edit(id: string) {
     this.buildingService.get(id).subscribe((building) => {
       this.selectedBuilding = building;
       this.buildForm();
@@ -81,17 +93,17 @@ export class BuildingComponent implements OnInit {
     }
   }
 
-  delete(id:string){
+  delete(id: string) {
 
   }
-  createIssue(id:string){
+  createIssue(id: string) {
     this.isIssueModalOpen = true;
     this.buildIssueForm();
   }
 
   buildIssueForm() {
     this.issueForm = this.fb.group({
-      buildingId: [this.selectedBuilding.id, Validators.required],
+      buildingId: [this.selectedBuilding.id, null],
       number: ['', Validators.required],
       type: ['', Validators.required],
       notes: ['', Validators.required],
@@ -99,10 +111,16 @@ export class BuildingComponent implements OnInit {
     });
   }
 
-  saveIssue(){
+  saveIssue() {
+    if (this.issueForm.invalid) {
+      return;
+    }
 
-    this.isIssueModalOpen = false;
-    this.issueForm.reset(); 
+    this.issueService.create(this.issueForm.value).subscribe(() => {
+      this.isIssueModalOpen = false;
+      this.issueForm.reset();
+    });
+   
   }
 
 }
