@@ -3,6 +3,7 @@
     "texts": {
         "Menu:Home": "Home",
         "Menu:Buildings": "Buildings",
+        "Menu:Rooms": "Rooms",
         "Welcome": "Welcome",
         "CreateIssue": "Create Issue",
         "NewIssue": "New Issue",
@@ -15,7 +16,7 @@
         "Infera.TestCase:00006": "There is already a warehouse numbered {No} and named {Name} in this building.",
         "Infera.TestCase:00007": "There is already an invoice with date {Date} and number{InvoiceNo}.",
         "Permission:Buildings": "Building Module",
-        "Enum:IssueType.0": "Undefined", 
+        "Enum:IssueType.0": "Undefined",
         "Enum:IssueType.1": "Cleaning",
         "Enum:IssueType.2": "Fix",
         "Enum:IssueType.3": "Refill"

@@ -22,6 +22,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 2,
         layout: eLayoutType.application,
       },
+      {
+        path: '/rooms',
+        name: '::Menu:Rooms',
+        iconClass: 'fas fa-person-booth',
+        order: 3,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

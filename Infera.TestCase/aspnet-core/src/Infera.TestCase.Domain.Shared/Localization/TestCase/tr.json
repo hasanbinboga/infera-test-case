@@ -3,6 +3,7 @@
     "texts": {
         "Menu:Home": "Ana sayfa",
         "Menu:Buildings": "Binalar",
+        "Menu:Rooms": "Odalar",
         "Welcome": "Hoşgeldiniz",
         "CreateIssue": "Görev Oluştur",
         "NewIssue": "Yeni Görev",
