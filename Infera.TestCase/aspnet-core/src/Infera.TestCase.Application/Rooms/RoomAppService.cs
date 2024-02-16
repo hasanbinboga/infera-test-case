@@ -68,10 +68,10 @@ namespace Infera.TestCase.Rooms
                             Notes = room.Notes,
                             IssueCount = (from issue in issueQueryable where room.Id == issue.RoomId select issue).Count(),
                             SaleOrderCount = (from sale in saleOrderQueryable where room.Id == sale.RoomId select sale).Count(),
-                            CreationTime = building.CreationTime,
-                            CreatorId = building.CreatorId,
-                            LastModificationTime = building.LastModificationTime,
-                            LastModifierId = building.LastModifierId
+                            CreationTime = room.CreationTime,
+                            CreatorId = room.CreatorId,
+                            LastModificationTime = room.LastModificationTime,
+                            LastModifierId = room.LastModifierId
                         };
 
             //Execute the query and get the building with author
@@ -115,10 +115,10 @@ namespace Infera.TestCase.Rooms
                             Notes = room.Notes,
                             IssueCount = (from issue in issueQueryable where room.Id == issue.RoomId select issue).Count(),
                             SaleOrderCount = (from sale in saleOrderQueryable where room.Id == sale.RoomId select sale).Count(),
-                            CreationTime = building.CreationTime,
-                            CreatorId = building.CreatorId,
-                            LastModificationTime = building.LastModificationTime,
-                            LastModifierId = building.LastModifierId
+                            CreationTime = room.CreationTime,
+                            CreatorId = room.CreatorId,
+                            LastModificationTime = room.LastModificationTime,
+                            LastModifierId = room.LastModifierId
                         };
 
             //Paging

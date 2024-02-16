@@ -21,4 +21,13 @@ public static class TestCasePermissions
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
     }
+
+
+    public static class Warehouses
+    {
+        public const string Default = GroupName + ".Warehouses";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
 }

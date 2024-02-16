@@ -10,15 +10,21 @@ public class TestCasePermissionDefinitionProvider : PermissionDefinitionProvider
     {
         var inferaTestGroup = context.AddGroup(TestCasePermissions.GroupName);
 
-        var booksPermission = inferaTestGroup.AddPermission(TestCasePermissions.Buildings.Default, L("Permission:Buildings"));
-        booksPermission.AddChild(TestCasePermissions.Buildings.Create, L("Permission:Buildings.Create"));
-        booksPermission.AddChild(TestCasePermissions.Buildings.Edit, L("Permission:Buildings.Edit"));
-        booksPermission.AddChild(TestCasePermissions.Buildings.Delete, L("Permission:Buildings.Delete"));
+        var buildingsPermission = inferaTestGroup.AddPermission(TestCasePermissions.Buildings.Default, L("Permission:Buildings"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.Create, L("Permission:Buildings.Create"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.Edit, L("Permission:Buildings.Edit"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.Delete, L("Permission:Buildings.Delete"));
 
-        var authorsPermission = inferaTestGroup.AddPermission(TestCasePermissions.Rooms.Default, L("Permission:Rooms"));
-        authorsPermission.AddChild(TestCasePermissions.Rooms.Create, L("Permission:Rooms.Create"));
-        authorsPermission.AddChild(TestCasePermissions.Rooms.Edit, L("Permission:Rooms.Edit"));
-        authorsPermission.AddChild(TestCasePermissions.Rooms.Delete, L("Permission:Rooms.Delete"));
+        var roomsPermission = inferaTestGroup.AddPermission(TestCasePermissions.Rooms.Default, L("Permission:Rooms"));
+        roomsPermission.AddChild(TestCasePermissions.Rooms.Create, L("Permission:Rooms.Create"));
+        roomsPermission.AddChild(TestCasePermissions.Rooms.Edit, L("Permission:Rooms.Edit"));
+        roomsPermission.AddChild(TestCasePermissions.Rooms.Delete, L("Permission:Rooms.Delete"));
+
+
+        var warehousesPermission = inferaTestGroup.AddPermission(TestCasePermissions.Warehouses.Default, L("Permission:Warehouses"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.Create, L("Permission:Warehouses.Create"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.Edit, L("Permission:Warehouses.Edit"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.Delete, L("Permission:Warehouses.Delete"));
     }
 
     private static LocalizableString L(string name)

@@ -27,10 +27,10 @@ namespace Infera.TestCase
         internal Warehouse(
                         Guid id,
                         Guid? buildingId,
-                        string name,
-                        string no,
-                        int floor,
-                        int capacity,
+                        [NotNull] string name,
+                        [NotNull] string no,
+                        [NotNull] int floor,
+                        [NotNull] int capacity,
                         string content,
                         string notes): base(id)
         {
