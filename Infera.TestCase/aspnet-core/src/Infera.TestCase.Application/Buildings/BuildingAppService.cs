@@ -1,4 +1,5 @@
-﻿using Infera.TestCase.Issues;
+﻿using Infera.TestCase.BuildingWarehouses;
+using Infera.TestCase.Issues;
 using Infera.TestCase.Permissions;
 using Infera.TestCase.Rooms;
 using Infera.TestCase.Warehouses;
@@ -24,16 +25,19 @@ namespace Infera.TestCase.Buildings
     {
         private readonly IRoomRepository _roomRepository;
         private readonly IWarehouseRepository _warehouseRepository;
+        private readonly IBuildingWarehouseRepository _buildingWarehouseRepository;
         private readonly IIssueRepository _issueRepository;
 
         public BuildingAppService(IBuildingRepository repository,
             IRoomRepository roomRepository,
             IWarehouseRepository warehouseRepository,
+            IBuildingWarehouseRepository buildingWarehouseRepository,
             IIssueRepository issueRepository
             ) : base(repository)
         {
             _roomRepository = roomRepository;
             _warehouseRepository = warehouseRepository;
+            _buildingWarehouseRepository = buildingWarehouseRepository;
             _issueRepository = issueRepository;
 
             GetPolicyName = TestCasePermissions.Buildings.Default;
@@ -51,6 +55,7 @@ namespace Infera.TestCase.Buildings
             var issueQueryable = await _issueRepository.GetQueryableAsync();
             var roomQueryable = await _roomRepository.GetQueryableAsync();
             var warehouseQueryable = await _warehouseRepository.GetQueryableAsync();
+            var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync();
 
 
             //Prepare a query to join buildings and authors
@@ -63,7 +68,8 @@ namespace Infera.TestCase.Buildings
                             Addres = building.Addres,
                             IssueCount = (from issue in issueQueryable where building.Id == issue.BuildingId select issue).Count(),
                             RoomCount = (from room in roomQueryable where building.Id == room.BuildingId select room).Count(),
-                            WarehouseCount = (from wh in warehouseQueryable where building.Id == wh.BuildingId select wh).Count(),
+                            InWarehouseCount = (from wh in warehouseQueryable where building.Id == wh.BuildingId select wh).Count(),
+                            OwnWarehouseCount = (from wh in buildingWarehouseQueryable where building.Id == wh.BuildingId select wh).Count(),
                             CreationTime = building.CreationTime,
                             CreatorId = building.CreatorId,
                             LastModificationTime = building.LastModificationTime,
@@ -95,6 +101,7 @@ namespace Infera.TestCase.Buildings
             var issueQueryable = await _issueRepository.GetQueryableAsync();
             var roomQueryable = await _roomRepository.GetQueryableAsync();
             var warehouseQueryable = await _warehouseRepository.GetQueryableAsync();
+            var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync();
 
             //Prepare a query to join books and authors
             var query = from building in queryable 
@@ -106,7 +113,8 @@ namespace Infera.TestCase.Buildings
                             Addres = building.Addres,
                             IssueCount = (from issue in issueQueryable where building.Id == issue.BuildingId select issue).Count(),
                             RoomCount = (from room in roomQueryable where building.Id == room.BuildingId select room).Count(),
-                            WarehouseCount = (from wh in warehouseQueryable where building.Id == wh.BuildingId select wh).Count(),
+                            InWarehouseCount = (from wh in warehouseQueryable where building.Id == wh.BuildingId select wh).Count(),
+                            OwnWarehouseCount = (from wh in buildingWarehouseQueryable where building.Id == wh.BuildingId select wh).Count(),
                             CreationTime = building.CreationTime,
                             CreatorId = building.CreatorId,
                             LastModificationTime = building.LastModificationTime,

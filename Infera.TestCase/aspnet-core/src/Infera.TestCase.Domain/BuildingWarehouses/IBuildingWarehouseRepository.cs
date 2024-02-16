@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Infera.TestCase.BuildingWarehouses;
 
-public interface IBuildingWarehouseRepository : IBasicRepository<BuildingWarehouse, Guid>
+public interface IBuildingWarehouseRepository : IRepository<BuildingWarehouse, Guid>
 {
     Task<BuildingWarehouse?> FindByBuildingId(Guid buildingId, CancellationToken cancellationToken = default);
     Task<BuildingWarehouse?> FindByWarehouseId(Guid warehouseId, CancellationToken cancellationToken = default);
