@@ -24,10 +24,10 @@ namespace Infera.TestCase
         }
 
         internal Issue(Guid id,
-            Guid buildingId,
-            Guid roomId,
-            Guid warehouseInventoryId,
-            Guid productInventoryId,
+            Guid? buildingId,
+            Guid? roomId,
+            Guid? warehouseInventoryId,
+            Guid? productInventoryId,
             [NotNull] IssueType type,
             int number,
             bool isCompleted,
@@ -44,6 +44,7 @@ namespace Infera.TestCase
             CompletedTime = completedTime;
             SetNotes(notes);
             Assignee = assignee;
+            SetType(type);
 
         }
 
