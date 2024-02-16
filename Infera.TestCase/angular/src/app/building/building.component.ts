@@ -3,6 +3,7 @@ import { ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BuildingService, BuildingDto } from '@proxy/buildings';
+import { IssueDto } from '@proxy/issues';
 
 @Component({
   selector: 'app-building',
@@ -13,8 +14,13 @@ export class BuildingComponent implements OnInit {
   
   building = { items: [], totalCount: 0 } as PagedResultDto<BuildingDto>;
   isModalOpen = false;
+  isIssueModalOpen = false;
+
   form: FormGroup;
+  issueForm: FormGroup;
+  
   selectedBuilding = {} as BuildingDto;
+  
  
 
 
@@ -79,8 +85,24 @@ export class BuildingComponent implements OnInit {
 
   }
   createIssue(id:string){
-
+    this.isIssueModalOpen = true;
+    this.buildIssueForm();
   }
 
+  buildIssueForm() {
+    this.issueForm = this.fb.group({
+      buildingId: [this.selectedBuilding.id, Validators.required],
+      number: ['', Validators.required],
+      type: ['', Validators.required],
+      notes: ['', Validators.required],
+      assignee: ['', null],
+    });
+  }
+
+  saveIssue(){
+
+    this.isIssueModalOpen = false;
+    this.issueForm.reset(); 
+  }
 
 }
