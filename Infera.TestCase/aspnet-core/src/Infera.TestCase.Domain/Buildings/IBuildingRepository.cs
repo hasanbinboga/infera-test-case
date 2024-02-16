@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Infera.TestCase.Buildings
 {
-    public interface IBuildingRepository : IBasicRepository<Building, Guid>
+    public interface IBuildingRepository : IRepository<Building, Guid>
     {
         /// <summary>
         /// Find Building by name. Building name is unique. Because of that name value must be controlled before inserting.

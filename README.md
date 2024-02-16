@@ -216,3 +216,34 @@ Press any key to close this window . . .
 
 Artık her bir entity için domain service ve custom repository sınıflarını oluşturabiliriz.
 
+Yaptığım geliştirmeler neticesinde domain service ve custom repo sınıflarını oluşturup, EF Core module'e custom repoları register ettim.
+
+```csharp
+ public override void ConfigureServices(ServiceConfigurationContext context)
+ {
+     context.Services.AddAbpDbContext<TestCaseDbContext>(options =>
+     {
+         /* Remove "includeAllEntities: true" to create
+          * default repositories only for aggregate roots */
+         options.AddDefaultRepositories(includeAllEntities: true);
+
+         options.AddRepository<Building, EfCoreBuildingRepository>();
+         options.AddRepository<BuildingWarehouse, EfCoreBuildingWarehouseRepository>();
+         options.AddRepository<Issue, EfCoreIssueRepository>();
+         options.AddRepository<ProductInventory, EfCoreProductInventoryRepository>();
+         options.AddRepository<Room, EfCoreRoomRepository>();
+         options.AddRepository<SaleOrder, EfCoreSaleOrderRepository>();
+         options.AddRepository<WarehouseInventory, EfCoreWarehouseInventoryRepository>();
+         options.AddRepository<Warehouse, EfCoreWarehouseRepository>();
+     });
+
+     Configure<AbpDbContextOptions>(options =>
+     {
+         /* The main point to change your DBMS.
+          * See also TestCaseMigrationsDbContextFactory for EF Core tooling. */
+         options.UseSqlServer();
+     });
+
+ }
+```
+

@@ -3,7 +3,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Infera.TestCase.Issues;
 
-public interface IIssueRepository : IBasicRepository<Issue, Guid>
+public interface IIssueRepository : IRepository<Issue, Guid>
 {
   
 }

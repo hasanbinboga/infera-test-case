@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Infera.TestCase.Rooms;
 
-public interface IRoomRepository : IBasicRepository<Room, Guid>
+public interface IRoomRepository : IRepository<Room, Guid>
 {
     Task<Room?> FindByBuildingIdAndNo(Guid buildingId, string no, CancellationToken cancellationToken = default);
 }
