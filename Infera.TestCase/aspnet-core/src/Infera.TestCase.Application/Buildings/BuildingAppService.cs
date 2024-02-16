@@ -5,6 +5,7 @@ using Infera.TestCase.Warehouses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -87,25 +88,53 @@ namespace Infera.TestCase.Buildings
             );
         }
 
-
-        private static string NormalizeSorting(string sorting)
+        public override async Task<PagedResultDto<BuildingDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
-            if (sorting.IsNullOrEmpty())
-            {
-                return $"building.{nameof(Building.Name)}";
-            }
+            //Get the IQueryable<Building> from the repository
+            var queryable = await Repository.GetQueryableAsync();
+            var issueQueryable = await _issueRepository.GetQueryableAsync();
+            var roomQueryable = await _roomRepository.GetQueryableAsync();
+            var warehouseQueryable = await _warehouseRepository.GetQueryableAsync();
 
-            if (sorting.Contains("authorName", StringComparison.OrdinalIgnoreCase))
-            {
-                return sorting.Replace(
-                    "authorName",
-                    "author.Name",
-                    StringComparison.OrdinalIgnoreCase
-                );
-            }
+            //Prepare a query to join books and authors
+            var query = from building in queryable 
+                        select new BuildingDto
+                        {
+                            Id = building.Id,
+                            Name = building.Name,
+                            No = building.No,
+                            Addres = building.Addres,
+                            IssueCount = (from issue in issueQueryable where building.Id == issue.BuildingId select issue).Count(),
+                            RoomCount = (from room in roomQueryable where building.Id == room.BuildingId select room).Count(),
+                            WarehouseCount = (from wh in warehouseQueryable where building.Id == wh.BuildingId select wh).Count(),
+                            CreationTime = building.CreationTime,
+                            CreatorId = building.CreatorId,
+                            LastModificationTime = building.LastModificationTime,
+                            LastModifierId = building.LastModifierId,
+                        };
 
-            return $"building.{sorting}";
+            //Paging
+            query = query
+                .OrderBy(input.Sorting)
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount);
+
+            //Execute the query and get a list
+            var queryResult = await AsyncExecuter.ToListAsync(query);
+
+            //Convert the query result to a list of BuildingDto objects
+            var bookDtos = queryResult.ToList();
+
+            //Get the total count with another query
+            var totalCount = await Repository.GetCountAsync();
+
+            return new PagedResultDto<BuildingDto>(
+                totalCount,
+                bookDtos
+            );
         }
+
+       
 
     }
 }

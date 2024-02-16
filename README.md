@@ -247,3 +247,60 @@ Yaptığım geliştirmeler neticesinde domain service ve custom repo sınıflar�
  }
 ```
 
+
+Devamında Building için Application Service katmanı için gerekli geliştirmeleri yaptım. İlk olarak gerekli DTO tanımlarını oluşturdum. Genelde listeleme amaçlı kullandığım DTO'lara ilişkili child entity'lerinin sayılarını ve Parent objelerin lookup propertylerini Datatable da göstermeyi tercih ederim. Building DTO için de child entity sayılarını gösterir propertyleri ekledim. Datatable entity si şu şekilde oldu;
+
+```csharp
+using System;
+using Volo.Abp.Application.Dtos;
+
+namespace Infera.TestCase.Buildings;
+
+public class BuildingDto: AuditedEntityDto<Guid>
+{
+
+    public string Name { get; set; } = null!;
+    public string No { get; set; } = null!;
+    public string? Addres { get; set; }
+    public int? RoomCount { get; set; }
+    public int? WarehouseCount { get; set; }
+    public int? IssueCount { get; set; } 
+}
+```
+
+CRUD işlemleri için sadece gerekli property'leri içeren DTO tanımlarım. Burada her bir input için gerekli BE validasyonları da implemente ederim.
+```csharp
+using System;
+using System.ComponentModel.DataAnnotations;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Validation;
+
+namespace Infera.TestCase.Buildings;
+
+public class BuildingCreateUpdateDto : EntityDto<Guid>
+{
+    [Required]
+    [DynamicStringLength(typeof(BuildingConsts), nameof(BuildingConsts.MaxNameLength), nameof(BuildingConsts.MinNameLength))]
+    public string Name { get; set; } = null!;
+
+    [Required]
+    [DynamicStringLength(typeof(BuildingConsts), nameof(BuildingConsts.MaxNoLength))]
+    public string No { get; set; } = null!;
+    
+    [DynamicStringLength(typeof(BuildingConsts), nameof(BuildingConsts.MaxAddresLength))]
+    public string? Addres { get; set; } 
+}
+```
+Ayrıca FE selectlerde kullanmak amacıyla lookup dto da geliştirdim.
+```csharp
+using System;
+using Volo.Abp.Application.Dtos;
+
+namespace Infera.TestCase.Buildings;
+public class BuildingLookupDto : EntityDto<Guid>
+{
+    public string Name { get; set; } = null!; 
+}
+```
+
+Ardından BuildingAppService class ını geliştirdim. Kullandığım framework'ün beklediği şekilde gerekli implemantasyonları yaptığım için AppService class ında geliştirdiğim ve base'den gelen metotları içeren endpointleri otomatik generate etti. Yine burada yetkilendirme için gerekli rol tanımlarını oluşturdum.
