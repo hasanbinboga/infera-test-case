@@ -1,11 +1,10 @@
 import { ListService, PagedResultDto } from '@abp/ng.core';
-import { ConfirmationService } from '@abp/ng.theme.shared';
+import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { issueTypeOptions } from '@proxy';
 import { BuildingService, BuildingDto } from '@proxy/buildings';
-import { IssueDto, IssueService, UserLookupDto } from '@proxy/issues';
-import { Observable, map } from 'rxjs';
+import { IssueService, UserLookupDto } from '@proxy/issues';
 
 @Component({
   selector: 'app-building',
@@ -94,8 +93,13 @@ export class BuildingComponent implements OnInit {
   }
 
   delete(id: string) {
-
+    this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
+      if (status === Confirmation.Status.confirm) {
+        this.buildingService.delete(id).subscribe(() => this.list.get());
+      }
+    });
   }
+
   createIssue(id: string) {
     this.isIssueModalOpen = true;
     this.buildIssueForm();
