@@ -306,3 +306,12 @@ public class BuildingLookupDto : EntityDto<Guid>
 Ardından BuildingAppService class ını geliştirdim. Kullandığım framework'ün beklediği şekilde gerekli implemantasyonları yaptığım için AppService class ında geliştirdiğim ve base'den gelen metotları içeren endpointleri otomatik generate etti. Yine burada yetkilendirme için gerekli rol tanımlarını oluşturdum.
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/c37cb750-1220-47c2-84ae-cdae97c73df4)
+
+
+Uygulama aya kalktıktan sonra default parolayı değiştirmemi istedi. Account manage ekranından gerekli değişikliği yaptım.
+
+Yeni parola: Aa123456.
+
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/1bb77f0b-52bf-4ef8-9ad3-3813849fe1ce)
+
