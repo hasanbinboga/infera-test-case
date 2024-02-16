@@ -304,3 +304,5 @@ public class BuildingLookupDto : EntityDto<Guid>
 ```
 
 Ardından BuildingAppService class ını geliştirdim. Kullandığım framework'ün beklediği şekilde gerekli implemantasyonları yaptığım için AppService class ında geliştirdiğim ve base'den gelen metotları içeren endpointleri otomatik generate etti. Yine burada yetkilendirme için gerekli rol tanımlarını oluşturdum.
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/c37cb750-1220-47c2-84ae-cdae97c73df4)
