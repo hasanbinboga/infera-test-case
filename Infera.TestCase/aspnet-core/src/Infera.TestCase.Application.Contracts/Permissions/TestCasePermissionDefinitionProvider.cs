@@ -36,6 +36,11 @@ public class TestCasePermissionDefinitionProvider : PermissionDefinitionProvider
         IssuesPermission.AddChild(TestCasePermissions.Issues.Create, L("Permission:Issues.Create"));
         IssuesPermission.AddChild(TestCasePermissions.Issues.Edit, L("Permission:Issues.Edit"));
         IssuesPermission.AddChild(TestCasePermissions.Issues.Delete, L("Permission:Issues.Delete"));
+
+        var AccountingPermission = inferaTestGroup.AddPermission(TestCasePermissions.Accountings.Default, L("Permission:Accountings"));
+        AccountingPermission.AddChild(TestCasePermissions.Accountings.Create, L("Permission:Accountings.Create"));
+        AccountingPermission.AddChild(TestCasePermissions.Accountings.Edit, L("Permission:Accountings.Edit"));
+        AccountingPermission.AddChild(TestCasePermissions.Accountings.Delete, L("Permission:Accountings.Delete"));
     }
 
     private static LocalizableString L(string name)

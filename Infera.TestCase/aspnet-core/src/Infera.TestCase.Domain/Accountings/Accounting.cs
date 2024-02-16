@@ -7,16 +7,16 @@ namespace Infera.TestCase
 {
     public class Accounting : FullAuditedAggregateRoot<Guid>
     {
-        public Guid ProductInventoryId { get; set; }
-        public Guid? SaleOrderId { get; set; }
-        public int Count { get; set; }
-        public double PurchasePrice { get; set; }
-        public double SalePrice { get; set; }
-        public double Amount { get; set; }
-        public double Tax { get; set; }
-        public DateTime? InvoiceDate { get; set; }
-        public string? InvoiceNumber { get; set; }
-        public AccountingType Type { get; set; }
+        public virtual Guid ProductInventoryId { get; set; }
+        public virtual Guid? SaleOrderId { get; set; }
+        public virtual int Count { get; set; }
+        public virtual double PurchasePrice { get; set; }
+        public virtual double SalePrice { get; set; }
+        public virtual double Amount { get; set; }
+        public virtual double Tax { get; set; }
+        public virtual DateTime? InvoiceDate { get; set; }
+        public virtual string? InvoiceNumber { get; set; }
+        public virtual AccountingType Type { get; set; }
 
         protected Accounting()
         {

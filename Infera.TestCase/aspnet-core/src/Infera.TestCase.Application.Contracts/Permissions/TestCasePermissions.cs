@@ -46,4 +46,11 @@ public static class TestCasePermissions
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
     }
+    public static class Accountings
+    {
+        public const string Default = GroupName + ".Accountings";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
 }
