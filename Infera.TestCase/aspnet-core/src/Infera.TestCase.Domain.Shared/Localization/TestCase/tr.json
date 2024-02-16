@@ -2,6 +2,7 @@
   "culture": "tr",
     "texts": {
         "Menu:Home": "Ana sayfa",
+        "Menu:Buildings": "Binalar",
         "Welcome": "Hoşgeldiniz",
         "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
         "Infera.TestCase:00001": "{Name} isimli bina zaten var.",

@@ -315,3 +315,24 @@ Yeni parola: Aa123456.
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/1bb77f0b-52bf-4ef8-9ad3-3813849fe1ce)
 
+BE tarafındaki temel geliştirmeleri tamamladıktan sonra FE ile ilgili implemantasyonlara başlamaya karar verdim. UI geliştirmeleri ilerledikçe ihtiyaç olacak yeni metotları geliştirerek BE/FE birlikte devam etmeyi planlıyorum.
+
+
+ilk olarak BE api metotlarını kullanabilmek amacıyla gerekli proxy service implemantasyonları için abp cli dan yararlandım. Böylece swagger tarafındaki implemantasyonları doğrudan angular class ve servislerine çevirdi.
+
+```console 
+PS C:\Repos\infera-test-case\Infera.TestCase\angular>abp generate-proxy -t n
+```
+
+Ardından Building modülünü oluşturdum.
+
+```console 
+C:\Repos\infera-test-case\Infera.TestCase\angular> ng generate module building --module app --routing --route buildings
+CREATE src/app/building/building-routing.module.ts (362 bytes)
+CREATE src/app/building/building.module.ts (386 bytes)
+CREATE src/app/building/building.component.html (24 bytes)
+CREATE src/app/building/building.component.spec.ts (638 bytes)
+CREATE src/app/building/building.component.ts (218 bytes)
+CREATE src/app/building/building.component.scss (0 bytes)
+UPDATE src/app/app-routing.module.ts (1033 bytes)
+```
