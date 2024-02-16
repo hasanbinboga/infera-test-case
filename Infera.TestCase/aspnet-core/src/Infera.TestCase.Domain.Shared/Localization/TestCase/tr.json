@@ -10,6 +10,8 @@
         "Infera.TestCase:00004": "{Manifacturer} tarafından üretilen {Size} boyutlarındaki {Name} markalı ürün zaten var.",
         "Infera.TestCase:00005": "Belirtilen ürün bu depoda zaten var.",
         "Infera.TestCase:00006": "Bu binada zaten {No} numaralı ve {Name} isimli depo vardır.",
-        "Infera.TestCase:00007": "{Date} tarih ve {InvoiceNo} numaralı fatura zaten var."
+        "Infera.TestCase:00007": "{Date} tarih ve {InvoiceNo} numaralı fatura zaten var.",
+        "Permission:Buildings": "Bina Modülü"
+
     }
 }
