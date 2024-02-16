@@ -26,10 +26,10 @@ namespace Infera.TestCase
         internal ProductInventory(
                             Guid id,
                             [NotNull] string name,
-                            string manifacturer,
-                            ProductInventoryType type,
-                            int size,
-                            double salePrice,
+                            [NotNull] string manifacturer,
+                            [NotNull] ProductInventoryType type,
+                            [NotNull] int size,
+                            [NotNull] double salePrice,
                             string notes) : base(id)
         {
             SetName(name);

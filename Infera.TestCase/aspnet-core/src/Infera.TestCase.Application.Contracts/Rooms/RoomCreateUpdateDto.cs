@@ -12,7 +12,7 @@ public class RoomCreateUpdateDto : EntityDto<Guid>
     public Guid BuildingId { get; set; }
 
     [Required]
-    [DynamicStringLength(typeof(RoomConsts), nameof(RoomConsts.MaxNoLength), nameof(RoomConsts.MaxNoLength))]
+    [DynamicStringLength(typeof(RoomConsts), nameof(RoomConsts.MaxNoLength))]
     public string No { get; set; } = null!;
 
     [Required]

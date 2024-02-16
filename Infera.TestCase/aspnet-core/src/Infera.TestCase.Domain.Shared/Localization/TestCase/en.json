@@ -9,6 +9,7 @@
         "Infera.TestCase:00003": "There is already room number {No} in this building.",
         "Infera.TestCase:00004": "There already exists a {Name} branded product of {Size} size produced by {Manifacturer}.",
         "Infera.TestCase:00005": "The specified product already exists in this warehouse.",
-        "Infera.TestCase:00006": "There is already a warehouse numbered {No} and named {Name} in this building."
+        "Infera.TestCase:00006": "There is already a warehouse numbered {No} and named {Name} in this building.",
+        "Infera.TestCase:00007": "There is already an invoice with date {Date} and number{InvoiceNo}."
     }
 }

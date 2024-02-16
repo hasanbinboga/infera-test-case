@@ -9,9 +9,13 @@ public class WarehouseCreateUpdateDto : EntityDto<Guid>
 {
 
     public Guid BuildingId { get; set; }
+    [Required]
+    [DynamicStringLength(typeof(WarehouseConsts), nameof(WarehouseConsts.MaxNameLength), nameof(WarehouseConsts.MinNameLength))]
+    public string Name { get; set; } = null!;
+
 
     [Required]
-    [DynamicStringLength(typeof(WarehouseConsts), nameof(WarehouseConsts.MaxNoLength), nameof(WarehouseConsts.MaxNoLength))]
+    [DynamicStringLength(typeof(WarehouseConsts), nameof(WarehouseConsts.MaxNoLength))]
     public string No { get; set; } = null!;
 
     [Required]

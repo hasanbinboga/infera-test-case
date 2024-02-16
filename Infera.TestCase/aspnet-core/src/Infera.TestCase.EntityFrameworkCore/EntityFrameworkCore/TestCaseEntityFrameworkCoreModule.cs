@@ -1,4 +1,5 @@
-﻿using Infera.TestCase.Buildings;
+﻿using Infera.TestCase.Accountings;
+using Infera.TestCase.Buildings;
 using Infera.TestCase.BuildingWarehouses;
 using Infera.TestCase.Issues;
 using Infera.TestCase.ProductInventories;
@@ -48,6 +49,7 @@ public class TestCaseEntityFrameworkCoreModule : AbpModule
              * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
 
+            options.AddRepository<Accounting, EfCoreAccountingRepository>();
             options.AddRepository<Building, EfCoreBuildingRepository>();
             options.AddRepository<BuildingWarehouse, EfCoreBuildingWarehouseRepository>();
             options.AddRepository<Issue, EfCoreIssueRepository>();

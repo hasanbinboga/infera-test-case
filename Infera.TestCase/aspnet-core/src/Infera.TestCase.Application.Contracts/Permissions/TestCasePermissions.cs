@@ -30,4 +30,12 @@ public static class TestCasePermissions
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
     }
+
+    public static class ProductInventories
+    {
+        public const string Default = GroupName + ".ProductInventories";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
 }
