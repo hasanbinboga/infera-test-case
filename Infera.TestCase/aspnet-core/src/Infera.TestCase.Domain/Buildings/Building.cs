@@ -31,7 +31,7 @@ namespace Infera.TestCase
         internal Building(Guid id, 
                         [NotNull] string name,
                         [NotNull] string no, 
-                        string addres): base(id) 
+                        string? addres): base(id) 
         {
             SetName(name);
             SetNo(no);
@@ -59,7 +59,7 @@ namespace Infera.TestCase
             No = no;
         }
 
-        internal void SetAddres(string addres)
+        internal void SetAddres(string? addres)
         {
             Check.Length(addres, nameof(addres), BuildingConsts.MaxAddresLength);
             Addres = addres;

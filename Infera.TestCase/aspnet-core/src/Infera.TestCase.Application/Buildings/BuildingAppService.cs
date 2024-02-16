@@ -3,6 +3,7 @@ using Infera.TestCase.Issues;
 using Infera.TestCase.Permissions;
 using Infera.TestCase.Rooms;
 using Infera.TestCase.Warehouses;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,18 +28,22 @@ namespace Infera.TestCase.Buildings
         private readonly IWarehouseRepository _warehouseRepository;
         private readonly IBuildingWarehouseRepository _buildingWarehouseRepository;
         private readonly IIssueRepository _issueRepository;
+        private readonly BuildingManager _buildingManager;
 
         public BuildingAppService(IBuildingRepository repository,
             IRoomRepository roomRepository,
             IWarehouseRepository warehouseRepository,
             IBuildingWarehouseRepository buildingWarehouseRepository,
-            IIssueRepository issueRepository
+            IIssueRepository issueRepository,
+            BuildingManager buildingManager
             ) : base(repository)
         {
             _roomRepository = roomRepository;
             _warehouseRepository = warehouseRepository;
             _buildingWarehouseRepository = buildingWarehouseRepository;
             _issueRepository = issueRepository;
+
+            _buildingManager = buildingManager;
 
             GetPolicyName = TestCasePermissions.Buildings.Default;
             GetListPolicyName = TestCasePermissions.Buildings.Default;
@@ -47,6 +52,19 @@ namespace Infera.TestCase.Buildings
             DeletePolicyName = TestCasePermissions.Buildings.Create;
         }
 
+        [Authorize(TestCasePermissions.Buildings.Create)]
+        public override async Task<BuildingDto> CreateAsync(BuildingCreateUpdateDto input)
+        {
+            var building = await _buildingManager.CreateAsync(
+            input.Name,
+            input.No,
+            input.Addres
+        );
+
+            await Repository.InsertAsync(building);
+
+            return ObjectMapper.Map<Building, BuildingDto>(building);
+        }
 
         public override async Task<BuildingDto> GetAsync(Guid id)
         {
@@ -61,7 +79,8 @@ namespace Infera.TestCase.Buildings
             //Prepare a query to join buildings and authors
             var query = from building in queryable
                         where building.Id == id
-                        select new BuildingDto {
+                        select new BuildingDto
+                        {
                             Id = building.Id,
                             Name = building.Name,
                             No = building.No,
@@ -81,7 +100,7 @@ namespace Infera.TestCase.Buildings
             if (queryResult == null)
             {
                 throw new EntityNotFoundException(typeof(Building), id);
-            } 
+            }
             return queryResult;
         }
 
@@ -104,7 +123,7 @@ namespace Infera.TestCase.Buildings
             var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync();
 
             //Prepare a query to join books and authors
-            var query = from building in queryable 
+            var query = from building in queryable
                         select new BuildingDto
                         {
                             Id = building.Id,
@@ -123,7 +142,7 @@ namespace Infera.TestCase.Buildings
 
             //Paging
             query = query
-                .OrderBy(input.Sorting)
+                .OrderBy(input.Sorting.IsNullOrEmpty() ? "Id" : input.Sorting)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 
@@ -142,7 +161,7 @@ namespace Infera.TestCase.Buildings
             );
         }
 
-       
+
 
     }
 }

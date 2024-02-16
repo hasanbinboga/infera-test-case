@@ -16,17 +16,10 @@ function configureRoutes(routesService: RoutesService) {
         layout: eLayoutType.application,
       },
       {
-        path: '/infera',
-        name: '::Menu:Infera',
-        iconClass: 'fas fa-book',
-        order: 2,
-        layout: eLayoutType.application,
-      },
-      {
         path: '/buildings',
         name: '::Menu:Buildings',
         iconClass: 'fas fa-building',
-        parentName: "::Menu:Infera",
+        order: 2,
         layout: eLayoutType.application,
       },
     ]);

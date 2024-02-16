@@ -19,3 +19,4 @@ export interface BuildingDto extends AuditedEntityDto<string> {
 export interface BuildingLookupDto extends EntityDto<string> {
   name?: string;
 }
+ 

@@ -1,5 +1,7 @@
 import { ListService, PagedResultDto } from '@abp/ng.core';
+import { ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BuildingService, BuildingDto } from '@proxy/buildings';
 
 @Component({
@@ -10,8 +12,17 @@ import { BuildingService, BuildingDto } from '@proxy/buildings';
 export class BuildingComponent implements OnInit {
   
   building = { items: [], totalCount: 0 } as PagedResultDto<BuildingDto>;
+  isModalOpen = false;
+  form: FormGroup;
+  selectedBuilding = {} as BuildingDto;
  
-  constructor(public readonly list: ListService, private buildingService: BuildingService) {}
+
+
+  constructor(public readonly list: ListService,
+    private fb: FormBuilder,
+    private confirmation: ConfirmationService,
+    private buildingService: BuildingService) {
+  }
 
   ngOnInit(): void {
     const buildingStreamCreator = (query) => this.buildingService.getList(query);
@@ -20,5 +31,56 @@ export class BuildingComponent implements OnInit {
       this.building = response;
     });
   }
+
+  create(){
+    this.selectedBuilding = {} as BuildingDto;
+    this.buildForm();
+    this.isModalOpen = true;
+  }
+  
+  buildForm() {
+    this.form = this.fb.group({
+      name: [this.selectedBuilding.name || '', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+      no: [this.selectedBuilding.no || '', [Validators.required, Validators.maxLength(20)]],
+      addres: [this.selectedBuilding.addres || '', Validators.maxLength(500)]
+    });
+  }
+
+  edit(id:string){
+    this.buildingService.get(id).subscribe((building) => {
+      this.selectedBuilding = building;
+      this.buildForm();
+      this.isModalOpen = true;
+    });
+  }
+  save() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    if (this.selectedBuilding.id) {
+      this.buildingService
+        .update(this.selectedBuilding.id, this.form.value)
+        .subscribe(() => {
+          this.isModalOpen = false;
+          this.form.reset();
+          this.list.get();
+        });
+    } else {
+      this.buildingService.create(this.form.value).subscribe(() => {
+        this.isModalOpen = false;
+        this.form.reset();
+        this.list.get();
+      });
+    }
+  }
+
+  delete(id:string){
+
+  }
+  createIssue(id:string){
+
+  }
+
 
 }

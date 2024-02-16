@@ -13,7 +13,7 @@ namespace Infera.TestCase.Buildings
             BuildingRepository = buildingRepository; 
         }
 
-        public async Task<Building> CreateAsync(string name, string no, string addres)
+        public async Task<Building> CreateAsync(string name, string no, string? addres)
         {
             var existingBuilding = await BuildingRepository.FindByName(name);
 

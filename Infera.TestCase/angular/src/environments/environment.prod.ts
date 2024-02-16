@@ -7,7 +7,7 @@ export const environment = {
   application: {
     baseUrl,
     name: 'TestCase',
-    logoUrl: '',
+    logoUrl: 'https://www.ccnholding.com/medya/2023/08/ccn-holding-logo.png',
   },
   oAuthConfig: {
     issuer: 'https://localhost:44372/',
