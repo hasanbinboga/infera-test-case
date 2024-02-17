@@ -27,6 +27,7 @@ const routes: Routes = [
   }, 
   { path: 'buildings', loadChildren: () => import('./building/building.module').then(m => m.BuildingModule) },
   { path: 'rooms', loadChildren: () => import('./room/room.module').then(m => m.RoomModule) },
+  { path: 'warehouses', loadChildren: () => import('./warehouse/warehouse.module').then(m => m.WarehouseModule) },
 ];
 
 @NgModule({

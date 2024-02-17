@@ -29,6 +29,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 3,
         layout: eLayoutType.application,
       },
+      {
+        path: '/warehouses',
+        name: '::Menu:Warehouses',
+        iconClass: 'fas fa-warehouse',
+        order: 4,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }
