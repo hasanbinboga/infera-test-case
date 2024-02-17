@@ -61,7 +61,7 @@
   <ng-template #abpBody>
     <form [formGroup]="form" (ngSubmit)="save()">
       <div class="mt-2">
-        <label for="room-buildingId">Assignee</label><span> * </span>
+        <label for="room-buildingId">Building</label><span> * </span>
         <select class="form-control" id="room-buildingId" formControlName="buildingId">
           <option [ngValue]="null">Select a Building</option>
           <option [ngValue]="building.id" *ngFor="let building of buildings">
