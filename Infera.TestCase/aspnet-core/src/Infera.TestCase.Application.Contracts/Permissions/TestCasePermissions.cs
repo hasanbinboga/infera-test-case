@@ -12,8 +12,17 @@ public static class TestCasePermissions
         public const string Create = Default + ".Create";
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
+        public const string GetListOfWarehouseAsync = Default + ".GetListOfWarehouseAsync";
     }
 
+    public static class BuildingWarehouses
+    {
+        public const string Default = GroupName + ".BuildingWarehouses";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+    
     public static class Rooms
     {
         public const string Default = GroupName + ".Rooms";
@@ -29,6 +38,7 @@ public static class TestCasePermissions
         public const string Create = Default + ".Create";
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
+        public const string GetListOfBuildingAsync = Default + ".GetListOfBuildingAsync";
     }
 
     public static class ProductInventories

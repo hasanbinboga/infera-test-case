@@ -12,6 +12,7 @@ namespace Infera.TestCase.Buildings
                                                         BuildingCreateUpdateDto
                                                         >
     {
-        Task<ListResultDto<BuildingLookupDto>> GetBuildingLookupAsync(); 
+        Task<ListResultDto<BuildingLookupDto>> GetBuildingLookupAsync();
+        Task<PagedResultDto<BuildingWarehouseDto>> GetListOfWarehouseAsync(BuildingListFilterDto input);
     }
 }

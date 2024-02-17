@@ -18,6 +18,8 @@ export class WarehouseComponent implements OnInit {
   isModalOpen = false; 
 
   form: FormGroup; 
+  buildingWarehouseForm: FormGroup;
+
   selectedWarehouse = {} as WarehouseDto;
 
   users: UserLookupDto[];
@@ -109,4 +111,16 @@ export class WarehouseComponent implements OnInit {
       }
     });
   } 
+
+  createBuildingWarehouse(id: string){
+    
+  }
+
+  buildBuildingWarehouseForm() {
+    
+  }
+
+  saveBuildingWarehouse(){
+    
+  }
 }

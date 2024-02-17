@@ -172,7 +172,61 @@ namespace Infera.TestCase.Warehouses
             );
         }
 
+        [Authorize(TestCasePermissions.Warehouses.GetListOfBuildingAsync)]
+        public async Task<PagedResultDto<BuildingWarehouseDto>> GetListOfBuildingAsync(WarehouseListFilterDto input)
+        {
+            //Get the IQueryable<Warehouse> from the repository
+            var queryable = await Repository.GetQueryableAsync();
+            var buildingQueryable = await _buildingRepository.GetQueryableAsync();
+            var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync();
+            var warehouseInventoryQueryable = await _warehouseInventoryRepository.GetQueryableAsync();
 
+            //Prepare a query to join books and authors
+            var query = from buildingWarehouse in buildingWarehouseQueryable
+                        join warehouse in queryable on buildingWarehouse.WarehouseId equals warehouse.Id
+                        join building in buildingQueryable on warehouse.BuildingId equals building.Id into ps
+                        from p in ps.DefaultIfEmpty()
+                        where buildingWarehouse.WarehouseId == input.WarehouseId
+                        select new BuildingWarehouseDto
+                        {
+                            Id = buildingWarehouse.Id,
+                            RelatedBuildingId = buildingWarehouse.BuildingId,
+                            WarehouseId = buildingWarehouse.WarehouseId,
+                            BuildingId = warehouse.BuildingId,
+                            BuildingName = p.Name,
+                            Name = warehouse.Name,
+                            No = warehouse.No,
+                            Floor = warehouse.Floor,
+                            Capacity = warehouse.Capacity,
+                            Notes = warehouse.Notes,
+                            Content = warehouse.Content,
+                            BuildingCount = (from bw in buildingWarehouseQueryable where bw.Id == warehouse.BuildingId select bw).Count(),
+                            InventoryCount = (from i in warehouseInventoryQueryable where warehouse.Id == i.WarehouseId select i).Count(),
+                            CreationTime = warehouse.CreationTime,
+                            CreatorId = warehouse.CreatorId,
+                            LastModificationTime = warehouse.LastModificationTime,
+                            LastModifierId = warehouse.LastModifierId
+                        };
 
+            //Paging
+            query = query
+                .OrderBy(input.Sorting.IsNullOrEmpty() ? "Id" : input.Sorting)
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount);
+
+            //Execute the query and get a list
+            var queryResult = await AsyncExecuter.ToListAsync(query);
+
+            //Convert the query result to a list of WarehouseDto objects
+            var dtos = queryResult.ToList();
+
+            //Get the total count with another query
+            var totalCount = await Repository.GetCountAsync();
+
+            return new PagedResultDto<BuildingWarehouseDto>(
+                totalCount,
+                dtos
+            );
+        }
     }
 }

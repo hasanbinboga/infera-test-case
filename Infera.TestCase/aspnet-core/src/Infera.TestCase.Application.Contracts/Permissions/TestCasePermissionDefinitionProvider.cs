@@ -14,6 +14,13 @@ public class TestCasePermissionDefinitionProvider : PermissionDefinitionProvider
         buildingsPermission.AddChild(TestCasePermissions.Buildings.Create, L("Permission:Buildings.Create"));
         buildingsPermission.AddChild(TestCasePermissions.Buildings.Edit, L("Permission:Buildings.Edit"));
         buildingsPermission.AddChild(TestCasePermissions.Buildings.Delete, L("Permission:Buildings.Delete"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.GetListOfWarehouseAsync, L("Permission:Buildings.GetListOfWarehouseAsync"));
+
+
+        var buildingWarehousesPermission = inferaTestGroup.AddPermission(TestCasePermissions.Buildings.Default, L("Permission:Buildings"));
+        buildingWarehousesPermission.AddChild(TestCasePermissions.Buildings.Create, L("Permission:Buildings.Create"));
+        buildingWarehousesPermission.AddChild(TestCasePermissions.Buildings.Edit, L("Permission:Buildings.Edit"));
+        buildingWarehousesPermission.AddChild(TestCasePermissions.Buildings.Delete, L("Permission:Buildings.Delete"));
 
         var roomsPermission = inferaTestGroup.AddPermission(TestCasePermissions.Rooms.Default, L("Permission:Rooms"));
         roomsPermission.AddChild(TestCasePermissions.Rooms.Create, L("Permission:Rooms.Create"));
@@ -25,6 +32,7 @@ public class TestCasePermissionDefinitionProvider : PermissionDefinitionProvider
         warehousesPermission.AddChild(TestCasePermissions.Warehouses.Create, L("Permission:Warehouses.Create"));
         warehousesPermission.AddChild(TestCasePermissions.Warehouses.Edit, L("Permission:Warehouses.Edit"));
         warehousesPermission.AddChild(TestCasePermissions.Warehouses.Delete, L("Permission:Warehouses.Delete"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.GetListOfBuildingAsync, L("Permission:Warehouses.GetListOfBuildingAsync"));
 
 
         var productsPermission = inferaTestGroup.AddPermission(TestCasePermissions.ProductInventories.Default, L("Permission:ProductInventories"));

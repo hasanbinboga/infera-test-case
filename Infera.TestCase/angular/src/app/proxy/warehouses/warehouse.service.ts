@@ -1,4 +1,4 @@
-import type { WarehouseCreateUpdateDto, WarehouseDto, WarehouseLookupDto } from './models';
+import type { BuildingWarehouseDto, WarehouseCreateUpdateDto, WarehouseDto, WarehouseListFilterDto, WarehouseLookupDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { ListResultDto, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -40,6 +40,15 @@ export class WarehouseService {
       method: 'GET',
       url: '/api/app/warehouse',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getListOfBuilding = (input: WarehouseListFilterDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<BuildingWarehouseDto>>({
+      method: 'GET',
+      url: '/api/app/warehouse/of-building',
+      params: { warehouseId: input.warehouseId, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   
