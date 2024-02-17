@@ -39,7 +39,7 @@ export interface WarehouseDto extends AuditedEntityDto<string> {
 }
 
 export interface WarehouseListFilterDto extends PagedAndSortedResultRequestDto {
-  warehouseId?: string;
+  buildingId?: string;
 }
 
 export interface WarehouseLookupDto extends EntityDto<string> {

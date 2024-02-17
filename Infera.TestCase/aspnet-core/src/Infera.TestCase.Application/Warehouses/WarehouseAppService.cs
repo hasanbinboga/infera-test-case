@@ -186,7 +186,7 @@ namespace Infera.TestCase.Warehouses
                         join warehouse in queryable on buildingWarehouse.WarehouseId equals warehouse.Id
                         join building in buildingQueryable on warehouse.BuildingId equals building.Id into ps
                         from p in ps.DefaultIfEmpty()
-                        where buildingWarehouse.WarehouseId == input.WarehouseId
+                        where buildingWarehouse.BuildingId == input.BuildingId
                         select new BuildingWarehouseDto
                         {
                             Id = buildingWarehouse.Id,
@@ -221,7 +221,7 @@ namespace Infera.TestCase.Warehouses
             var dtos = queryResult.ToList();
 
             //Get the total count with another query
-            var totalCount = await Repository.GetCountAsync();
+            var totalCount = await _buildingWarehouseRepository.GetCountAsync();
 
             return new PagedResultDto<BuildingWarehouseDto>(
                 totalCount,

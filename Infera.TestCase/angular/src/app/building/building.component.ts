@@ -3,8 +3,10 @@ import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { issueTypeOptions } from '@proxy';
-import { BuildingService, BuildingDto } from '@proxy/buildings';
+import { BuildingWarehouseService } from '@proxy/building-warehouses';
+import { BuildingService, BuildingDto, BuildingWarehouseDto, BuildingListFilterDto } from '@proxy/buildings';
 import { IssueService, UserLookupDto } from '@proxy/issues';
+import { WarehouseDto, WarehouseListFilterDto, WarehouseLookupDto, WarehouseService } from '@proxy/warehouses';
 
 @Component({
   selector: 'app-building',
@@ -14,23 +16,33 @@ import { IssueService, UserLookupDto } from '@proxy/issues';
 export class BuildingComponent implements OnInit {
 
   building = { items: [], totalCount: 0 } as PagedResultDto<BuildingDto>;
+  warehouse = { items: [], totalCount: 0 } as PagedResultDto<BuildingWarehouseDto>;
+
   isModalOpen = false;
   isIssueModalOpen = false;
+  isWharehouseListModalOpen = false;
+  isLinkToWharehouseModalOpen = false;
 
   form: FormGroup;
+  buildingWarehouseForm: FormGroup;
   issueForm: FormGroup;
 
   selectedBuilding = {} as BuildingDto;
+  selectedBuildingWarehouse = {} as BuildingWarehouseDto;
 
   users: UserLookupDto[];
+  warehouses: WarehouseLookupDto[];
 
   issueTypes = issueTypeOptions;
 
 
-  constructor(public readonly list: ListService,
+  constructor(public readonly buildingList: ListService,
+    public readonly warehouseList: ListService,
     private fb: FormBuilder,
     private confirmation: ConfirmationService,
     private buildingService: BuildingService,
+    private warehouseService: WarehouseService,
+    private buildingWarehouseService: BuildingWarehouseService,
     private issueService: IssueService,
   ) {
 
@@ -39,14 +51,18 @@ export class BuildingComponent implements OnInit {
   ngOnInit(): void {
     const buildingStreamCreator = (query) => this.buildingService.getList(query);
 
-    this.list.hookToQuery(buildingStreamCreator).subscribe((response) => {
+    this.buildingList.hookToQuery(buildingStreamCreator).subscribe((response) => {
       this.building = response;
     });
 
-    this.issueService.getUserLookup().subscribe(s=>{
+    this.issueService.getUserLookup().subscribe(s => {
       this.users = s.items;
     });
-    
+
+    this.warehouseService.getWarehouseLookup().subscribe(s => {
+      this.warehouses = s.items;
+    });
+
   }
 
   create() {
@@ -81,13 +97,13 @@ export class BuildingComponent implements OnInit {
         .subscribe(() => {
           this.isModalOpen = false;
           this.form.reset();
-          this.list.get();
+          this.buildingList.get();
         });
     } else {
       this.buildingService.create(this.form.value).subscribe(() => {
         this.isModalOpen = false;
         this.form.reset();
-        this.list.get();
+        this.buildingList.get();
       });
     }
   }
@@ -95,7 +111,7 @@ export class BuildingComponent implements OnInit {
   delete(id: string) {
     this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
       if (status === Confirmation.Status.confirm) {
-        this.buildingService.delete(id).subscribe(() => this.list.get());
+        this.buildingService.delete(id).subscribe(() => this.buildingList.get());
       }
     });
   }
@@ -124,7 +140,58 @@ export class BuildingComponent implements OnInit {
       this.isIssueModalOpen = false;
       this.issueForm.reset();
     });
-   
+
+  }
+
+  listWarehouses(id: string) {
+
+    const warehouseStreamCreator = (input: WarehouseListFilterDto) => {
+      input.buildingId = id;
+      return this.warehouseService.getListOfBuilding(input);
+    };
+
+    this.warehouseList.hookToQuery(warehouseStreamCreator).subscribe((response) => {
+      this.warehouse = response;
+      this.isWharehouseListModalOpen = true;
+    });
+
+  }
+
+
+  linkToWarehouse(id: string) {
+    this.isLinkToWharehouseModalOpen = true;
+    this.buildBuildingWarehouseForm(id);
+  }
+
+  buildBuildingWarehouseForm(id: string) {
+    this.buildingWarehouseForm = this.fb.group({
+      buildingId: [id, null],
+      warehouseId: ['', Validators.required]
+    });
+  }
+
+  saveBuildingWarehouse() {
+    if (this.buildingWarehouseForm.invalid) {
+      return;
+    }
+    this.buildingWarehouseService.create(this.buildingWarehouseForm.value).subscribe(() => {
+      this.isLinkToWharehouseModalOpen = false;
+      this.buildingWarehouseForm.reset();
+      this.buildingList.get();
+    });
+  }
+
+  deleteWarehouseRelation(id: string) {
+    this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
+      if (status === Confirmation.Status.confirm) {
+        this.buildingWarehouseService.delete(id).subscribe(() => {
+          this.warehouseList.get();
+          this.buildingList.get();
+
+        }
+        );
+      }
+    });
   }
 
 }

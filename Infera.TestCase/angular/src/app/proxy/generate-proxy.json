@@ -3321,7 +3321,7 @@
               "parameters": [
                 {
                   "nameOnMethod": "input",
-                  "name": "WarehouseId",
+                  "name": "BuildingId",
                   "jsonName": null,
                   "type": "System.Guid",
                   "typeSimple": "string",
@@ -8164,7 +8164,7 @@
       "genericArguments": null,
       "properties": [
         {
-          "name": "WarehouseId",
+          "name": "BuildingId",
           "jsonName": null,
           "type": "System.Guid",
           "typeSimple": "string",

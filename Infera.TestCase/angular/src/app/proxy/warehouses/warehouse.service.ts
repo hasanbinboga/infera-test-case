@@ -48,7 +48,7 @@ export class WarehouseService {
     this.restService.request<any, PagedResultDto<BuildingWarehouseDto>>({
       method: 'GET',
       url: '/api/app/warehouse/of-building',
-      params: { warehouseId: input.warehouseId, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { buildingId: input.buildingId, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   

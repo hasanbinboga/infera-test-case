@@ -208,7 +208,7 @@ namespace Infera.TestCase.Buildings
             var dtos = queryResult.ToList();
 
             //Get the total count with another query
-            var totalCount = await Repository.GetCountAsync();
+            var totalCount = await _buildingWarehouseRepository.GetCountAsync();
 
             return new PagedResultDto<BuildingWarehouseDto>(
                 totalCount,

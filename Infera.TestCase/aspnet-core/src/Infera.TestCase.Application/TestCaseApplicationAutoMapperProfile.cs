@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Infera.TestCase.Accountings;
 using Infera.TestCase.Buildings;
+using Infera.TestCase.BuildingWarehouses;
 using Infera.TestCase.Issues;
 using Infera.TestCase.ProductInventories;
 using Infera.TestCase.Rooms;
@@ -15,6 +16,9 @@ public class TestCaseApplicationAutoMapperProfile : Profile
         CreateMap<Building, BuildingDto>();
         CreateMap<BuildingCreateUpdateDto, Building>();
         CreateMap<Building, BuildingLookupDto>();
+
+        CreateMap<BuildingWarehouse, BuildingWarehouses.BuildingWarehouseDto>();
+        CreateMap<BuildingWarehouseCreateUpdateDto, BuildingWarehouse>();
 
         CreateMap<Room, RoomDto>();
         CreateMap<RoomCreateUpdateDto, Room>();

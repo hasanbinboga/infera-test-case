@@ -6,6 +6,6 @@ namespace Infera.TestCase.Warehouses;
 [Serializable]
 public class WarehouseListFilterDto : PagedAndSortedResultRequestDto
 {
-    public Guid WarehouseId { get; set; }
+    public Guid BuildingId { get; set; }
     
 }

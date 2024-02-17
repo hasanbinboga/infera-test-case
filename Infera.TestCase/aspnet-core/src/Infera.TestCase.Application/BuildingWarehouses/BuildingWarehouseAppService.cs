@@ -50,8 +50,7 @@ namespace Infera.TestCase.BuildingWarehouses
         [Authorize(TestCasePermissions.BuildingWarehouses.Create)]
         public override async Task<BuildingWarehouseDto> CreateAsync(BuildingWarehouseCreateUpdateDto input)
         {
-            var building = await _buildingManager.CreateAsync(input.BuildingId, input.WarehouseId
-        );
+            var building = await _buildingManager.CreateAsync(input.BuildingId, input.WarehouseId);
 
             await Repository.InsertAsync(building);
 
