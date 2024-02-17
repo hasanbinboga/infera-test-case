@@ -336,3 +336,19 @@ CREATE src/app/building/building.component.ts (218 bytes)
 CREATE src/app/building/building.component.scss (0 bytes)
 UPDATE src/app/app-routing.module.ts (1033 bytes)
 ```
+
+Devamında Oda ve depo tanımları için de gerekli FE modülleri geliştirildi.
+
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/84b52a8d-2ca7-4fd5-a69b-2da3dc675964)
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/98f900e2-68f0-418a-8f08-409983b929d2)
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/ab778161-30a9-4a1b-9258-30f7a6330339)
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/263031cc-506a-48f8-8609-1c6de556e925)
+
+
+
+
+
