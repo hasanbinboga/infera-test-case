@@ -113,12 +113,12 @@ export class RoomComponent implements OnInit {
 
   createIssue(id: string) {
     this.isIssueModalOpen = true;
-    this.buildIssueForm();
+    this.buildIssueForm(id);
   }
 
-  buildIssueForm() {
+  buildIssueForm(id: string) {
     this.issueForm = this.fb.group({
-      roomId: [this.selectedRoom.id, null],
+      roomId: [id, null],
       number: ['', Validators.required],
       type: ['', Validators.required],
       notes: ['', Validators.required],
