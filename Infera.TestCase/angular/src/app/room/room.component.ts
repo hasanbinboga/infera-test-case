@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { issueTypeOptions } from '@proxy';
 import { RoomService, RoomDto } from '@proxy/rooms';
 import { IssueService, UserLookupDto } from '@proxy/issues';
+import { BuildingLookupDto, BuildingService } from '@proxy/buildings';
 
 
 @Component({
@@ -24,11 +25,13 @@ export class RoomComponent implements OnInit {
   selectedRoom = {} as RoomDto;
 
   users: UserLookupDto[];
+  buildings: BuildingLookupDto[];
 
   issueTypes = issueTypeOptions;
   constructor(public readonly list: ListService,
     private fb: FormBuilder,
     private confirmation: ConfirmationService,
+    private buildingService: BuildingService,
     private roomService: RoomService,
     private issueService: IssueService,
   ) {
@@ -44,6 +47,10 @@ export class RoomComponent implements OnInit {
 
     this.issueService.getUserLookup().subscribe(s => {
       this.users = s.items;
+    });
+
+    this.buildingService.getBuildingLookup().subscribe(s => {
+      this.buildings = s.items;
     });
 
   }

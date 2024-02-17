@@ -52,4 +52,120 @@
     </div>
   </div>
   
-  
+  <!-- CRUD FORM  -->
+<abp-modal [(visible)]="isModalOpen">
+  <ng-template #abpHeader>
+    <h3>{{ (selectedRoom.id ? '::Edit' : '::NewRoom') | abpLocalization }}</h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="mt-2">
+        <label for="room-buildingId">Assignee</label><span> * </span>
+        <select class="form-control" id="room-buildingId" formControlName="buildingId">
+          <option [ngValue]="null">Select a Building</option>
+          <option [ngValue]="building.id" *ngFor="let building of buildings">
+             {{building.name}}
+          </option>
+        </select>
+      </div>
+
+      
+
+      <div class="form-group">
+        <label for="room-no">No</label><span> * </span>
+        <input type="text" id="room-no" class="form-control" formControlName="no" />
+      </div>
+
+      <div class="form-group">
+        <label for="room-floor">Floor</label><span> * </span>
+        <input type="number" id="room-floor" class="form-control" formControlName="floor" />
+      </div>
+
+      <div class="form-group">
+        <label for="room-capacity">Capacity</label><span> * </span>
+        <input type="number" id="room-capacity" class="form-control" formControlName="capacity" />
+      </div>
+
+      <div class="mt-2">
+        <label for="room-hasMiniBar">Has Mini Bar</label><span> * </span>
+        <select class="form-control" id="room-hasMiniBar" formControlName="hasMiniBar">
+          <option [ngValue]="null">Select a Building</option>
+          <option [ngValue]="true">Var</option>
+          <option [ngValue]="false">Yok</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="room-notes">Notes</label><span> * </span>
+        <input type="text" id="room-notes" class="form-control" formControlName="notes" />
+      </div>
+      
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose>
+      {{ '::Close' | abpLocalization }}
+    </button>
+
+    <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+      <i class="fa fa-check mr-1"></i>
+      {{ '::Save' | abpLocalization }}
+    </button>
+  </ng-template>
+</abp-modal>
+
+
+<!-- CREATE ISSUE FORM  -->
+<abp-modal [(visible)]="isIssueModalOpen">
+  <ng-template #abpHeader>
+    <h3>{{ '::NewIssue' | abpLocalization }}</h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="issueForm" (ngSubmit)="saveIssue()">
+      <div class="form-group">
+        <label for="issue-notes">Notes</label><span> * </span>
+        <input type="text" id="issue-notes" class="form-control" formControlName="notes" autofocus />
+      </div>
+
+      <div class="mt-2">
+        <label for="issue-type">Type</label><span> * </span>
+        <select class="form-control" id="issue-type" formControlName="type">
+          <option [ngValue]="null">Select a issue type</option>
+          <option [ngValue]="type.value" *ngFor="let type of issueTypes">
+            {{ '::Enum:IssueType.' + type.value | abpLocalization }}
+          </option>
+        </select>
+      </div>
+
+      <div class="mt-2">
+        <label for="issue-assignee">Assignee</label><span> * </span>
+        <select class="form-control" id="issue-assignee" formControlName="assignee">
+          <option [ngValue]="null">Select a User</option>
+          <option [ngValue]="user.id" *ngFor="let user of users">
+             {{user.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="issue-number">Number</label><span> * </span>
+        <input type="text" id="issue-number" class="form-control" formControlName="number" />
+      </div>
+
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose>
+      {{ '::Close' | abpLocalization }}
+    </button>
+
+    <button class="btn btn-primary" (click)="saveIssue()" [disabled]="issueForm.invalid">
+      <i class="fa fa-check mr-1"></i>
+      {{ '::Save' | abpLocalization }}
+    </button>
+  </ng-template>
+</abp-modal>
