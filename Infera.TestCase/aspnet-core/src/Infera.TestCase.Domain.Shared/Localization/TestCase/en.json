@@ -1,10 +1,11 @@
 {
-  "culture": "en",
+    "culture": "en",
     "texts": {
         "Menu:Home": "Home",
         "Menu:Buildings": "Buildings",
         "Menu:Rooms": "Rooms",
         "Menu:Warehouses": "Warehouses",
+        "Menu:Products": "Products",
         "Welcome": "Welcome",
         "CreateIssue": "Create Issue",
         "NewIssue": "New Issue",
@@ -20,6 +21,13 @@
         "Enum:IssueType.0": "Undefined",
         "Enum:IssueType.1": "Cleaning",
         "Enum:IssueType.2": "Fix",
-        "Enum:IssueType.3": "Refill"
+        "Enum:IssueType.3": "Refill",
+        "ListWarehouses": "List Warehouses",
+        "LinkToWarehouse": "Link to Warehouse",
+        "WarehouseList": "Warehouse List",
+        "NewBuildingWarehouse": "New Building-Warehouse Relation",
+        "NewWarehouse": "New Warehouse",
+        "ListBuildings": "List Buildings",
+        "LinkToBuilding": "Link To Building"
     }
 }

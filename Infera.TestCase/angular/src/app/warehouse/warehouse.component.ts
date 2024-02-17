@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { issueTypeOptions } from '@proxy';
 import { WarehouseService, WarehouseDto } from '@proxy/warehouses';
-import { IssueService, UserLookupDto } from '@proxy/issues';
 import { BuildingListFilterDto, BuildingLookupDto, BuildingService, BuildingWarehouseDto } from '@proxy/buildings';
 import { BuildingWarehouseService } from '@proxy/building-warehouses';
 

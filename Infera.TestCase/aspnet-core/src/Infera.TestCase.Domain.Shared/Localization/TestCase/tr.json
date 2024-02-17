@@ -1,10 +1,11 @@
 {
-  "culture": "tr",
+    "culture": "tr",
     "texts": {
         "Menu:Home": "Ana sayfa",
         "Menu:Buildings": "Binalar",
         "Menu:Rooms": "Odalar",
         "Menu:Warehouses": "Depolar",
+        "Menu:Products": "Ürünler",
         "Welcome": "Hoşgeldiniz",
         "CreateIssue": "Görev Oluştur",
         "NewIssue": "Yeni Görev",
@@ -20,6 +21,13 @@
         "Enum:IssueType.0": "Bilinmiyor",
         "Enum:IssueType.1": "Temizlik",
         "Enum:IssueType.2": "Onarım",
-        "Enum:IssueType.3": "Eksikleri tamamla"
+        "Enum:IssueType.3": "Eksikleri tamamla",
+        "ListWarehouses": "Depoları listele",
+        "LinkToWarehouse": "Depo ile ilişkilendir",
+        "WarehouseList": "Depo Listesi",
+        "NewBuildingWarehouse": "Yeni Depo Bina ilişkisi",
+        "NewWarehouse": "Yeni Depo",
+        "ListBuildings": "Binaları Listele",
+        "LinkToBuilding": "Bina ile İlişkilendir"
     }
 }

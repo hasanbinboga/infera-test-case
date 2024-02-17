@@ -35,10 +35,10 @@
                 </button>
                 <hr/>
                 <button ngbDropdownItem (click)="listBuildings(row.id)">
-                  {{ '::ListWarehouses' | abpLocalization }}
+                  {{ '::ListBuildings' | abpLocalization }}
                 </button>
                 <button ngbDropdownItem (click)="linkToBuilding(row.id)">
-                  {{ '::LinkToWarehouse' | abpLocalization }}
+                  {{ '::LinkToBuilding' | abpLocalization }}
                 </button>
               </div>
             </div>
@@ -51,7 +51,7 @@
         <ngx-datatable-column [name]="'::Capacity' | abpLocalization" prop="capacity"></ngx-datatable-column>
         <ngx-datatable-column [name]="'::Content' | abpLocalization" prop="content"></ngx-datatable-column>
         <ngx-datatable-column [name]="'::Notes' | abpLocalization" prop="notes"></ngx-datatable-column>
-        <ngx-datatable-column [name]="'::BuldingCount' | abpLocalization" prop="buldingCount"></ngx-datatable-column> 
+        <ngx-datatable-column [name]="'::BuldingCount' | abpLocalization" prop="buildingCount"></ngx-datatable-column> 
         <ngx-datatable-column [name]="'::InventoryCount' | abpLocalization" prop="inventoryCount"></ngx-datatable-column>
       </ngx-datatable>
     </div>
@@ -171,11 +171,11 @@
        
 
       <div class="mt-2">
-        <label for="buildingWarehouse-warehouseId">Warehouse</label><span> * </span>
-        <select class="form-control" id="buildingWarehouse-warehouseId" formControlName="warehouseId">
-          <option [ngValue]="null">Select a Warehouse</option>
-          <option [ngValue]="warehouse.id" *ngFor="let warehouse of warehouses">
-             {{warehouse.name}}
+        <label for="buildingWarehouse-buildingId">Building</label><span> * </span>
+        <select class="form-control" id="buildingWarehouse-buildingId" formControlName="buildingId">
+          <option [ngValue]="null">Select a Building</option>
+          <option [ngValue]="building.id" *ngFor="let building of buildings">
+             {{building.name}}
           </option>
         </select>
       </div>

@@ -143,7 +143,7 @@ namespace Infera.TestCase.Warehouses
                             Capacity = warehouse.Capacity,
                             Notes = warehouse.Notes,
                             Content = warehouse.Content,
-                            BuildingCount = (from bw in buildingWarehouseQueryable where bw.Id == warehouse.BuildingId select bw).Count(),
+                            BuildingCount = (from bw in buildingWarehouseQueryable where bw.WarehouseId == warehouse.Id select bw).Count(),
                             InventoryCount = (from i in warehouseInventoryQueryable where warehouse.Id == i.WarehouseId select i).Count(),
                             CreationTime = warehouse.CreationTime,
                             CreatorId = warehouse.CreatorId,

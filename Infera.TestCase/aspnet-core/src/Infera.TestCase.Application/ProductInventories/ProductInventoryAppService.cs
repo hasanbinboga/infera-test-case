@@ -123,7 +123,7 @@ namespace Infera.TestCase.ProductInventories
 
             //Paging
             query = query
-                .OrderBy(input.Sorting)
+                .OrderBy(input.Sorting.IsNullOrEmpty() ? "Id" : input.Sorting)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 

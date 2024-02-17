@@ -36,6 +36,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 4,
         layout: eLayoutType.application,
       },
+      {
+        path: '/products',
+        name: '::Menu:Products',
+        iconClass: 'fas fa-cookie-bite',
+        order: 4,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }
