@@ -348,7 +348,7 @@ Devamında Oda ve depo tanımları için de gerekli FE modülleri geliştirildi.
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/263031cc-506a-48f8-8609-1c6de556e925)
 
-[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/Q4j-Ic3S04A)
+[![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/s-WHFHbX0Gk)
 
 
 
