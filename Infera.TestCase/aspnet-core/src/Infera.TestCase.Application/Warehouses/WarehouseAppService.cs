@@ -4,6 +4,7 @@ using Infera.TestCase.Issues;
 using Infera.TestCase.Permissions;
 using Infera.TestCase.SaleOrders;
 using Infera.TestCase.WarehouseInventories;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,16 +28,19 @@ namespace Infera.TestCase.Warehouses
         private readonly IBuildingRepository _buildingRepository;
         private readonly IBuildingWarehouseRepository _buildingWarehouseRepository;
         private readonly IWarehouseInventoryRepository _warehouseInventoryRepository;
+        private readonly WarehouseManager _warehouseManager;
 
         public WarehouseAppService(IWarehouseRepository repository,
             IBuildingRepository buildingRepository,
             IBuildingWarehouseRepository buildingWarehouseRepository,
-            IWarehouseInventoryRepository warehouseInventoryRepository
+            IWarehouseInventoryRepository warehouseInventoryRepository,
+            WarehouseManager warehouseManager
             ) : base(repository)
         {
-            _buildingRepository = buildingRepository; 
+            _buildingRepository = buildingRepository;
             _buildingWarehouseRepository = buildingWarehouseRepository;
             _warehouseInventoryRepository = warehouseInventoryRepository;
+            _warehouseManager = warehouseManager;
 
             GetPolicyName = TestCasePermissions.Warehouses.Default;
             GetListPolicyName = TestCasePermissions.Warehouses.Default;
@@ -45,14 +49,33 @@ namespace Infera.TestCase.Warehouses
             DeletePolicyName = TestCasePermissions.Warehouses.Create;
         }
 
+        [Authorize(TestCasePermissions.Warehouses.Create)]
+        public override async Task<WarehouseDto> CreateAsync(WarehouseCreateUpdateDto input)
+        {
+            var warehouse = await _warehouseManager.CreateAsync(
+                input.BuildingId,
+                input.Name,
+                input.No,
+                input.Floor,
+                input.Capacity,
+                input.Content,
+                input.Notes
+            );
+
+            await Repository.InsertAsync(warehouse);
+
+            var res =  ObjectMapper.Map<Warehouse, WarehouseDto>(warehouse);
+
+            return res;
+        }
 
         public override async Task<WarehouseDto> GetAsync(Guid id)
         {
             //Get the IQueryable<Warehouse> from the repository
             var queryable = await Repository.GetQueryableAsync();
-            var buildingQueryable = await _buildingRepository.GetQueryableAsync(); 
-            var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync(); 
-            var warehouseInventoryQueryable = await _warehouseInventoryRepository.GetQueryableAsync(); 
+            var buildingQueryable = await _buildingRepository.GetQueryableAsync();
+            var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync();
+            var warehouseInventoryQueryable = await _warehouseInventoryRepository.GetQueryableAsync();
 
 
             //Prepare a query to join buildings and authors
@@ -60,11 +83,13 @@ namespace Infera.TestCase.Warehouses
                         join building in buildingQueryable on warehouse.BuildingId equals building.Id into ps
                         from p in ps.DefaultIfEmpty()
                         where warehouse.Id == id
-                        select new WarehouseDto {
+                        select new WarehouseDto
+                        {
                             Id = warehouse.Id,
                             BuildingId = warehouse.BuildingId,
                             BuildingName = p.Name,
                             No = warehouse.No,
+                            Name = warehouse.Name,
                             Floor = warehouse.Floor,
                             Capacity = warehouse.Capacity,
                             Notes = warehouse.Notes,
@@ -82,7 +107,7 @@ namespace Infera.TestCase.Warehouses
             if (queryResult == null)
             {
                 throw new EntityNotFoundException(typeof(Warehouse), id);
-            } 
+            }
             return queryResult;
         }
 
@@ -112,6 +137,7 @@ namespace Infera.TestCase.Warehouses
                             Id = warehouse.Id,
                             BuildingId = warehouse.BuildingId,
                             BuildingName = p.Name,
+                            Name = warehouse.Name,
                             No = warehouse.No,
                             Floor = warehouse.Floor,
                             Capacity = warehouse.Capacity,
@@ -127,7 +153,7 @@ namespace Infera.TestCase.Warehouses
 
             //Paging
             query = query
-                .OrderBy(input.Sorting)
+                .OrderBy(input.Sorting.IsNullOrEmpty() ? "Id" : input.Sorting)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 
@@ -146,7 +172,7 @@ namespace Infera.TestCase.Warehouses
             );
         }
 
-       
+
 
     }
 }

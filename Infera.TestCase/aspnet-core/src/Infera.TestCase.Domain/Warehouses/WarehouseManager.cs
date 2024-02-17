@@ -19,8 +19,8 @@ public class WarehouseManager : DomainService
                         string no,
                         int floor,
                         int capacity,
-                        string content,
-                        string notes)
+                        string? content,
+                        string? notes)
     {
         var existingWarehouse= await WarehouseRepository.FindWarehouse(buildingId, name, no);
 

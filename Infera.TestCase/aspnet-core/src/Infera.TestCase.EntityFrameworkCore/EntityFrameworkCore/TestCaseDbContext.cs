@@ -128,7 +128,7 @@ public class TestCaseDbContext :
         {
             b.ToTable(TestCaseConsts.DbTablePrefix + "Warehouses", TestCaseConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props            
-            b.Property(s => s.Name).IsRequired().HasMaxLength(WarehouseConsts.MinNameLength);
+            b.Property(s => s.Name).IsRequired().HasMaxLength(WarehouseConsts.MaxNameLength);
             b.Property(s => s.No).IsRequired();
             b.Property(s => s.Floor).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(WarehouseConsts.MaxNotesLength);
