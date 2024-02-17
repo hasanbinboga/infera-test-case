@@ -5,7 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { issueTypeOptions } from '@proxy';
 import { WarehouseService, WarehouseDto } from '@proxy/warehouses';
 import { IssueService, UserLookupDto } from '@proxy/issues';
-import { BuildingLookupDto, BuildingService } from '@proxy/buildings';
+import { BuildingListFilterDto, BuildingLookupDto, BuildingService, BuildingWarehouseDto } from '@proxy/buildings';
+import { BuildingWarehouseService } from '@proxy/building-warehouses';
 
 @Component({
   selector: 'app-warehouse',
@@ -15,25 +16,30 @@ import { BuildingLookupDto, BuildingService } from '@proxy/buildings';
 export class WarehouseComponent implements OnInit {
 
   warehouse = { items: [], totalCount: 0 } as PagedResultDto<WarehouseDto>;
+  building = { items: [], totalCount: 0 } as PagedResultDto<BuildingWarehouseDto>;
+  
   isModalOpen = false; 
+  isBuildingListModalOpen = false;
+  isLinkToBuildingModalOpen = false;
 
   form: FormGroup; 
   buildingWarehouseForm: FormGroup;
 
   selectedWarehouse = {} as WarehouseDto;
+  selectedBuildingWarehouse = {} as BuildingWarehouseDto;
 
-  users: UserLookupDto[];
   buildings: BuildingLookupDto[];
 
   issueTypes = issueTypeOptions;
 
 
-  constructor(public readonly list: ListService,
+  constructor(public readonly buildingList: ListService,
+    public readonly warehouseList: ListService,
     private fb: FormBuilder,
     private confirmation: ConfirmationService,
     private warehouseService: WarehouseService,
+    private buildingWarehouseService: BuildingWarehouseService,
     private buildingService: BuildingService,
-    private issueService: IssueService,
   ) {
 
   }
@@ -41,13 +47,10 @@ export class WarehouseComponent implements OnInit {
   ngOnInit(): void {
     const warehouseStreamCreator = (query) => this.warehouseService.getList(query);
 
-    this.list.hookToQuery(warehouseStreamCreator).subscribe((response) => {
+    this.warehouseList.hookToQuery(warehouseStreamCreator).subscribe((response) => {
       this.warehouse = response;
     });
 
-    this.issueService.getUserLookup().subscribe(s=>{
-      this.users = s.items;
-    });
 
     this.buildingService.getBuildingLookup().subscribe(s=>{
       this.buildings = s.items;
@@ -93,13 +96,13 @@ export class WarehouseComponent implements OnInit {
         .subscribe(() => {
           this.isModalOpen = false;
           this.form.reset();
-          this.list.get();
+          this.warehouseList.get();
         });
     } else {
       this.warehouseService.create(this.form.value).subscribe(() => {
         this.isModalOpen = false;
         this.form.reset();
-        this.list.get();
+        this.warehouseList.get();
       });
     }
   }
@@ -107,20 +110,57 @@ export class WarehouseComponent implements OnInit {
   delete(id: string) {
     this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
       if (status === Confirmation.Status.confirm) {
-        this.warehouseService.delete(id).subscribe(() => this.list.get());
+        this.warehouseService.delete(id).subscribe(() => this.warehouseList.get());
       }
     });
   } 
 
-  createBuildingWarehouse(id: string){
-    
+  listBuildings(id: string) {
+
+    const buildingStreamCreator = (input: BuildingListFilterDto) => {
+      input.warehouseId = id;
+      return this.buildingService.getListOfWarehouse(input);
+    };
+
+    this.buildingList.hookToQuery(buildingStreamCreator).subscribe((response) => {
+      this.building = response;
+      this.isBuildingListModalOpen = true;
+    });
+
   }
 
-  buildBuildingWarehouseForm() {
-    
+  linkToBuilding(id: string) {
+    this.isLinkToBuildingModalOpen = true;
+    this.buildBuildingWarehouseForm(id);
+  }
+
+  buildBuildingWarehouseForm(id: string) {
+    this.buildingWarehouseForm = this.fb.group({
+      warehouseId: [id, null],
+      buildingId: ['', Validators.required]
+    });
   }
 
   saveBuildingWarehouse(){
-    
+    if (this.buildingWarehouseForm.invalid) {
+      return;
+    }
+    this.buildingWarehouseService.create(this.buildingWarehouseForm.value).subscribe(() => {
+      this.isLinkToBuildingModalOpen = false;
+      this.buildingWarehouseForm.reset();
+      this.buildingList.get();
+    });
+  }
+
+  deleteWarehouseRelation(id: string) {
+    this.confirmation.warn('::AreYouSureToDelete', 'AbpAccount::AreYouSure').subscribe((status) => {
+      if (status === Confirmation.Status.confirm) {
+        this.buildingWarehouseService.delete(id).subscribe(() => {
+          this.warehouseList.get();
+          this.buildingList.get();
+        }
+        );
+      }
+    });
   }
 }

@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="card-body">
-      <ngx-datatable [rows]="warehouse.items" [count]="warehouse.totalCount" [list]="list" default>
+      <ngx-datatable [rows]="warehouse.items" [count]="warehouse.totalCount" [list]="warehouseList" default>
         <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <div ngbDropdown container="body" class="d-inline-block">
@@ -33,8 +33,12 @@
                 <button *abpPermission="'TestCase.Warehouses.Delete'" ngbDropdownItem (click)="delete(row.id)">
                   {{ '::Delete' | abpLocalization }}
                 </button>
-                <button ngbDropdownItem (click)="createBuildingWarehouse(row.id)">
-                  Bina ile ilişkilendir
+                <hr/>
+                <button ngbDropdownItem (click)="listBuildings(row.id)">
+                  {{ '::ListWarehouses' | abpLocalization }}
+                </button>
+                <button ngbDropdownItem (click)="linkToBuilding(row.id)">
+                  {{ '::LinkToWarehouse' | abpLocalization }}
                 </button>
               </div>
             </div>
@@ -116,4 +120,80 @@
       </button>
     </ng-template>
   </abp-modal>
+
+
+  <!-- WAREHOUSE LIST --> 
+<abp-modal  [options]="{centered: true, size: 'xl' }" class="warehouseList"  [(visible)]="isBuildingListModalOpen">
+  <ng-template style="width: 987px !important;" #abpHeader>
+    <h3>{{  '::WarehouseList' | abpLocalization }}</h3>
+  </ng-template> 
+  <ng-template style="width: 987px !important;" #abpBody>
+    <ngx-datatable [rows]="building.items" [count]="building.totalCount" [list]="buildingList" default>
+      <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div ngbDropdown container="body" class="d-inline-block">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              ngbDropdownToggle>
+              <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+            </button>
+            <div ngbDropdownMenu>
+              <button *abpPermission="'TestCase.BuildingWarehouses.Delete'" ngbDropdownItem (click)="deleteWarehouseRelation(row.id)">
+                {{ '::Delete' | abpLocalization }}
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [name]="'::Name' | abpLocalization" prop="name"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::Number' | abpLocalization" prop="no"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::Addres' | abpLocalization" prop="addres"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::RoomCount' | abpLocalization" prop="roomCount"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::WarehouseCount' | abpLocalization"
+        prop="inWarehouseCount"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::OwnedWarehouseCount' | abpLocalization"
+        prop="ownWarehouseCount"></ngx-datatable-column>
+      <ngx-datatable-column [name]="'::IssueCount' | abpLocalization" prop="issueCount"></ngx-datatable-column>
+    </ngx-datatable>
+  </ng-template>
+
+   
+</abp-modal>
+
+<!-- CREATE BUILDINGWAREHOUSE FORM  -->
+<abp-modal [(visible)]="isLinkToBuildingModalOpen">
+  <ng-template #abpHeader>
+    <h3>{{ '::NewBuildingWarehouse' | abpLocalization }}</h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="buildingWarehouseForm" (ngSubmit)="saveBuildingWarehouse()">
+       
+       
+
+      <div class="mt-2">
+        <label for="buildingWarehouse-warehouseId">Warehouse</label><span> * </span>
+        <select class="form-control" id="buildingWarehouse-warehouseId" formControlName="warehouseId">
+          <option [ngValue]="null">Select a Warehouse</option>
+          <option [ngValue]="warehouse.id" *ngFor="let warehouse of warehouses">
+             {{warehouse.name}}
+          </option>
+        </select>
+      </div>
+
+      
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary" abpClose>
+      {{ '::Close' | abpLocalization }}
+    </button>
+
+    <button class="btn btn-primary" (click)="saveBuildingWarehouse()" [disabled]="buildingWarehouseForm.invalid">
+      <i class="fa fa-check mr-1"></i>
+      {{ '::Save' | abpLocalization }}
+    </button>
+  </ng-template>
+</abp-modal>
+
   

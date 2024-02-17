@@ -169,7 +169,7 @@
               <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
             </button>
             <div ngbDropdownMenu>
-              <button *abpPermission="'TestCase.Warehouses.Delete'" ngbDropdownItem (click)="deleteWarehouseRelation(row.id)">
+              <button *abpPermission="'TestCase.BuildingWarehouses.Delete'" ngbDropdownItem (click)="deleteWarehouseRelation(row.id)">
                 {{ '::Delete' | abpLocalization }}
               </button>
             </div>
@@ -192,7 +192,7 @@
 </abp-modal>
 
 <!-- CREATE BUILDINGWAREHOUSE FORM  -->
-<abp-modal [(visible)]="isLinkToWharehouseModalOpen">
+<abp-modal [(visible)]="isLinkToWarehouseModalOpen">
   <ng-template #abpHeader>
     <h3>{{ '::NewBuildingWarehouse' | abpLocalization }}</h3>
   </ng-template>

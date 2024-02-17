@@ -21,7 +21,7 @@ export class BuildingComponent implements OnInit {
   isModalOpen = false;
   isIssueModalOpen = false;
   isWharehouseListModalOpen = false;
-  isLinkToWharehouseModalOpen = false;
+  isLinkToWarehouseModalOpen = false;
 
   form: FormGroup;
   buildingWarehouseForm: FormGroup;
@@ -159,7 +159,7 @@ export class BuildingComponent implements OnInit {
 
 
   linkToWarehouse(id: string) {
-    this.isLinkToWharehouseModalOpen = true;
+    this.isLinkToWarehouseModalOpen = true;
     this.buildBuildingWarehouseForm(id);
   }
 
@@ -175,7 +175,7 @@ export class BuildingComponent implements OnInit {
       return;
     }
     this.buildingWarehouseService.create(this.buildingWarehouseForm.value).subscribe(() => {
-      this.isLinkToWharehouseModalOpen = false;
+      this.isLinkToWarehouseModalOpen = false;
       this.buildingWarehouseForm.reset();
       this.buildingList.get();
     });
