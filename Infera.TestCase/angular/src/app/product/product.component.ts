@@ -3,9 +3,6 @@ import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { productInventoryTypeOptions, issueTypeOptions, IssueEntityType } from '@proxy';
-import { WarehouseService, WarehouseDto } from '@proxy/warehouses';
-import { BuildingListFilterDto, BuildingLookupDto, BuildingService, BuildingWarehouseDto } from '@proxy/buildings';
-import { BuildingWarehouseService } from '@proxy/building-warehouses';
 import { ProductInventoryDto, ProductInventoryService } from '@proxy/product-inventories';
 import { IssueService, UserLookupDto } from '@proxy/issues';
  

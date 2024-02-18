@@ -1,1 +1,146 @@
-<p>accounting works!</p>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col col-md-6">
+                <h5 class="card-title">
+                    {{ '::Menu:Accounting' | abpLocalization }}
+                </h5>
+            </div>
+            <div class="text-end col col-md-6">
+                <div class="text-lg-end pt-2">
+                    <button *abpPermission="'TestCase.ProductInventories.Create'" id="create" class="btn btn-primary"
+                        type="button" (click)="create()">
+                        <i class="fa fa-plus me-1"></i>
+                        <span>{{ '::NewInvoice' | abpLocalization }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <ngx-datatable [rows]="accounting.items" [count]="accounting.totalCount" [list]="list" default>
+            <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div ngbDropdown container="body" class="d-inline-block">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" ngbDropdownToggle>
+                            <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button *abpPermission="'TestCase.ProductInventories.Edit'" ngbDropdownItem
+                                (click)="edit(row.id)">
+                                {{ '::Edit' | abpLocalization }}
+                            </button>
+                            <button *abpPermission="'TestCase.ProductInventories.Delete'" ngbDropdownItem
+                                (click)="delete(row.id)">
+                                {{ '::Delete' | abpLocalization }}
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ProductName' | abpLocalization" prop="productName"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ProductManifacturer' | abpLocalization"
+                prop="productManifacturer"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ProductType' | abpLocalization" prop="productType"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ProductSize' | abpLocalization" prop="productSize"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::RoomBuildingName' | abpLocalization"
+                prop="roomBuildingName"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::RoomNo' | abpLocalization" prop="roomNo"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::RoomFloor' | abpLocalization" prop="roomFloor"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::WarehouseName' | abpLocalization"
+                prop="warehouseName"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::WarehouseNo' | abpLocalization" prop="warehouseNo"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::WarehouseFloor' | abpLocalization"
+                prop="WarehouseFloor"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Type' | abpLocalization" prop="type"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::SalePrice' | abpLocalization" prop="salePrice"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::IsOrderCompleted' | abpLocalization"
+                prop="isOrderCompleted"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::PurchasePrice' | abpLocalization"
+                prop="purchasePrice"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::SalePrice' | abpLocalization" prop="salePrice"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Count' | abpLocalization" prop="count"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Tax' | abpLocalization" prop="tax"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Amount' | abpLocalization" prop="amount"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::invoiceDate' | abpLocalization" prop="invoiceDate"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::invoiceNumber' | abpLocalization"
+                prop="invoiceNumber"></ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>
+
+
+<!-- CRUD FORM  -->
+<abp-modal [(visible)]="isModalOpen">
+    <ng-template #abpHeader>
+        <h3>{{ (selectedAccounting.id ? '::Edit' : '::NewInvoice') | abpLocalization }}</h3>
+    </ng-template>
+
+    <ng-template #abpBody>
+        <form [formGroup]="form" (ngSubmit)="save()">
+
+            <div class="mt-2">
+                <label for="accounting-product">Product</label><span> * </span>
+                <select class="form-control" id="accounting-product" formControlName="productInventoryId">
+                    <option [ngValue]="null">Select a Product</option>
+                    <option [ngValue]="product.id" *ngFor="let product of products">
+                        {{product.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label for="accounting-type">Type</label><span> * </span>
+                <select class="form-control" id="accounting-type" formControlName="type">
+                    <option [ngValue]="null">Select a accounting type</option>
+                    <option [ngValue]="type.value" *ngFor="let type of accountingTypes">
+                        {{ '::Enum:AccountingType.' + type.value | abpLocalization }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="accounting-count">Count</label><span> * </span>
+                <input type="number" id="accounting-count" class="form-control" formControlName="count" />
+            </div>
+            <div class="form-group">
+                <label for="accounting-purchasePrice">purchase Price</label><span> * </span>
+                <input type="number" id="accounting-purchasePrice" class="form-control"
+                    formControlName="purchasePrice" />
+            </div>
+
+            <div class="form-group">
+                <label for="accounting-salePrice">sale Price</label><span> * </span>
+                <input type="number" id="accounting-salePrice" class="form-control" formControlName="salePrice" />
+            </div>
+
+            <div class="form-group">
+                <label for="accounting-amount">amount</label><span> * </span>
+                <input type="number" id="accounting-amount" class="form-control" formControlName="amount" />
+            </div>
+
+            <div class="form-group">
+                <label for="accounting-tax">tax</label><span> * </span>
+                <input type="number" id="accounting-tax" class="form-control" formControlName="tax" />
+            </div>
+
+            <div class="form-group">
+                <label for="accounting-invoiceNumber">invoiceNumber</label><span> * </span>
+                <input type="text" id="accounting-invoiceNumber" class="form-control" formControlName="invoiceNumber" />
+            </div>
+
+        </form>
+    </ng-template>
+
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>
+            {{ '::Close' | abpLocalization }}
+        </button>
+
+        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+            <i class="fa fa-check mr-1"></i>
+            {{ '::Save' | abpLocalization }}
+        </button>
+    </ng-template>
+</abp-modal>

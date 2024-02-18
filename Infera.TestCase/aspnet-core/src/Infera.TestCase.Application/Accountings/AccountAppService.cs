@@ -192,7 +192,7 @@ namespace Infera.TestCase.Accountings
 
             //Paging
             query = query
-                .OrderBy(input.Sorting)
+                .OrderBy(input.Sorting.IsNullOrEmpty() ? "Id" : input.Sorting)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 

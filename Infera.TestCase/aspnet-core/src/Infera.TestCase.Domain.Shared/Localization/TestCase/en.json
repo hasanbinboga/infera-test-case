@@ -34,6 +34,8 @@
         "Enum:ProductInventoryType.2": "Snack",
         "Enum:ProductInventoryType.3": "Chocolate",
         "Enum:ProductInventoryType.4": "Alcohol",
+        "Enum:AccountingType.1": "Input",
+        "Enum:AccountingType.2": "Ouput",
         "ListWarehouses": "List Warehouses",
         "LinkToWarehouse": "Link to Warehouse",
         "WarehouseList": "Warehouse List",
