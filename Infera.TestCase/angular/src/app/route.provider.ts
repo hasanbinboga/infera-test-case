@@ -44,10 +44,17 @@ function configureRoutes(routesService: RoutesService) {
         layout: eLayoutType.application,
       },
       {
+        path: '/warehouse-inventories',
+        name: '::Menu:WarehouseInventories',
+        iconClass: 'fas fa-store',
+        order: 6,
+        layout: eLayoutType.application,
+      },
+      {
         path: '/issues',
         name: '::Menu:Issues',
         iconClass: 'fas fa-check',
-        order: 6,
+        order: 7,
         layout: eLayoutType.application,
       },
       {

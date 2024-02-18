@@ -6,6 +6,7 @@
         "Menu:Rooms": "Rooms",
         "Menu:Warehouses": "Warehouses",
         "Menu:Products": "Products",
+        "Menu:WarehouseInventories": "Warehouse Inventories",
         "Menu:Issues": "Tasks",
         "Menu:BuildingIssues": "Building Tasks",
         "Menu:RoomIssues": "Room Tasks",
