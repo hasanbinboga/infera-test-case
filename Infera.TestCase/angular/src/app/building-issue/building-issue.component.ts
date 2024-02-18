@@ -19,7 +19,7 @@ export class BuildingIssueComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedIssue= {} as IssueDto;
+  selectedIssue = {} as IssueDto;
 
   issueTypes = issueTypeOptions;
   issueEntityTypes = issueEntityTypeOptions;
@@ -39,12 +39,12 @@ export class BuildingIssueComponent implements OnInit {
     private issueService: IssueService,
     private buildingService: BuildingService,
     private confirmation: ConfirmationService) {
-    
+
   }
 
 
   ngOnInit(): void {
-    const issueStreamCreator = (query:IssueListFilterDto) => {
+    const issueStreamCreator = (query: IssueListFilterDto) => {
       query.entityType = IssueEntityType.Building;
       return this.issueService.getListByEntityType(query);
     };
@@ -74,7 +74,7 @@ export class BuildingIssueComponent implements OnInit {
       assignee: [this.selectedIssue.assigneeId || null, null],
       number: [this.selectedIssue.number || null, null],
       type: [this.selectedIssue.type || null, Validators.required],
-      entityType: [this.selectedIssue.entityType || IssueEntityType.Building,  Validators.required],
+      entityType: [this.selectedIssue.entityType || IssueEntityType.Building, Validators.required],
       notes: [this.selectedIssue.notes || "", Validators.maxLength(500)],
       isCompleted: [this.selectedIssue.isCompleted || null, null],
       completedTime: [this.selectedIssue.completedTime ? new Date(this.selectedIssue.completedTime) : null, null],
@@ -94,7 +94,6 @@ export class BuildingIssueComponent implements OnInit {
       return;
     }
 
-    console.log("this.form.value",this.form.value);
     if (this.selectedIssue.id) {
       this.issueService
         .update(this.selectedIssue.id, this.form.value)

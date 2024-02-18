@@ -85,11 +85,18 @@ namespace Infera.TestCase.Rooms
 
         public async Task<ListResultDto<RoomLookupDto>> GetRoomLookupAsync()
         {
-            var buildings = await Repository.GetListAsync();
+            var roomQ = await Repository.GetQueryableAsync();
+            var buildingQ = await _buildingRepository.GetQueryableAsync();
 
-            return new ListResultDto<RoomLookupDto>(
-                ObjectMapper.Map<List<Room>, List<RoomLookupDto>>(buildings)
-            );
+            var buildings = from room in roomQ
+                            join building in buildingQ on room.BuildingId equals building.Id
+                            select new RoomLookupDto
+                            {
+                                Id = room.Id,
+                                Name = $"Bina:{building.Name}-Oda:{room.No}"
+                            };
+
+            return new ListResultDto<RoomLookupDto>(buildings.ToList());
         }
 
         public override async Task<PagedResultDto<RoomDto>> GetListAsync(PagedAndSortedResultRequestDto input)
