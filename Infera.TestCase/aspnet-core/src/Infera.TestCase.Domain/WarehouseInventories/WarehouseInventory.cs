@@ -10,16 +10,16 @@ namespace Infera.TestCase
     {
         public virtual Guid WarehouseId { get; protected set; }
         public virtual Guid ProductInventoryId { get; protected set; }
-        public virtual int Count { get; protected set; } 
-        public virtual int Capacity { get; protected set; } 
+        public virtual int Count { get; protected set; }
+        public virtual int Capacity { get; protected set; }
         public virtual string? Notes { get; protected set; }
-        
+
         public virtual Collection<SaleOrder> SaleOrders { get; protected set; } //Sub collection
         public virtual Collection<Issue> Issues { get; protected set; } //Sub collection
 
         protected WarehouseInventory()
         {
-            
+
         }
 
         internal WarehouseInventory(Guid id,
@@ -27,7 +27,7 @@ namespace Infera.TestCase
                                  [NotNull] Guid productInventoryId,
                                   int count,
                                   int capacity,
-                                  string? notes):base(id) 
+                                  string? notes) : base(id)
         {
             SetWarehouseId(warehouseId);
             SetProductInventoryId(productInventoryId);
@@ -42,7 +42,10 @@ namespace Infera.TestCase
 
         internal void SetNotes(string? notes)
         {
-            Check.NotNullOrWhiteSpace(notes, nameof(notes), WarehouseInventoryConsts.MaxNotesLength);
+            if (string.IsNullOrEmpty(notes) == false)
+            {
+                Check.NotNullOrWhiteSpace(notes, nameof(notes), WarehouseInventoryConsts.MaxNotesLength);
+            }
             Notes = notes;
         }
 

@@ -1,1 +1,176 @@
-<p>warehouse-inventory works!</p>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col col-md-6">
+                <h5 class="card-title">
+                    {{ '::Menu:Products' | abpLocalization }}
+                </h5>
+            </div>
+            <div class="text-end col col-md-6">
+                <div class="text-lg-end pt-2">
+                    <button *abpPermission="'TestCase.ProductInventories.Create'" id="create" class="btn btn-primary"
+                        type="button" (click)="create()">
+                        <i class="fa fa-plus me-1"></i>
+                        <span>{{ '::NewProduct' | abpLocalization }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <ngx-datatable [rows]="inventory.items" [count]="inventory.totalCount" [list]="list" default>
+            <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div ngbDropdown container="body" class="d-inline-block">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" ngbDropdownToggle>
+                            <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button *abpPermission="'TestCase.ProductInventories.Edit'" ngbDropdownItem
+                                (click)="edit(row.id)">
+                                {{ '::Edit' | abpLocalization }}
+                            </button>
+                            <button *abpPermission="'TestCase.ProductInventories.Delete'" ngbDropdownItem
+                                (click)="delete(row.id)">
+                                {{ '::Delete' | abpLocalization }}
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::WarehouseName' | abpLocalization"
+                prop="warehouseName"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::WarehouseNo' | abpLocalization" prop="warehouseNo"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::WarehouseFloor' | abpLocalization"
+                prop="warehouseFloor"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ProductName' | abpLocalization" prop="productName"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Manifacturer' | abpLocalization"
+                prop="productManicaturer"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ProductType' | abpLocalization" prop="productType"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ProductSize' | abpLocalization" prop="productSize"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::SalePrice' | abpLocalization" prop="salePrice"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Notes' | abpLocalization" prop="notes"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Count' | abpLocalization" prop="count"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Capacity' | abpLocalization" prop="capacity"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Notes' | abpLocalization" prop="notes"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::SaleCount' | abpLocalization" prop="saleCount"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::IssueCount' | abpLocalization" prop="issueCount"></ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>
+
+
+<!-- CRUD FORM  -->
+<abp-modal [(visible)]="isModalOpen">
+    <ng-template #abpHeader>
+        <h3>{{ (selectedInventory.id ? '::Edit' : '::NewInventory') | abpLocalization }}</h3>
+    </ng-template>
+
+    <ng-template #abpBody>
+        <form [formGroup]="form" (ngSubmit)="save()">
+
+            <div class="mt-2">
+                <label for="inventory-warehouseId">Warehouse</label><span> * </span>
+                <select class="form-control" id="inventory-warehouseId" formControlName="warehouseId">
+                    <option [ngValue]="null">Select a Warehouse</option>
+                    <option [ngValue]="warehouse.id" *ngFor="let warehouse of warehouses">
+                        {{warehouse.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label for="inventory-productId">Product</label><span> * </span>
+                <select class="form-control" id="inventory-productId" formControlName="productId">
+                    <option [ngValue]="null">Select a Product</option>
+                    <option [ngValue]="product.id" *ngFor="let product of products">
+                        {{product.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="product-count">Count</label><span> * </span>
+                <input type="number" id="product-count" class="form-control" formControlName="count" />
+            </div>
+
+            <div class="form-group">
+                <label for="product-capacity">Capacity</label><span> * </span>
+                <input type="number" id="product-capacity" class="form-control" formControlName="capacity" />
+            </div>
+
+            
+            <div class="form-group">
+                <label for="product-notes">Notes</label>
+                <input type="text" id="product-notes" class="form-control" formControlName="notes" />
+            </div>
+
+        </form>
+    </ng-template>
+
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>
+            {{ '::Close' | abpLocalization }}
+        </button>
+
+        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+            <i class="fa fa-check mr-1"></i>
+            {{ '::Save' | abpLocalization }}
+        </button>
+    </ng-template>
+</abp-modal>
+
+
+<!-- CREATE ISSUE FORM  -->
+<abp-modal [(visible)]="isIssueModalOpen">
+    <ng-template #abpHeader>
+        <h3>{{ '::NewIssue' | abpLocalization }}</h3>
+    </ng-template>
+
+    <ng-template #abpBody>
+        <form [formGroup]="issueForm" (ngSubmit)="saveIssue()">
+            <div class="form-group">
+                <label for="issue-notes">Notes</label><span> * </span>
+                <input type="text" id="issue-notes" class="form-control" formControlName="notes" autofocus />
+            </div>
+
+            <div class="mt-2">
+                <label for="issue-type">Type</label><span> * </span>
+                <select class="form-control" id="issue-type" formControlName="type">
+                    <option [ngValue]="null">Select a issue type</option>
+                    <option [ngValue]="type.value" *ngFor="let type of issueTypes">
+                        {{ '::Enum:IssueType.' + type.value | abpLocalization }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label for="issue-assignee">Assignee</label><span> * </span>
+                <select class="form-control" id="issue-assignee" formControlName="assignee">
+                    <option [ngValue]="null">Select a User</option>
+                    <option [ngValue]="user.id" *ngFor="let user of users">
+                        {{user.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="issue-number">Number</label><span> * </span>
+                <input type="text" id="issue-number" class="form-control" formControlName="number" />
+            </div>
+
+        </form>
+    </ng-template>
+
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>
+            {{ '::Close' | abpLocalization }}
+        </button>
+
+        <button class="btn btn-primary" (click)="saveIssue()" [disabled]="issueForm.invalid">
+            <i class="fa fa-check mr-1"></i>
+            {{ '::Save' | abpLocalization }}
+        </button>
+    </ng-template>
+</abp-modal>

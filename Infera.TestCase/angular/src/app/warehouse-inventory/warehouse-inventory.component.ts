@@ -125,7 +125,7 @@ export class WarehouseInventoryComponent implements OnInit {
       productInventoryId: [id, null],
       number: ['', Validators.required],
       type: ['', Validators.required],
-      entityType: [IssueEntityType.ProductInventory, null],
+      entityType: [IssueEntityType.WarehouseInventory, null],
       notes: ['', Validators.required],
       assignee: ['', null],
     });
