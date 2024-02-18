@@ -8,13 +8,13 @@ namespace Infera.TestCase
 {
     public class Warehouse : FullAuditedAggregateRoot<Guid>
     {
-        public virtual Guid? BuildingId { get; set; }
-        public virtual string Name { get; set; } 
-        public virtual string No { get; set; } 
-        public virtual int Floor { get; set; }
-        public virtual int Capacity { get; set; }
-        public virtual string? Content { get; set; }
-        public virtual string? Notes { get; set; }
+        public virtual Guid? BuildingId { get; protected set; }
+        public virtual string Name { get; protected set; } 
+        public virtual string No { get; protected set; } 
+        public virtual int Floor { get; protected set; }
+        public virtual int Capacity { get; protected set; }
+        public virtual string? Content { get; protected set; }
+        public virtual string? Notes { get; protected set; }
         public virtual Collection<BuildingWarehouse> BuildingWarehouses { get; protected set; } //Sub collection
         public virtual Collection<WarehouseInventory> WarehouseInventories { get; protected set; } //Sub collection
 

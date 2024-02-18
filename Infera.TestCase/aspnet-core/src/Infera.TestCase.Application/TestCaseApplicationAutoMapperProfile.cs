@@ -5,6 +5,7 @@ using Infera.TestCase.BuildingWarehouses;
 using Infera.TestCase.Issues;
 using Infera.TestCase.ProductInventories;
 using Infera.TestCase.Rooms;
+using Infera.TestCase.WarehouseInventories;
 using Infera.TestCase.Warehouses;
 
 namespace Infera.TestCase;
@@ -27,6 +28,10 @@ public class TestCaseApplicationAutoMapperProfile : Profile
         CreateMap<Warehouse, WarehouseDto>();
         CreateMap<WarehouseCreateUpdateDto, Warehouse>();
         CreateMap<Warehouse, WarehouseLookupDto>();
+
+        CreateMap<WarehouseInventory, InventoryDto>();
+        CreateMap<InventoryCreateUpdateDto, Warehouse>();
+        CreateMap<WarehouseInventory, InventoryLookupDto>();
 
         CreateMap<ProductInventory, ProductInventoryDto>();
         CreateMap<ProductInventoryCreateUpdateDto, ProductInventory>();

@@ -25,14 +25,7 @@ export class BuildingIssueComponent implements OnInit {
   issueEntityTypes = issueEntityTypeOptions;
 
   users: UserLookupDto[];
-  buildings: BuildingLookupDto[];
-
-
-
-
-
-
-
+  buildings: BuildingLookupDto[]; 
 
   constructor(public readonly list: ListService,
     private fb: FormBuilder,

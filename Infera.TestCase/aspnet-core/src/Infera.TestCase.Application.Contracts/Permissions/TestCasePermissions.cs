@@ -41,6 +41,15 @@ public static class TestCasePermissions
         public const string GetListOfBuildingAsync = Default + ".GetListOfBuildingAsync";
     }
 
+    public static class WarehouseInventories
+    {
+        public const string Default = GroupName + ".WarehouseInventories";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+        public const string GetListOfBuildingAsync = Default + ".GetListOfBuildingAsync";
+    }
+
     public static class ProductInventories
     {
         public const string Default = GroupName + ".ProductInventories";

@@ -18,7 +18,7 @@ public class WarehouseInventoryManager : DomainService
                                   Guid productInventoryId,
                                   int count,
                                   int capacity,
-                                  string notes)
+                                  string? notes)
     {
         var existingWarehouseInventory= await WarehouseInventoryRepository.FindByProductId(warehouseId, productInventoryId);
 

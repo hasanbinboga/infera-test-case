@@ -34,6 +34,12 @@ public class TestCasePermissionDefinitionProvider : PermissionDefinitionProvider
         warehousesPermission.AddChild(TestCasePermissions.Warehouses.Delete, L("Permission:Warehouses.Delete"));
         warehousesPermission.AddChild(TestCasePermissions.Warehouses.GetListOfBuildingAsync, L("Permission:Warehouses.GetListOfBuildingAsync"));
 
+        var warehouseInventoriesPermission = inferaTestGroup.AddPermission(TestCasePermissions.WarehouseInventories.Default, L("Permission:WarehouseInventories"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.Create, L("Permission:WarehouseInventories.Create"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.Edit, L("Permission:WarehouseInventories.Edit"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.Delete, L("Permission:WarehouseInventories.Delete"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.GetListOfBuildingAsync, L("Permission:WarehouseInventories.GetListOfBuildingAsync"));
+
 
         var productsPermission = inferaTestGroup.AddPermission(TestCasePermissions.ProductInventories.Default, L("Permission:ProductInventories"));
         productsPermission.AddChild(TestCasePermissions.ProductInventories.Create, L("Permission:ProductInventories.Create"));
