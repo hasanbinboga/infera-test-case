@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Validation;
 
@@ -28,6 +29,6 @@ public class IssueCreateUpdateDto : EntityDto<Guid>
 
     public bool? IsCompleted { get; set; }
 
-    public DateTime? CompletedTime { get; set; }
+    public Date? CompletedTime { get; set; }
 
 }

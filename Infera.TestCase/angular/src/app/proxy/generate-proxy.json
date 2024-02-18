@@ -1014,7 +1014,7 @@
                 "type": "Infera.TestCase.Accountings.AccountingDto",
                 "typeSimple": "Infera.TestCase.Accountings.AccountingDto"
               },
-              "allowAnonymous": null,
+              "allowAnonymous": false,
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<Infera.TestCase.Accountings.AccountingDto,Infera.TestCase.Accountings.AccountingCreateUpdateDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -7535,6 +7535,18 @@
         },
         {
           "name": "CompletedTime",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CompletedTime1",
           "jsonName": null,
           "type": "System.DateTime?",
           "typeSimple": "string?",

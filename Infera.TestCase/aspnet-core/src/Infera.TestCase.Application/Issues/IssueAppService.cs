@@ -180,11 +180,11 @@ namespace Infera.TestCase.Issues
                         from room in rjoin.DefaultIfEmpty()
                         join b in buildingQueryable on room.BuildingId equals b.Id into rbjoin
                         from roomBuilding in rbjoin.DefaultIfEmpty()
-                        where issue.EntityType == input.EntityType &&
-                              (!input.BuildingId.HasValue || (input.BuildingId.HasValue && input.BuildingId.Value == building.Id)) &&
-                              (!input.RoomId.HasValue || (input.RoomId.HasValue && input.RoomId.Value == room.Id)) &&
-                              (!input.WarehouseInventoryId.HasValue || (input.WarehouseInventoryId.HasValue && input.WarehouseInventoryId.Value == building.Id)) &&
-                              (!input.ProductInventoryId.HasValue || (input.ProductInventoryId.HasValue && input.ProductInventoryId.Value == building.Id))
+                        where issue.EntityType == input.EntityType /* &&
+                              building.Id == input.BuildingId &&
+                              room.Id == input.RoomId &&
+                              warehouseInventory.Id == input.WarehouseInventoryId &&
+                              prod.Id == input.ProductInventoryId*/
                         select new IssueDto
                         {
                             Id = issue.Id,
@@ -215,6 +215,9 @@ namespace Infera.TestCase.Issues
                             EntityType = issue.EntityType
                         };
 
+            //Get the total count with another query
+            var totalCount = query.Count();
+
             //Paging
             query = query
                 .OrderBy(input.Sorting.IsNullOrEmpty() ? "Id" : input.Sorting)
@@ -239,8 +242,7 @@ namespace Infera.TestCase.Issues
             //Convert the query result to a list of IssueDto objects
             var bookDtos = queryResult.ToList();
 
-            //Get the total count with another query
-            var totalCount = await Repository.GetCountAsync();
+           
 
             return new PagedResultDto<IssueDto>(
                 totalCount,
@@ -252,7 +254,17 @@ namespace Infera.TestCase.Issues
         [Authorize(TestCasePermissions.Buildings.Create)]
         public override async Task<IssueDto> CreateAsync(IssueCreateUpdateDto input)
         {
-            var building = await _issueManager.CreateAsync(input.BuildingId, input.RoomId, input.WarehouseInventoryId, input.ProductInventoryId, input.EntityType, input.Type, input.Number, input.IsCompleted, input.CompletedTime, input.Notes, input.Assignee);
+            var building = await _issueManager.CreateAsync(input.BuildingId, 
+                input.RoomId, 
+                input.WarehouseInventoryId, 
+                input.ProductInventoryId, 
+                input.EntityType, 
+                input.Type, 
+                input.Number, 
+                input.IsCompleted, 
+                input.CompletedTime != null? input.CompletedTime.DateTime: null, 
+                input.Notes, 
+                input.Assignee);
 
             await Repository.InsertAsync(building);
 

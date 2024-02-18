@@ -23,7 +23,7 @@ namespace Infera.TestCase.Accountings
                         double amount,
                         double tax,
                         DateTime? invoiceDate,
-                        string invoiceNumber)
+                        string? invoiceNumber)
         {
             var existingAccounting = await AccountingRepository.FindByInvoice(invoiceDate, invoiceNumber);
 

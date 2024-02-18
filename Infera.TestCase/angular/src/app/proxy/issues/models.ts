@@ -14,6 +14,7 @@ export interface IssueCreateUpdateDto extends EntityDto<string> {
   notes?: string;
   isCompleted?: boolean;
   completedTime?: string;
+  completedTime1?: string;
 }
 
 export interface IssueDto extends AuditedEntityDto<string> {

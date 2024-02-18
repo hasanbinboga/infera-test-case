@@ -7,6 +7,7 @@ using Infera.TestCase.Rooms;
 using Infera.TestCase.SaleOrders;
 using Infera.TestCase.WarehouseInventories;
 using Infera.TestCase.Warehouses;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace Infera.TestCase.Accountings
         private readonly IBuildingRepository _buildingRepository;
         private readonly IProductInventoryRepository _productRepository;
         private readonly ISaleOrderRepository _saleOrderRepository;
+        private readonly AccountingManager _accountingManager;
 
         public AccountingAppService(IAccountingRepository repository,
             IRoomRepository roomRepository,
@@ -42,7 +44,8 @@ namespace Infera.TestCase.Accountings
             IBuildingRepository buildingRepository,
             IProductInventoryRepository productRepository,
             ISaleOrderRepository saleOrderRepository,
-            IWarehouseInventoryRepository warehouseInventoryRepository
+            IWarehouseInventoryRepository warehouseInventoryRepository,
+            AccountingManager accountingManager
             ) : base(repository)
         {
             _roomRepository = roomRepository;
@@ -52,6 +55,7 @@ namespace Infera.TestCase.Accountings
             _buildingRepository = buildingRepository;
             _productRepository = productRepository;
             _saleOrderRepository = saleOrderRepository;
+            _accountingManager = accountingManager;
 
             GetPolicyName = TestCasePermissions.Accountings.Default;
             GetListPolicyName = TestCasePermissions.Accountings.Default;
@@ -211,7 +215,25 @@ namespace Infera.TestCase.Accountings
             );
         }
 
-       
+        [Authorize(TestCasePermissions.Accountings.Create)]
+        public override async Task<AccountingDto> CreateAsync(AccountingCreateUpdateDto input)
+        {
+            var invoice = await _accountingManager.CreateAsync(
+                                                       input.ProductInventoryId,
+                                                       input.SaleOrderId,
+                                                       input.Count,
+                                                       input.Type,
+                                                       input.PurchasePrice,
+                                                       input.SalePrice,
+                                                       input.Amount,
+                                                       input.Tax,
+                                                       input.InvoiceDate != null? input.InvoiceDate.DateTime : null,
+                                                       input.InvoiceNumber
+                                                   );
 
+            await Repository.InsertAsync(invoice);
+
+            return ObjectMapper.Map<Accounting, AccountingDto>(invoice);
+        }
     }
 }

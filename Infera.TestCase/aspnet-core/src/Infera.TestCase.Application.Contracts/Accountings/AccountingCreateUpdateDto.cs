@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Validation;
 
@@ -26,11 +27,13 @@ public class AccountingCreateUpdateDto : EntityDto<Guid>
     [Required]
     public double Tax { get; set; }
 
-    public DateTime? InvoiceDate { get; set; }
-    
+    public Date? InvoiceDate { get; set; }
+
     [DynamicStringLength(typeof(AccountingConsts), nameof(AccountingConsts.MaxInvoiceNumberLength))]
     public string? InvoiceNumber { get; set; }
 
     [Required]
     public AccountingType Type { get; set; }
 }
+
+

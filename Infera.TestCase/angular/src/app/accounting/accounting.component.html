@@ -94,7 +94,7 @@
                 <label for="accounting-type">Type</label><span> * </span>
                 <select class="form-control" id="accounting-type" formControlName="type">
                     <option [ngValue]="null">Select a accounting type</option>
-                    <option [ngValue]="type.value" *ngFor="let type of accountingTypes">
+                    <option [ngValue]="type.value"  *ngFor="let type of accountingTypes">
                         {{ '::Enum:AccountingType.' + type.value | abpLocalization }}
                     </option>
                 </select>
@@ -128,6 +128,13 @@
             <div class="form-group">
                 <label for="accounting-invoiceNumber">invoiceNumber</label><span> * </span>
                 <input type="text" id="accounting-invoiceNumber" class="form-control" formControlName="invoiceNumber" />
+            </div>
+
+            <div class="mt-2">
+                <label>Invoice Date</label> 
+                <input #datepicker="ngbDatepicker" id="invoiceDate" class="form-control"
+                name="datepicker" formControlName="invoiceDate"
+                    ngbDatepicker (click)="datepicker.toggle()" />
             </div>
 
         </form>

@@ -63,7 +63,7 @@ export class AccountingComponent implements OnInit {
       salePrice: [this.selectedAccounting.salePrice || null, Validators.required],
       amount: [this.selectedAccounting.amount || null, Validators.required],
       tax: [this.selectedAccounting.tax || null, Validators.required],
-      invoiceDate: [this.selectedAccounting.invoiceDate || null, null],
+      invoiceDate: [this.selectedAccounting.invoiceDate ? new Date(this.selectedAccounting.invoiceDate) : null, null], 
       invoiceNumber: [this.selectedAccounting.invoiceNumber || null, null]
     });
   }
