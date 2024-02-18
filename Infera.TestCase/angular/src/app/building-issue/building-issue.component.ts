@@ -3,10 +3,8 @@ import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IssueEntityType, issueEntityTypeOptions, issueTypeOptions } from '@proxy';
-import { BuildingWarehouseService } from '@proxy/building-warehouses'; 
 import { BuildingLookupDto, BuildingService } from '@proxy/buildings';
 import { IssueDto, IssueListFilterDto, IssueService, UserLookupDto } from '@proxy/issues';
-import { WarehouseListFilterDto, WarehouseLookupDto, WarehouseService } from '@proxy/warehouses';
 
 @Component({
   selector: 'app-building-issue',

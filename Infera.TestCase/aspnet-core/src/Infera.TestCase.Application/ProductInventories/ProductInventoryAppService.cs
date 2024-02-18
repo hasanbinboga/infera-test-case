@@ -87,9 +87,8 @@ namespace Infera.TestCase.ProductInventories
         {
             var buildings = await Repository.GetListAsync();
 
-            return new ListResultDto<ProductInventoryLookupDto>(
-                ObjectMapper.Map<List<ProductInventory>, List<ProductInventoryLookupDto>>(buildings)
-            );
+            var list = ObjectMapper.Map<List<ProductInventory>, List<ProductInventoryLookupDto>>(buildings);
+            return new ListResultDto<ProductInventoryLookupDto>(list);
         }
 
         public override async Task<PagedResultDto<ProductInventoryDto>> GetListAsync(PagedAndSortedResultRequestDto input)
