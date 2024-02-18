@@ -12,6 +12,7 @@
         "Menu:RoomIssues": "Room Tasks",
         "Menu:WarehouseInventoryIssues": "Warehouse Inventory Tasks",
         "Menu:ProductIssues": "Product Tasks",
+        "Menu:Accounting": "Accounting",
         "Welcome": "Welcome",
         "CreateIssue": "Create Issue",
         "NewIssue": "New Issue",

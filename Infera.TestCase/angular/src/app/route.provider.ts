@@ -89,6 +89,13 @@ function configureRoutes(routesService: RoutesService) {
         order: 4,
         layout: eLayoutType.application,
       },
+      {
+        path: '/accounting',
+        name: '::Menu:Accounting',
+        iconClass: 'fas fa-receipt',
+        order: 7,
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }
