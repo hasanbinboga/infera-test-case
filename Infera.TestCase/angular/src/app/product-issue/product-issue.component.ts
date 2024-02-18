@@ -53,7 +53,6 @@ export class ProductIssueComponent implements OnInit {
 
     this.productService.getProductInventoryLookup().subscribe(s => {
       this.products = s.items;
-      console.log("this.products", this.products);
     });
     
   }
@@ -92,7 +91,6 @@ export class ProductIssueComponent implements OnInit {
       return;
     }
 
-    console.log("this.form.value",this.form.value);
     if (this.selectedIssue.id) {
       this.issueService
         .update(this.selectedIssue.id, this.form.value)
