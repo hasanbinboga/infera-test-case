@@ -1,4 +1,4 @@
-import type { IssueCreateUpdateDto, IssueDto, IssueLookupDto, UserLookupDto } from './models';
+import type { IssueCreateUpdateDto, IssueDto, IssueListFilterDto, IssueLookupDto, UserLookupDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { ListResultDto, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -48,6 +48,15 @@ export class IssueService {
       method: 'GET',
       url: '/api/app/issue',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getListByEntityType = (input: IssueListFilterDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<IssueDto>>({
+      method: 'GET',
+      url: '/api/app/issue/by-entity-type',
+      params: { entityType: input.entityType, buildingId: input.buildingId, roomId: input.roomId, warehouseInventoryId: input.warehouseInventoryId, productInventoryId: input.productInventoryId, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   

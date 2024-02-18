@@ -1,5 +1,6 @@
-import type { AuditedEntityDto, EntityDto } from '@abp/ng.core';
+import type { AuditedEntityDto, EntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { IssueType } from '../issue-type.enum';
+import type { IssueEntityType } from '../issue-entity-type.enum';
 
 export interface IssueCreateUpdateDto extends EntityDto<string> {
   buildingId?: string;
@@ -7,10 +8,11 @@ export interface IssueCreateUpdateDto extends EntityDto<string> {
   warehouseInventoryId?: string;
   productInventoryId?: string;
   assignee?: string;
-  number: number;
+  number?: number;
   type: IssueType;
+  entityType: IssueEntityType;
   notes?: string;
-  isCompleted: boolean;
+  isCompleted?: boolean;
   completedTime?: string;
 }
 
@@ -29,12 +31,22 @@ export interface IssueDto extends AuditedEntityDto<string> {
   warehouseFloor?: number;
   productInventoryId?: string;
   productName?: string;
-  number: number;
+  number?: number;
   type: IssueType;
-  isCompleted: boolean;
+  entityType: IssueEntityType;
+  isCompleted?: boolean;
   completedTime?: string;
   notes?: string;
-  assignee?: string;
+  assigneeId?: string;
+  assigneeName?: string;
+}
+
+export interface IssueListFilterDto extends PagedAndSortedResultRequestDto {
+  entityType: IssueEntityType;
+  buildingId?: string;
+  roomId?: string;
+  warehouseInventoryId?: string;
+  productInventoryId?: string;
 }
 
 export interface IssueLookupDto extends EntityDto<string> {

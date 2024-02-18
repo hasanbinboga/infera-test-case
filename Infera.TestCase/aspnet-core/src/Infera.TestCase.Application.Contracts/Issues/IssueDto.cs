@@ -19,10 +19,12 @@ public class IssueDto : AuditedEntityDto<Guid>
     public int? WarehouseFloor { get; set; } 
     public Guid? ProductInventoryId { get; set; }
     public string? ProductName { get; set; }
-    public int Number { get; set; }
+    public int? Number { get; set; }
     public IssueType Type { get; set; }
-    public bool IsCompleted { get; set; }
+    public IssueEntityType EntityType { get; set; }
+    public bool? IsCompleted { get; set; }
     public DateTime? CompletedTime { get; set; }
     public string? Notes { get; set; }
-    public Guid? Assignee { get; set; }
+    public Guid? AssigneeId { get; set; }
+    public string? AssigneeName { get; set; }
 }

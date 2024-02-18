@@ -5,6 +5,7 @@ using Infera.TestCase.ProductInventories;
 using Infera.TestCase.Rooms;
 using Infera.TestCase.WarehouseInventories;
 using Infera.TestCase.Warehouses;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,10 @@ namespace Infera.TestCase.Issues
         private readonly IWarehouseInventoryRepository _warehouseInventoryRepository;
         private readonly IBuildingRepository _buildingRepository;
         private readonly IBuildingWarehouseRepository _buildingWarehouseRepository;
-        private readonly IProductInventoryRepository _productRepository; 
+        private readonly IProductInventoryRepository _productRepository;
         private readonly IIdentityUserIntegrationService _identityUserIntegrationService;
+        private readonly IssueManager _issueManager;
+        private readonly IIdentityUserRepository _identityUserRepository;
 
         public IssueAppService(IIssueRepository repository,
             IRoomRepository roomRepository,
@@ -43,7 +46,9 @@ namespace Infera.TestCase.Issues
             IBuildingRepository buildingRepository,
             IProductInventoryRepository productRepository,
             IIdentityUserIntegrationService identityUserIntegrationService,
-            IWarehouseInventoryRepository warehouseInventoryRepository
+            IWarehouseInventoryRepository warehouseInventoryRepository,
+            IIdentityUserRepository identityUserRepository,
+            IssueManager issueManager
             ) : base(repository)
         {
             _roomRepository = roomRepository;
@@ -53,6 +58,8 @@ namespace Infera.TestCase.Issues
             _productRepository = productRepository;
             _warehouseInventoryRepository = warehouseInventoryRepository;
             _identityUserIntegrationService = identityUserIntegrationService;
+            _issueManager = issueManager;
+            _identityUserRepository = identityUserRepository;
 
             GetPolicyName = TestCasePermissions.Issues.Default;
             GetListPolicyName = TestCasePermissions.Issues.Default;
@@ -64,12 +71,12 @@ namespace Infera.TestCase.Issues
 
         public override async Task<IssueDto> GetAsync(Guid id)
         {
-            
+
             //Get the IQueryable<Issue> from the repository
             var queryable = await Repository.GetQueryableAsync();
             var prodQueryable = await _productRepository.GetQueryableAsync();
             var roomQueryable = await _roomRepository.GetQueryableAsync();
-            var warehouseInventoryQueryable = await _warehouseInventoryRepository.GetQueryableAsync(); 
+            var warehouseInventoryQueryable = await _warehouseInventoryRepository.GetQueryableAsync();
             var warehouseQueryable = await _warehouseRepository.GetQueryableAsync();
             var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync();
             var buildingQueryable = await _buildingRepository.GetQueryableAsync();
@@ -90,14 +97,15 @@ namespace Infera.TestCase.Issues
                         join b in buildingQueryable on room.BuildingId equals b.Id into rbjoin
                         from roomBuilding in rbjoin.DefaultIfEmpty()
                         where issue.Id == id
-                        select new IssueDto {
+                        select new IssueDto
+                        {
                             Id = issue.Id,
                             Notes = issue.Notes,
                             IsCompleted = issue.IsCompleted,
                             ProductInventoryId = issue.ProductInventoryId,
                             CompletedTime = issue.CompletedTime,
                             Type = issue.Type,
-                            Assignee = issue.Assignee,
+                            AssigneeId = issue.Assignee,
                             BuildingId = issue.BuildingId,
                             BuildingName = building.Name,
                             RoomId = issue.RoomId,
@@ -123,30 +131,30 @@ namespace Infera.TestCase.Issues
             if (queryResult == null)
             {
                 throw new EntityNotFoundException(typeof(Issue), id);
-            } 
+            }
             return queryResult;
         }
 
         public async Task<ListResultDto<IssueLookupDto>> GetIssueLookupAsync()
         {
-            var buildings = await Repository.GetListAsync();
+            var issues = await Repository.GetListAsync();
 
             return new ListResultDto<IssueLookupDto>(
-                ObjectMapper.Map<List<Issue>, List<IssueLookupDto>>(buildings)
+                ObjectMapper.Map<List<Issue>, List<IssueLookupDto>>(issues)
             );
         }
 
         public async Task<ListResultDto<UserLookupDto>> GetUserLookupAsync()
         {
-            var users = await _identityUserIntegrationService.SearchAsync(new UserLookupSearchInputDto { MaxResultCount = 50});
+            var users = await _identityUserIntegrationService.SearchAsync(new UserLookupSearchInputDto { MaxResultCount = 50 });
 
             return new ListResultDto<UserLookupDto>(
                 users.Items.Select(x => new UserLookupDto { Id = x.Id, Name = x.Name }).ToList()
-            ) ;
+            );
         }
 
-       
-        public override async Task<PagedResultDto<IssueDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        [Authorize(TestCasePermissions.Issues.Default)]
+        public async Task<PagedResultDto<IssueDto>> GetListByEntityTypeAsync(IssueListFilterDto input)
         {
             //Get the IQueryable<Issue> from the repository
             var queryable = await Repository.GetQueryableAsync();
@@ -156,6 +164,7 @@ namespace Infera.TestCase.Issues
             var warehouseQueryable = await _warehouseRepository.GetQueryableAsync();
             var buildingWarehouseQueryable = await _buildingWarehouseRepository.GetQueryableAsync();
             var buildingQueryable = await _buildingRepository.GetQueryableAsync();
+
 
             //Prepare a query to join books and authors
             var query = from issue in queryable
@@ -170,7 +179,12 @@ namespace Infera.TestCase.Issues
                         join r in roomQueryable on issue.RoomId equals r.Id into rjoin
                         from room in rjoin.DefaultIfEmpty()
                         join b in buildingQueryable on room.BuildingId equals b.Id into rbjoin
-                        from roomBuilding in rbjoin.DefaultIfEmpty() 
+                        from roomBuilding in rbjoin.DefaultIfEmpty()
+                        where issue.EntityType == input.EntityType &&
+                              (!input.BuildingId.HasValue || (input.BuildingId.HasValue && input.BuildingId.Value == building.Id)) &&
+                              (!input.RoomId.HasValue || (input.RoomId.HasValue && input.RoomId.Value == room.Id)) &&
+                              (!input.WarehouseInventoryId.HasValue || (input.WarehouseInventoryId.HasValue && input.WarehouseInventoryId.Value == building.Id)) &&
+                              (!input.ProductInventoryId.HasValue || (input.ProductInventoryId.HasValue && input.ProductInventoryId.Value == building.Id))
                         select new IssueDto
                         {
                             Id = issue.Id,
@@ -179,7 +193,7 @@ namespace Infera.TestCase.Issues
                             ProductInventoryId = issue.ProductInventoryId,
                             CompletedTime = issue.CompletedTime,
                             Type = issue.Type,
-                            Assignee = issue.Assignee,
+                            AssigneeId = issue.Assignee,
                             BuildingId = issue.BuildingId,
                             BuildingName = building.Name,
                             RoomId = issue.RoomId,
@@ -197,17 +211,30 @@ namespace Infera.TestCase.Issues
                             RoomNo = room.No,
                             RoomFloor = room.Floor,
                             RoomBuildingId = room.BuildingId,
-                            RoomBuildingName = roomBuilding.Name
+                            RoomBuildingName = roomBuilding.Name,
+                            EntityType = issue.EntityType
                         };
 
             //Paging
             query = query
-                .OrderBy(input.Sorting)
+                .OrderBy(input.Sorting.IsNullOrEmpty() ? "Id" : input.Sorting)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 
             //Execute the query and get a list
             var queryResult = await AsyncExecuter.ToListAsync(query);
+
+            foreach (var item in queryResult)
+            {
+                if (item.AssigneeId.HasValue)
+                {
+                    var user = await _identityUserRepository.FindAsync(item.AssigneeId.Value, includeDetails: false, cancellationToken: default);
+                    if (user != null)
+                    {
+                        item.AssigneeName = $"{user.Name} ({user.NormalizedUserName} - {user.UserName})";
+                    }
+                }
+            }
 
             //Convert the query result to a list of IssueDto objects
             var bookDtos = queryResult.ToList();
@@ -221,7 +248,15 @@ namespace Infera.TestCase.Issues
             );
         }
 
-       
 
+        [Authorize(TestCasePermissions.Buildings.Create)]
+        public override async Task<IssueDto> CreateAsync(IssueCreateUpdateDto input)
+        {
+            var building = await _issueManager.CreateAsync(input.BuildingId, input.RoomId, input.WarehouseInventoryId, input.ProductInventoryId, input.EntityType, input.Type, input.Number, input.IsCompleted, input.CompletedTime, input.Notes, input.Assignee);
+
+            await Repository.InsertAsync(building);
+
+            return ObjectMapper.Map<Issue, IssueDto>(building);
+        }
     }
 }

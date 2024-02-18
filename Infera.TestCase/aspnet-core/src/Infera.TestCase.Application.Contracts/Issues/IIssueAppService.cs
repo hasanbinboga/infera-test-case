@@ -12,6 +12,9 @@ public interface IIssueAppService: ICrudAppService<
                                                     IssueCreateUpdateDto
                                                     >
 {
+
+    Task<PagedResultDto<IssueDto>> GetListByEntityTypeAsync(IssueListFilterDto input);
     Task<ListResultDto<IssueLookupDto>> GetIssueLookupAsync();
     Task<ListResultDto<UserLookupDto>> GetUserLookupAsync();
+
 }

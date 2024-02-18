@@ -2,7 +2,7 @@ import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { issueTypeOptions } from '@proxy';
+import { IssueEntityType, issueTypeOptions } from '@proxy';
 import { RoomService, RoomDto } from '@proxy/rooms';
 import { IssueService, UserLookupDto } from '@proxy/issues';
 import { BuildingLookupDto, BuildingService } from '@proxy/buildings';
@@ -119,10 +119,11 @@ export class RoomComponent implements OnInit {
   buildIssueForm(id: string) {
     this.issueForm = this.fb.group({
       roomId: [id, null],
-      number: ['', Validators.required],
-      type: ['', Validators.required],
+      number: [null, Validators.required],
+      type: [null, Validators.required],
+      entityType: [IssueEntityType.Room, null],
       notes: ['', Validators.required],
-      assignee: ['', null],
+      assignee: [null, null],
     });
   }
 

@@ -13,17 +13,18 @@ public class IssueManager : DomainService
         IssueRepository = issueRepository; 
     }
 
-    public async Task<Issue> CreateAsync(Guid buildingId,
-            Guid roomId,
-            Guid warehouseInventoryId,
-            Guid productInventoryId,
+    public Task<Issue> CreateAsync(Guid? buildingId,
+            Guid? roomId,
+            Guid? warehouseInventoryId,
+            Guid? productInventoryId,
+            IssueEntityType entityType,
             IssueType type,
-            int number,
-            bool isCompleted,
+            int? number,
+            bool? isCompleted,
             DateTime? completedTime,
-            string notes,
-            Guid assignee)
+            string? notes,
+            Guid? assignee)
     {
-        return new Issue(GuidGenerator.Create(), buildingId, roomId, warehouseInventoryId, productInventoryId, type, number, isCompleted, completedTime, notes, assignee);
+        return Task.FromResult(new Issue(GuidGenerator.Create(), buildingId, roomId, warehouseInventoryId, productInventoryId, type, entityType, number, isCompleted, completedTime, notes, assignee));
     }
 }

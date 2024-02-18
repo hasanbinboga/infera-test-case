@@ -29,6 +29,10 @@ const routes: Routes = [
   { path: 'rooms', loadChildren: () => import('./room/room.module').then(m => m.RoomModule) },
   { path: 'warehouses', loadChildren: () => import('./warehouse/warehouse.module').then(m => m.WarehouseModule) },
   { path: 'products', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
+  { path: 'building-issues', loadChildren: () => import('./building-issue/building-issue.module').then(m => m.BuildingIssueModule) },
+  { path: 'room-issues', loadChildren: () => import('./room-issue/room-issue.module').then(m => m.RoomIssueModule) },
+  { path: 'warehouse-inventory-issues', loadChildren: () => import('./warehouse-inventory-issue/warehouse-inventory-issue.module').then(m => m.WarehouseInventoryIssueModule) },
+  { path: 'product-issues', loadChildren: () => import('./product-issue/product-issue.module').then(m => m.ProductIssueModule) },
 ];
 
 @NgModule({

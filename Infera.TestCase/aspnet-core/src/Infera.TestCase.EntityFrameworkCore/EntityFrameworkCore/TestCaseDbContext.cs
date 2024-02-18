@@ -109,7 +109,7 @@ public class TestCaseDbContext :
             b.Property(s => s.Floor).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(RoomConsts.MaxNotesLength);
 
-        }); 
+        });
 
         builder.Entity<Room>().HasIndex(s => new { s.BuildingId, s.No, s.Floor, s.HasMiniBar, s.Capacity, s.IsDeleted });
 
@@ -121,7 +121,7 @@ public class TestCaseDbContext :
             b.Property(s => s.WarehouseId).IsRequired();
 
         });
-        
+
         builder.Entity<BuildingWarehouse>().HasIndex(s => new { s.BuildingId, s.WarehouseId, s.IsDeleted });
 
         builder.Entity<Warehouse>(b =>
@@ -189,6 +189,7 @@ public class TestCaseDbContext :
             b.ToTable(TestCaseConsts.DbTablePrefix + "Issues", TestCaseConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props            
             b.Property(s => s.Type).IsRequired();
+            b.Property(s => s.EntityType).IsRequired();
             b.Property(s => s.Notes).HasMaxLength(IssueConsts.MaxNotesLength);
 
             b.HasOne<IdentityUser>().WithMany().HasForeignKey(x => x.Assignee);

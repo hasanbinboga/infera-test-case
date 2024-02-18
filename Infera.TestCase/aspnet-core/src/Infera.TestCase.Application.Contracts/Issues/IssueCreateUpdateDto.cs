@@ -13,18 +13,20 @@ public class IssueCreateUpdateDto : EntityDto<Guid>
     public Guid? ProductInventoryId { get; set; }
     public Guid? Assignee { get; set; }
 
-    [Required]
-    public int Number { get; set; }
+    public int? Number { get; set; }
     
     [Required]
     public IssueType Type { get; set; }
 
 
-    [DynamicStringLength(typeof(IssueConsts), nameof(IssueConsts.MaxNotesLength))]
-    public string? Notes { get; set; } = null!;
-
     [Required]
-    public bool IsCompleted { get; set; }
+    public IssueEntityType EntityType { get; set; }
+
+
+    [DynamicStringLength(typeof(IssueConsts), nameof(IssueConsts.MaxNotesLength))]
+    public string? Notes { get; set; }
+
+    public bool? IsCompleted { get; set; }
 
     public DateTime? CompletedTime { get; set; }
 

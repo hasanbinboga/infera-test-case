@@ -6,6 +6,7 @@ import * as ProductInventories from './product-inventories';
 import * as Rooms from './rooms';
 import * as Warehouses from './warehouses';
 export * from './accounting-type.enum';
+export * from './issue-entity-type.enum';
 export * from './issue-type.enum';
 export * from './product-inventory-type.enum';
 export { Accountings, BuildingWarehouses, Buildings, Issues, ProductInventories, Rooms, Warehouses };

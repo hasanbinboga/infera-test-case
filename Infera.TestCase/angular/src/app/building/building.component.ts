@@ -2,11 +2,11 @@ import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { issueTypeOptions } from '@proxy';
+import { IssueEntityType, issueTypeOptions } from '@proxy';
 import { BuildingWarehouseService } from '@proxy/building-warehouses';
-import { BuildingService, BuildingDto, BuildingWarehouseDto, BuildingListFilterDto } from '@proxy/buildings';
+import { BuildingService, BuildingDto, BuildingWarehouseDto} from '@proxy/buildings';
 import { IssueService, UserLookupDto } from '@proxy/issues';
-import { WarehouseDto, WarehouseListFilterDto, WarehouseLookupDto, WarehouseService } from '@proxy/warehouses';
+import { WarehouseListFilterDto, WarehouseLookupDto, WarehouseService } from '@proxy/warehouses';
 
 @Component({
   selector: 'app-building',
@@ -126,6 +126,7 @@ export class BuildingComponent implements OnInit {
       buildingId: [this.selectedBuilding.id, null],
       number: ['', Validators.required],
       type: ['', Validators.required],
+      entityType: [IssueEntityType.Building, null],
       notes: ['', Validators.required],
       assignee: ['', null],
     });

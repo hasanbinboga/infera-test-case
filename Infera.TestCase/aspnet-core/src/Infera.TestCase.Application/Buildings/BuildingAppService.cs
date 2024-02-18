@@ -56,10 +56,10 @@ namespace Infera.TestCase.Buildings
         public override async Task<BuildingDto> CreateAsync(BuildingCreateUpdateDto input)
         {
             var building = await _buildingManager.CreateAsync(
-            input.Name,
-            input.No,
-            input.Addres
-        );
+                                                        input.Name,
+                                                        input.No,
+                                                        input.Addres
+                                                    );
 
             await Repository.InsertAsync(building);
 
@@ -104,7 +104,7 @@ namespace Infera.TestCase.Buildings
             return queryResult;
         }
 
-       
+
 
         public async Task<ListResultDto<BuildingLookupDto>> GetBuildingLookupAsync()
         {

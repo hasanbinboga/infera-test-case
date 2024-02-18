@@ -2,7 +2,7 @@ import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { productInventoryTypeOptions, issueTypeOptions } from '@proxy';
+import { productInventoryTypeOptions, issueTypeOptions, IssueEntityType } from '@proxy';
 import { WarehouseService, WarehouseDto } from '@proxy/warehouses';
 import { BuildingListFilterDto, BuildingLookupDto, BuildingService, BuildingWarehouseDto } from '@proxy/buildings';
 import { BuildingWarehouseService } from '@proxy/building-warehouses';
@@ -116,6 +116,7 @@ export class ProductComponent implements OnInit {
       productInventoryId: [id, null],
       number: ['', Validators.required],
       type: ['', Validators.required],
+      entityType: [IssueEntityType.ProductInventory, null],
       notes: ['', Validators.required],
       assignee: ['', null],
     });

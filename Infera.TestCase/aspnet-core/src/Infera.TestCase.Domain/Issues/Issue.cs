@@ -11,9 +11,10 @@ namespace Infera.TestCase
         public virtual Guid? RoomId { get; set; }
         public virtual Guid? WarehouseInventoryId { get; set; }
         public virtual Guid? ProductInventoryId { get; set; }
-        public virtual int Number { get; set; }
+        public virtual int? Number { get; set; }
+        public virtual IssueEntityType EntityType { get; set; }
         public virtual IssueType Type { get; set; }
-        public virtual bool IsCompleted { get; set; }
+        public virtual bool? IsCompleted { get; set; }
         public virtual DateTime? CompletedTime { get; set; }
         public virtual string? Notes { get; set; }
         public virtual Guid? Assignee { get; set; }
@@ -29,11 +30,12 @@ namespace Infera.TestCase
             Guid? warehouseInventoryId,
             Guid? productInventoryId,
             [NotNull] IssueType type,
-            int number,
-            bool isCompleted,
+            [NotNull] IssueEntityType enitiyType,
+            int? number,
+            bool? isCompleted,
             DateTime? completedTime,
-            string notes,
-            [NotNull] Guid assignee) : base(id)
+            string? notes,
+            Guid? assignee) : base(id)
         {
             BuildingId = buildingId;
             RoomId = roomId;
@@ -45,18 +47,26 @@ namespace Infera.TestCase
             SetNotes(notes);
             Assignee = assignee;
             SetType(type);
-
+            SetEntityType(enitiyType);
         }
 
         internal void SetType(IssueType type)
-        {
+        {   
             Check.NotNull(type, nameof(Type));
             Type = type;
         }
 
-        internal void SetNotes(string notes)
+        internal void SetEntityType(IssueEntityType entityType)
+        {
+            Check.NotNull(entityType, nameof(EntityType));
+            EntityType = entityType;
+        }
+
+
+        internal void SetNotes(string? notes)
         {
             Check.Length(notes, nameof(Notes), IssueConsts.MaxNotesLength);
+            Notes = notes;
         }
     }
 }
