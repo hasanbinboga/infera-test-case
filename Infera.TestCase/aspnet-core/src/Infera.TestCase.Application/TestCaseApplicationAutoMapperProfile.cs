@@ -5,6 +5,7 @@ using Infera.TestCase.BuildingWarehouses;
 using Infera.TestCase.Issues;
 using Infera.TestCase.ProductInventories;
 using Infera.TestCase.Rooms;
+using Infera.TestCase.SaleOrders;
 using Infera.TestCase.WarehouseInventories;
 using Infera.TestCase.Warehouses;
 
@@ -44,6 +45,10 @@ public class TestCaseApplicationAutoMapperProfile : Profile
         CreateMap<Issue, IssueDto>();
         CreateMap<IssueCreateUpdateDto, Issue>();
         CreateMap<Issue, IssueLookupDto>();
+
+        CreateMap<SaleOrder, SaleOrderDto>();
+        CreateMap<SaleOrderCreateUpdateDto, SaleOrder>();
+        CreateMap<SaleOrder, SaleOrderLookupDto>();
 
 
     }

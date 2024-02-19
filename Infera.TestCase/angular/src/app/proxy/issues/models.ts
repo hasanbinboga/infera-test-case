@@ -1,6 +1,7 @@
 import type { AuditedEntityDto, EntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { IssueType } from '../issue-type.enum';
 import type { IssueEntityType } from '../issue-entity-type.enum';
+import type { Date } from '../models';
 
 export interface IssueCreateUpdateDto extends EntityDto<string> {
   buildingId?: string;
@@ -13,8 +14,7 @@ export interface IssueCreateUpdateDto extends EntityDto<string> {
   entityType: IssueEntityType;
   notes?: string;
   isCompleted?: boolean;
-  completedTime?: string;
-  completedTime1?: string;
+  completedTime: Date;
 }
 
 export interface IssueDto extends AuditedEntityDto<string> {

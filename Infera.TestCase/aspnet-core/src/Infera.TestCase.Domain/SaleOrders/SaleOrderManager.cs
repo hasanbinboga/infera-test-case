@@ -17,7 +17,7 @@ public class SaleOrderManager : DomainService
                         Guid warehouseInventoryId,
                         int count,
                         bool isCompleted,
-                        string notes)
+                        string? notes)
     {
         return new SaleOrder(GuidGenerator.Create(), roomId, warehouseInventoryId, count, isCompleted,notes);
     }

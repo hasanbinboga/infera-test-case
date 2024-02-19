@@ -25,7 +25,7 @@ namespace Infera.TestCase
                         [NotNull] Guid warehouseInventoryId,
                         [NotNull] int count,
                         bool isCompleted,
-                        string notes
+                        string? notes
                         ) : base(id)
         {
             SetRoomId(roomId);
@@ -58,9 +58,12 @@ namespace Infera.TestCase
         }
 
 
-        internal void SetNotes(string notes)
+        internal void SetNotes(string? notes)
         {
-            Check.Length(notes, nameof(notes), SaleOrderConsts.MaxNotesLength);
+            if (Notes != null)
+            {
+                Check.Length(notes, nameof(notes), SaleOrderConsts.MaxNotesLength);
+            }
             Notes = notes;
         }
 

@@ -1,4 +1,5 @@
 import type { AuditedEntityDto, EntityDto } from '@abp/ng.core';
+import type { Date } from '../models';
 import type { AccountingType } from '../accounting-type.enum';
 import type { ProductInventoryType } from '../product-inventory-type.enum';
 
@@ -10,7 +11,7 @@ export interface AccountingCreateUpdateDto extends EntityDto<string> {
   salePrice: number;
   amount: number;
   tax: number;
-  invoiceDate?: string;
+  invoiceDate: Date;
   invoiceNumber?: string;
   type: AccountingType;
 }
