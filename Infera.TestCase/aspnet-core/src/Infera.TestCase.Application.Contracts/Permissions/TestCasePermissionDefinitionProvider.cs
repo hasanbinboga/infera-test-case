@@ -61,7 +61,6 @@ public class TestCasePermissionDefinitionProvider : PermissionDefinitionProvider
         saleOrdersPermission.AddChild(TestCasePermissions.SaleOrders.Create, L("Permission:SaleOrders.Create"));
         saleOrdersPermission.AddChild(TestCasePermissions.SaleOrders.Edit, L("Permission:SaleOrders.Edit"));
         saleOrdersPermission.AddChild(TestCasePermissions.SaleOrders.Delete, L("Permission:SaleOrders.Delete"));
-        saleOrdersPermission.AddChild(TestCasePermissions.SaleOrders.GetListOfBuildingAsync, L("Permission:SaleOrders.GetListOfBuildingAsync"));
 
     }
 
