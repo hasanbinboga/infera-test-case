@@ -90,6 +90,13 @@ function configureRoutes(routesService: RoutesService) {
         layout: eLayoutType.application,
       },
       {
+        path: '/sale-orders',
+        name: '::Menu:SaleOrders',
+        iconClass: 'fas fa-hand-holding-usd',
+        order: 7,
+        layout: eLayoutType.application,
+      },
+      {
         path: '/accounting',
         name: '::Menu:Accounting',
         iconClass: 'fas fa-receipt',

@@ -35,6 +35,7 @@ const routes: Routes = [
   { path: 'product-issues', loadChildren: () => import('./product-issue/product-issue.module').then(m => m.ProductIssueModule) },
   { path: 'warehouse-inventories', loadChildren: () => import('./warehouse-inventory/warehouse-inventory.module').then(m => m.WarehouseInventoryModule) },
   { path: 'accounting', loadChildren: () => import('./accounting/accounting.module').then(m => m.AccountingModule) },
+  { path: 'sale-orders', loadChildren: () => import('./sale-order/sale-order.module').then(m => m.SaleOrderModule) },
 ];
 
 @NgModule({
