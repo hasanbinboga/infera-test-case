@@ -348,6 +348,259 @@ Devamında Oda ve depo tanımları için de gerekli FE modülleri geliştirildi.
 
 ![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/263031cc-506a-48f8-8609-1c6de556e925)
 
+Ardından diğer entity'ler için gerekli arayüzler ve BE servisleri geliştirildi.
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/04b10192-b0ef-4041-8023-9cec87c80be2)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/4ebe503f-826b-4711-b8d3-d40c5d2ff86b)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/3b175680-1a1b-48a5-b78a-6740171636d9)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/7daa2433-53b2-4a05-976e-b82a9dd87451)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/6b058b57-0e7f-4a6c-9534-27e9debcc490)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/5cf37f59-8a14-4098-bab1-6409d05f26b7)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/5fd5b65e-5627-4262-aac9-b7d62b0c70fc)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/0fd8ca69-8ea2-47ef-8e02-551de6cf4dff)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/aa220a0f-459a-4015-baeb-7f5b6f4994c3)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/10b6a278-2dcc-4939-9377-877a65544d56)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/9175fed7-9081-47e0-96d5-9fd14acb7531)
+
+Ayrıca ABP Framework tarafından sağlanan yetkilendirme ve Tenant management modülleri ile gelen FE arayüzleri üzerinden Kullanıcı, müşteri, rol ve rol yetkilerine ilişkin tanımlar yapılabilmektedir.
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/0135648e-5c7d-4f44-ac2a-e3941bb81201)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/882e1966-678a-4dec-bb0c-248312220e34)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/11902678-59a7-434d-af19-a0e296594b64)
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/64d5c5a0-e012-4803-843d-0e04630e13a0)
+
+ABP Framework Localization ile ilgili temel altyapıya sahip olduğundan arayüzde ve BE mesajlarındaki mesajların tamamı Domain.Shared projesi altında Localization klasöründe her bir dil için gerekli json dosyasını barındırmaktadır.
+Örneğin Türkçe tanımlar şu şekildedir;
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/436e4114-8c1e-4762-a8a5-907dcfcda30d)
+
+```json
+{
+    "culture": "tr",
+    "texts": {
+        "Menu:Home": "Ana sayfa",
+        "Menu:Buildings": "Binalar",
+        "Menu:Rooms": "Odalar",
+        "Menu:Warehouses": "Depolar",
+        "Menu:Products": "Ürünler",
+        "Menu:WarehouseInventories": "Depo Envanterleri",
+        "Menu:Issues": "Görevler",
+        "Menu:BuildingIssues": "Bina görevleri",
+        "Menu:RoomIssues": "Oda görevleri",
+        "Menu:WarehouseInventoryIssues": "Depo Envanter görevleri",
+        "Menu:ProductIssues": "Ürün görevleri",
+        "Menu:SaleOrders": "Satış",
+        "Menu:Accounting": "Muhasebe",
+        "Welcome": "Hoşgeldiniz",
+        "CreateIssue": "Görev Oluştur",
+        "NewIssue": "Yeni Görev",
+        "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
+        "Infera.TestCase:00001": "{Name} isimli bina zaten var.",
+        "Infera.TestCase:00002": "Bu bina zaten bu depo ile ilişkilidir.",
+        "Infera.TestCase:00003": "Bu binada {No} numaralı oda zaten var.",
+        "Infera.TestCase:00004": "{Manifacturer} tarafından üretilen {Size} boyutlarındaki {Name} markalı ürün zaten var.",
+        "Infera.TestCase:00005": "Belirtilen ürün bu depoda zaten var.",
+        "Infera.TestCase:00006": "Bu binada zaten {No} numaralı ve {Name} isimli depo vardır.",
+        "Infera.TestCase:00007": "{Date} tarih ve {InvoiceNo} numaralı fatura zaten var.",
+        "Permission:Buildings": "Bina Modülü",
+        "Enum:IssueType.0": "Bilinmiyor",
+        "Enum:IssueType.1": "Temizlik",
+        "Enum:IssueType.2": "Onarım",
+        "Enum:IssueType.3": "Eksikleri tamamla",
+        "Enum:ProductInventoryType.0": "Bilinmiyor",
+        "Enum:ProductInventoryType.1": "İçecek",
+        "Enum:ProductInventoryType.2": "Atıştırmalık",
+        "Enum:ProductInventoryType.3": "Çikolata",
+        "Enum:ProductInventoryType.4": "Alkollü içecek",
+        "Enum:AccountingType.0": "Bilinmiyor",
+        "Enum:AccountingType.1": "Giriş",
+        "Enum:AccountingType.2": "Çıkış",
+        "ListWarehouses": "Depoları listele",
+        "LinkToWarehouse": "Depo ile ilişkilendir",
+        "WarehouseList": "Depo Listesi",
+        "NewBuildingWarehouse": "Yeni Depo Bina ilişkisi",
+        "NewWarehouse": "Yeni Depo",
+        "ListBuildings": "Binaları Listele",
+        "LinkToBuilding": "Bina ile İlişkilendir"
+    }
+}
+```
+
+
+Ayrıca yetkilendirmeye ilişkin tanımlar Application.Contracts projesi altında Permissions klasörü altında yer almaktadır. Kullanıcı ve rollerin yetkilendirilmesi amacıyla kullanılan temel tanımlar burada yer almaktadır.
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/2802699c-ed96-4c69-b19e-a6705bc4e7eb)
+
+```csharp
+namespace Infera.TestCase.Permissions;
+
+public static class TestCasePermissions
+{
+    public const string GroupName = "TestCase";
+
+    //Add your own permission names. Example:
+    
+    public static class Buildings
+    {
+        public const string Default = GroupName + ".Buildings";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+        public const string GetListOfWarehouseAsync = Default + ".GetListOfWarehouseAsync";
+    }
+
+    public static class BuildingWarehouses
+    {
+        public const string Default = GroupName + ".BuildingWarehouses";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+    
+    public static class Rooms
+    {
+        public const string Default = GroupName + ".Rooms";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
+
+    public static class Warehouses
+    {
+        public const string Default = GroupName + ".Warehouses";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+        public const string GetListOfBuildingAsync = Default + ".GetListOfBuildingAsync";
+    }
+
+    public static class WarehouseInventories
+    {
+        public const string Default = GroupName + ".WarehouseInventories";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+        public const string GetListOfBuildingAsync = Default + ".GetListOfBuildingAsync";
+    }
+
+    public static class ProductInventories
+    {
+        public const string Default = GroupName + ".ProductInventories";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
+    public static class Issues
+    {
+        public const string Default = GroupName + ".Issues";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+    public static class Accountings
+    {
+        public const string Default = GroupName + ".Accountings";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
+    public static class SaleOrders
+    {
+        public const string Default = GroupName + ".SaleOrders";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+        public const string GetListOfBuildingAsync = Default + ".GetListOfBuildingAsync";
+    }
+}
+
+```
+
+```csharp
+using Infera.TestCase.Localization;
+using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.Localization;
+
+namespace Infera.TestCase.Permissions;
+
+public class TestCasePermissionDefinitionProvider : PermissionDefinitionProvider
+{
+    public override void Define(IPermissionDefinitionContext context)
+    {
+        var inferaTestGroup = context.AddGroup(TestCasePermissions.GroupName);
+
+        var buildingsPermission = inferaTestGroup.AddPermission(TestCasePermissions.Buildings.Default, L("Permission:Buildings"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.Create, L("Permission:Buildings.Create"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.Edit, L("Permission:Buildings.Edit"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.Delete, L("Permission:Buildings.Delete"));
+        buildingsPermission.AddChild(TestCasePermissions.Buildings.GetListOfWarehouseAsync, L("Permission:Buildings.GetListOfWarehouseAsync"));
+
+
+        var buildingWarehousesPermission = inferaTestGroup.AddPermission(TestCasePermissions.BuildingWarehouses.Default, L("Permission:BuildingWarehouses"));
+        buildingWarehousesPermission.AddChild(TestCasePermissions.BuildingWarehouses.Create, L("Permission:BuildingWarehouses.Create"));
+        buildingWarehousesPermission.AddChild(TestCasePermissions.BuildingWarehouses.Edit, L("Permission:BuildingWarehouses.Edit"));
+        buildingWarehousesPermission.AddChild(TestCasePermissions.BuildingWarehouses.Delete, L("Permission:BuildingWarehouses.Delete"));
+
+        var roomsPermission = inferaTestGroup.AddPermission(TestCasePermissions.Rooms.Default, L("Permission:Rooms"));
+        roomsPermission.AddChild(TestCasePermissions.Rooms.Create, L("Permission:Rooms.Create"));
+        roomsPermission.AddChild(TestCasePermissions.Rooms.Edit, L("Permission:Rooms.Edit"));
+        roomsPermission.AddChild(TestCasePermissions.Rooms.Delete, L("Permission:Rooms.Delete"));
+
+
+        var warehousesPermission = inferaTestGroup.AddPermission(TestCasePermissions.Warehouses.Default, L("Permission:Warehouses"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.Create, L("Permission:Warehouses.Create"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.Edit, L("Permission:Warehouses.Edit"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.Delete, L("Permission:Warehouses.Delete"));
+        warehousesPermission.AddChild(TestCasePermissions.Warehouses.GetListOfBuildingAsync, L("Permission:Warehouses.GetListOfBuildingAsync"));
+
+        var warehouseInventoriesPermission = inferaTestGroup.AddPermission(TestCasePermissions.WarehouseInventories.Default, L("Permission:WarehouseInventories"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.Create, L("Permission:WarehouseInventories.Create"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.Edit, L("Permission:WarehouseInventories.Edit"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.Delete, L("Permission:WarehouseInventories.Delete"));
+        warehouseInventoriesPermission.AddChild(TestCasePermissions.WarehouseInventories.GetListOfBuildingAsync, L("Permission:WarehouseInventories.GetListOfBuildingAsync"));
+
+
+        var productsPermission = inferaTestGroup.AddPermission(TestCasePermissions.ProductInventories.Default, L("Permission:ProductInventories"));
+        productsPermission.AddChild(TestCasePermissions.ProductInventories.Create, L("Permission:ProductInventories.Create"));
+        productsPermission.AddChild(TestCasePermissions.ProductInventories.Edit, L("Permission:ProductInventories.Edit"));
+        productsPermission.AddChild(TestCasePermissions.ProductInventories.Delete, L("Permission:ProductInventories.Delete"));
+
+        var IssuesPermission = inferaTestGroup.AddPermission(TestCasePermissions.Issues.Default, L("Permission:Issues"));
+        IssuesPermission.AddChild(TestCasePermissions.Issues.Create, L("Permission:Issues.Create"));
+        IssuesPermission.AddChild(TestCasePermissions.Issues.Edit, L("Permission:Issues.Edit"));
+        IssuesPermission.AddChild(TestCasePermissions.Issues.Delete, L("Permission:Issues.Delete"));
+
+        var AccountingPermission = inferaTestGroup.AddPermission(TestCasePermissions.Accountings.Default, L("Permission:Accountings"));
+        AccountingPermission.AddChild(TestCasePermissions.Accountings.Create, L("Permission:Accountings.Create"));
+        AccountingPermission.AddChild(TestCasePermissions.Accountings.Edit, L("Permission:Accountings.Edit"));
+        AccountingPermission.AddChild(TestCasePermissions.Accountings.Delete, L("Permission:Accountings.Delete"));
+
+
+        var saleOrdersPermission = inferaTestGroup.AddPermission(TestCasePermissions.SaleOrders.Default, L("Permission:SaleOrders"));
+        saleOrdersPermission.AddChild(TestCasePermissions.SaleOrders.Create, L("Permission:SaleOrders.Create"));
+        saleOrdersPermission.AddChild(TestCasePermissions.SaleOrders.Edit, L("Permission:SaleOrders.Edit"));
+        saleOrdersPermission.AddChild(TestCasePermissions.SaleOrders.Delete, L("Permission:SaleOrders.Delete"));
+
+    }
+
+    private static LocalizableString L(string name)
+    {
+        return LocalizableString.Create<TestCaseResource>(name);
+    }
+}
+
+```
+
+
+Bu yetkilendirme tanımlarını Application Service katmanında ilgili metoda attribute olarak eklemek yeterlidir.
+
+![image](https://github.com/hasanbinboga/infera-test-case/assets/27738643/43018b66-1889-4a98-ba31-d818b94309ea)
+
+
+
+
+
 [![Watch the video](https://img.youtube.com/vi/T-D1KVIuvjA/maxresdefault.jpg)](https://youtu.be/s-WHFHbX0Gk)
 
 
